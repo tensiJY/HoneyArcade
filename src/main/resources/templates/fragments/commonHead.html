@@ -1,0 +1,17 @@
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 	<meta name="_csrf" th:content="${_csrf.token}" />
+	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+ 
+    <!-- vendor CSS -->
+    <link th:src="@{/assets/vendor/bootstrap-4.3.1-dist/bootstrap.min.css}" rel="stylesheet">
+ 
+    <!-- 컨텐츠 페이지 CSS 삽입 -->
+    <th:block layout:fragment="css"></th:block>
+ 
+    <script th:src="@{/assets/vendor/jquery/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/assets/vendor/bootstrap-4.3.1-dist/js/bootstrap.min.js}"></script>
+    
+    <!-- 컨텐츠페이지의 script 영역이 들어감. 즉 contents페이지에 설정된 script를 역으로 받아와서 설정-->
+    <th:block layout:fragment="script"></th:block>

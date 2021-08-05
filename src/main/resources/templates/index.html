@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+  
+  
+<th:block th:replace="fragments/commonHead"></th:block>
+
+<div layout:fragment="content" class="login">
+	<form action="/login/proc" method="post">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		<div class="loginbox _1">
+		    <h1><img src="/pro/img/logo.png" alt="Iam Freelancer"></h1>
+		    <div class="top_btn">
+		        <a class="btn1_1h40 green_b txt18R" href="pro/main.html">전문가</a>
+		        <a class="btn1_1h40 gray_b1 txt18R" href="user/main.html">의뢰인</a>
+		    </div>
+		    <div class="login_in">
+		        <!--<div th:replace="/fragments/login/loginLeft :: loginLeftFragment('loginLi')"></div>-->
+		        <div>            
+		             <input class="input1" type="text" name="username" placeholder="아이디" value="test01">
+		
+		            <input class="input1" type="text" name="password" placeholder="비밀번호" value="!qweqwe2">
+		
+					<p class="error" th:if="${param.error}" th:text="${exception}"></p>
+					<button type="submit" class="btn1_1h50 blalck_b1">로그인</button>
+		
+		            <div>
+		                <div class="checkbox">
+		                    <input type="checkbox" id="auto_login" />
+		                    <label for="auto_login">자동 로그인</label>
+		                </div>
+		                <div class="checkbox">
+		                    <input type="checkbox" id="save_id" />
+		                    <label for="save_id">아이디 저장</label>
+		                </div>
+		                <a class="btn1_2h50 gray_bo1 gray1" href="/firstJoinStep">회원가입</a>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</form>
+</div>
+	
+	<th:block layout:fragment="script">
+		<script type="text/javascript">
+
+
+		</script>
+	</th:block>
+
+</html>
