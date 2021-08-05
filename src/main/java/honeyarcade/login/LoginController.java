@@ -1,5 +1,7 @@
 package honeyarcade.login;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +24,14 @@ public class LoginController {
 	 * @return
 	 */
 	@GetMapping("/")
-	public String proc(Model model) {
+	public String proc(Model model, HttpSession session) {
+		System.out.println(session.toString());
+		System.out.println(session.getAttribute("userVO"));
+		
+	
+		
+		System.out.println("call /");
+		System.out.println("model " + model.toString());
 		model.addAttribute("exception","가입하지 않은 아이디이거나, 잘못된 비밀번호입니다");
 		return "index";
 	}

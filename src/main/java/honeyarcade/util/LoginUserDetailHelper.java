@@ -36,7 +36,7 @@ public final class LoginUserDetailHelper {
 		
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
-        UserVO adminVO = new UserVO();
+        UserVO userVO = new UserVO();
         
         if (authentication.getPrincipal() instanceof User) {
         	log.debug("1. : " );
@@ -45,20 +45,20 @@ public final class LoginUserDetailHelper {
         	log.debug("## LoginUserDetailsHelper.getAuthenticatedUser : AuthenticatedUser is {}", details.getUsername());
         	
         	
-        	adminVO = loginMapper.findByLoginId(details.getUsername());
-	        return adminVO;
+        	userVO = loginMapper.findByLoginId(details.getUsername());
+	        return userVO;
 	        
         } else {
         	log.debug("2. : " );
         	
         	Collection<? extends GrantedAuthority> authRole= authentication.getAuthorities();
         	String userRole = authRole.toString();
-        	adminVO.setRole_id(userRole);
+        	userVO.setRole_id(userRole);
         	
         	
         	log.debug("## LoginUserDetailsHelper.getAuthenticatedUser : AuthenticatedUser is {}", userRole);
         	
-        	return adminVO;
+        	return userVO;
         }
     }
 }

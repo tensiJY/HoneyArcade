@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) { // scr/main/resources/static 하위 폴더들 접근 가능하게 하기
-		web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");
+		web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/sass/**");
 	}
 	
 	@Override
@@ -58,11 +58,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				// 페이지 권한 설정
 				.antMatchers("/").permitAll()	//	누구나 접근 가능
-				.anyRequest().hasRole("ADMIN") // ADMIN만 접근 가능
+				.antMatchers( "/favicon.ico").permitAll()
+				.antMatchers("/admin").permitAll()
+				//.anyRequest().hasRole("ADMIN") // ADMIN만 접근 가능
 				//.anyRequest().authenticated()	//	나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근
 			.and() // 로그인 설정
 				.formLogin()
-				.loginPage("/")
+				.loginPage("/login/form")
 				.loginProcessingUrl("/login/proc")
 				.defaultSuccessUrl("/main/home") // 로그인이 성공했을 때 이동되는 페이지이며, 마찬가지로 컨트롤러에서 URL 매핑
 				//.permitAll()

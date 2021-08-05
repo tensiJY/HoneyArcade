@@ -13,10 +13,10 @@ public class UserPrincipalVO implements UserDetails{
 	//UID값을 명시 해주지 않으면 자바 컴파일러가 임시적인 값을 부여한다.
 	private static final long serialVersionUID = 1L;
 	
-	private ArrayList<UserVO> adminVO;
+	private ArrayList<UserVO> userVO;
 	
 	public UserPrincipalVO(ArrayList<UserVO> userAuthes) {
-		this.adminVO = userAuthes;
+		this.userVO = userAuthes;
 	}
 	
 	@Override
@@ -24,8 +24,8 @@ public class UserPrincipalVO implements UserDetails{
 
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		
-		for(int x=0; x<adminVO.size(); x++) {
-			authorities.add(new SimpleGrantedAuthority(adminVO.get(x).getRole_id()));
+		for(int x=0; x<userVO.size(); x++) {
+			authorities.add(new SimpleGrantedAuthority(userVO.get(x).getRole_id()));
 		}
 		
 		return authorities;
@@ -33,12 +33,12 @@ public class UserPrincipalVO implements UserDetails{
 
 	@Override
 	public String getPassword() { //유저 비밀번호
-		return adminVO.get(0).getLogin_pwd();
+		return userVO.get(0).getLogin_pwd();
 	}
 
 	@Override
 	public String getUsername() {// 유저 이름 혹은 아이디
-		return adminVO.get(0).getLogin_id();
+		return userVO.get(0).getLogin_id();
 	}
 	
 	@Override

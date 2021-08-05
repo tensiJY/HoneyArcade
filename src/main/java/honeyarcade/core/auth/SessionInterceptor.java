@@ -37,22 +37,22 @@ public class SessionInterceptor implements HandlerInterceptor {
         */
         
 		
-		UserVO adminVO = loginUserDetailHelper.getAuthenticatedUser();
+		UserVO userVO = loginUserDetailHelper.getAuthenticatedUser();
 		
 		log.info("call SessionInterceptor : ");
-		log.info("adminVO : " + adminVO.toString());
+		log.info("adminVO : " + userVO.toString());
 		
 		/**
 		 * 로직 작성 필요
 		 */
 		// 세션이 없고 요청한 URL이 '/main'일 경우 요청 페이지로 이동
-		if ("[ROLE_ANONYMOUS]".equals(adminVO.getRole_id()) && "/main".equals(request.getRequestURI())) {
+		if ("[ROLE_ANONYMOUS]".equals(userVO.getRole_id()) && "/".equals(request.getRequestURI())) {
 			return true; // true면 요청한 URL의 controller로 이동
 		}
 		
 		// 요청한 URL이 세션이 없을 때 '/main'으로 이동시키는 조건
 		// - 내정보 변경
-		if ("[ROLE_ANONYMOUS]".equals(adminVO.getRole_id()) && "/pro/moveMenu/myPage/mypage_myinfo".equals(request.getRequestURI())) {
+		if ("[ROLE_ANONYMOUS]".equals(userVO.getRole_id()) && "/pro/moveMenu/myPage/mypage_myinfo".equals(request.getRequestURI())) {
 			response.sendRedirect("/main");
 			return false; // 요청한 URL의 controller로 이동 불가
 		}

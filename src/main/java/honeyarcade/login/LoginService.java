@@ -35,12 +35,12 @@ public class LoginService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		System.out.println("call UserDetails : ");
 		System.out.println(username);
-		UserVO adminVO = loginMapper.findByLoginId(username);
+		UserVO userVO = loginMapper.findByLoginId(username);
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		
-		authorities.add(new SimpleGrantedAuthority(adminVO.getRole_id()));
+		authorities.add(new SimpleGrantedAuthority(userVO.getRole_id()));
 		
-		return new User(adminVO.getLogin_id(), adminVO.getLogin_pwd(), authorities);
+		return new User(userVO.getLogin_id(), userVO.getLogin_pwd(), authorities);
 		
 	}
 	
