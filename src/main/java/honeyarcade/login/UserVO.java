@@ -1,4 +1,4 @@
-package com.honeyarcade.admin.login;
+package honeyarcade.login;
 
 import java.io.Serializable;
 
@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AdminVO implements Serializable{
+public class UserVO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	

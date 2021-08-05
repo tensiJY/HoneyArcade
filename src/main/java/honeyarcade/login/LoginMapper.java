@@ -1,4 +1,4 @@
-package com.honeyarcade.admin.login;
+package honeyarcade.login;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface LoginMapper {
 
-	public AdminVO findByLoginId(@Param("login_id") String id);
+	public UserVO findByLoginId(@Param("login_id") String id);
 
 	
 }

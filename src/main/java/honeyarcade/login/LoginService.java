@@ -1,4 +1,4 @@
-package com.honeyarcade.admin.login;
+package honeyarcade.login;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class LoginService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		System.out.println("call UserDetails : ");
 		System.out.println(username);
-		AdminVO adminVO = loginMapper.findByLoginId(username);
+		UserVO adminVO = loginMapper.findByLoginId(username);
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		
 		authorities.add(new SimpleGrantedAuthority(adminVO.getRole_id()));

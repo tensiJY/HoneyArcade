@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.honeyarcade.admin.login.LoginMapper">
 
-	<select id="findByLoginId" resultType="com.honeyarcade.admin.login.AdminVO">
+	<select id="findByLoginId" resultType="honeyarcade.login.UserVO">
 	<![CDATA[
 		select 
 			*

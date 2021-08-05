@@ -1,4 +1,4 @@
-package com.honeyarcade.admin.util;
+package honeyarcade.util;
 
 import java.util.Collection;
 
@@ -11,9 +11,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.honeyarcade.admin.login.AdminVO;
-import com.honeyarcade.admin.login.LoginMapper;
-
+import honeyarcade.login.LoginMapper;
+import honeyarcade.login.UserVO;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -33,11 +32,11 @@ public final class LoginUserDetailHelper {
      * 인증된 사용자객체를 VO형식으로 가져온다.
      * @return 사용자 ValueObject
      */
-	public AdminVO getAuthenticatedUser() {
+	public UserVO getAuthenticatedUser() {
 		
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
-        AdminVO adminVO = new AdminVO();
+        UserVO adminVO = new UserVO();
         
         if (authentication.getPrincipal() instanceof User) {
         	log.debug("1. : " );

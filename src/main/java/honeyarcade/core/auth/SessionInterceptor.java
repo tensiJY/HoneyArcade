@@ -1,4 +1,4 @@
-package com.honeyarcade.admin.core.auth;
+package honeyarcade.core.auth;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,9 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.honeyarcade.admin.login.AdminVO;
-import com.honeyarcade.admin.util.LoginUserDetailHelper;
-
+import honeyarcade.login.UserVO;
+import honeyarcade.util.LoginUserDetailHelper;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
@@ -38,7 +37,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         */
         
 		
-		AdminVO adminVO = loginUserDetailHelper.getAuthenticatedUser();
+		UserVO adminVO = loginUserDetailHelper.getAuthenticatedUser();
 		
 		log.info("call SessionInterceptor : ");
 		log.info("adminVO : " + adminVO.toString());

@@ -1,4 +1,4 @@
-package com.honeyarcade.admin.core.auth;
+package honeyarcade.core.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
