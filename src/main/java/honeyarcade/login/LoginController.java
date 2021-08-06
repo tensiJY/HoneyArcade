@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import honeyarcade.util.LoginUserDetailHelper;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -18,31 +18,33 @@ public class LoginController {
 	public LoginUserDetailHelper loginUserDetailHelper;
 	
 	/**
-	 * 로그인 페이지, 인덱스
-	 * id가 없거나 잘못된 비밀번호 일경우 에러
+	 *
 	 * @param model
 	 * @return
 	 */
 	@GetMapping("/")
-	public String proc(Model model, HttpSession session) {
-		System.out.println(session.toString());
-		System.out.println(session.getAttribute("userVO"));
+	public String index(Model model, HttpSession session) {
+		log.info("call index");
 		
-	
-		
-		System.out.println("call /");
-		System.out.println("model " + model.toString());
-		model.addAttribute("exception","가입하지 않은 아이디이거나, 잘못된 비밀번호입니다");
 		return "index";
 	}
 	
-	/*
-	@GetMapping("/login/proc")
-	public String loginProc(Model model, RedirectAttributes rttr) {
-		//log.info("call login proc");
-		rttr.addAttribute("exception","가입하지 않은 아이디이거나, 잘못된 비밀번호입니다");
-		//return "index";
-		return "redirect:/";
+	@GetMapping("/login/form")
+	public String loginForm(Model model) {
+		log.info("call login form");
+		return "login/loginForm";
 	}
-	*/
+	
+	
+	@PostMapping("/login/proc")
+	public String loginProc(Model model) {
+		log.info("call login proc");
+		log.info(model.toString());
+		model.addAttribute("exception","가입하지 않은 아이디이거나, 잘못된 비밀번호입니다");
+		//return "index";
+		//return "redirect:/";
+		
+		return "/login/loginProc";
+	}
+	
 }
