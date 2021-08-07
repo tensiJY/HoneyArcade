@@ -1,0 +1,23 @@
+
+    
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script th:src="@{/template/assets/js/libs/jquery-3.1.1.min.js}"></script>
+    <script th:src="@{/template/bootstrap/js/popper.min.js}"></script>
+    <script th:src="@{/template/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/template/plugins/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
+    <script th:src="@{/template/assets/js/app.js}"></script>
+<!--    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>-->
+    <script th:src="@{/template/assets/js/custom.js}"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+
+   
+ 
+
+ 
+    
+    <!-- 컨텐츠페이지의 script 영역이 들어감. 즉 contents페이지에 설정된 script를 역으로 받아와서 설정-->
+    <th:block layout:fragment="script"></th:block>
