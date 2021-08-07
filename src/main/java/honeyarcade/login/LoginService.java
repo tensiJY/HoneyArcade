@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-//@MapperScan(value= {"com.honeyarcade.admin.login"})
 public class LoginService implements UserDetailsService {
 
 	

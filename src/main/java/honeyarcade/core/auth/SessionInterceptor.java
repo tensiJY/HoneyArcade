@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import honeyarcade.login.LoginUserDetailHelper;
 import honeyarcade.login.UserVO;
-import honeyarcade.util.LoginUserDetailHelper;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
@@ -36,26 +36,24 @@ public class SessionInterceptor implements HandlerInterceptor {
         }
         */
         
-		
-		UserVO userVO = loginUserDetailHelper.getAuthenticatedUser();
-		
-		log.info("call SessionInterceptor : ");
-		log.info("adminVO : " + userVO.toString());
-		
-		/**
-		 * 로직 작성 필요
-		 */
-		// 세션이 없고 요청한 URL이 '/main'일 경우 요청 페이지로 이동
-		if ("[ROLE_ANONYMOUS]".equals(userVO.getRole_id()) && "/".equals(request.getRequestURI())) {
-			return true; // true면 요청한 URL의 controller로 이동
-		}
+		// 세션이 없고 요청한 URL이 '/'일 경우 요청 페이지로 이동
+//		if ("[ROLE_ANONYMOUS]".equals(userVO.getRole_id()) && "/".equals(request.getRequestURI())) {
+//			return true; // true면 요청한 URL의 controller로 이동
+//		}
 		
 		// 요청한 URL이 세션이 없을 때 '/main'으로 이동시키는 조건
 		// - 내정보 변경
-		if ("[ROLE_ANONYMOUS]".equals(userVO.getRole_id()) && "/pro/moveMenu/myPage/mypage_myinfo".equals(request.getRequestURI())) {
-			response.sendRedirect("/main");
-			return false; // 요청한 URL의 controller로 이동 불가
-		}
+//		if ("[ROLE_ANONYMOUS]".equals(userVO.getRole_id()) && "/pro/moveMenu/myPage/mypage_myinfo".equals(request.getRequestURI())) {
+//			response.sendRedirect("/main");
+//			return false; // 요청한 URL의 controller로 이동 불가
+//		}
+		
+
+		
+		UserVO userVO = loginUserDetailHelper.getAuthenticatedUser();
+		
+		log.info("call SessionInterceptor : " + userVO.toString());
+		
 		
 		
         /*세션이 없어도 요청한 페이지로 이동*/

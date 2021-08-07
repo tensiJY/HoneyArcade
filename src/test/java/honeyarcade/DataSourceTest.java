@@ -1,4 +1,4 @@
-package com.honeyarcade.admin;
+package honeyarcade;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;

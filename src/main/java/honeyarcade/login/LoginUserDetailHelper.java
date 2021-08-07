@@ -1,4 +1,4 @@
-package honeyarcade.util;
+package honeyarcade.login;
 
 import java.util.Collection;
 
@@ -11,8 +11,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import honeyarcade.login.LoginMapper;
-import honeyarcade.login.UserVO;
 import lombok.extern.slf4j.Slf4j;
 
 
