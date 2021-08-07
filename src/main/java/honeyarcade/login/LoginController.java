@@ -18,7 +18,7 @@ public class LoginController {
 	public LoginUserDetailHelper loginUserDetailHelper;
 	
 	/**
-	 *
+	 * 인덱스
 	 * @param model
 	 * @return
 	 */
@@ -29,6 +29,11 @@ public class LoginController {
 		return "index";
 	}
 	
+	/**
+	 * 로그인 폼
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/login/form")
 	public String loginForm(Model model) {
 		log.info("call login form");
@@ -36,14 +41,15 @@ public class LoginController {
 	}
 	
 	
+	/**
+	 * 로그인 프로세스
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/login/proc")
 	public String loginProc(Model model) {
 		log.info("call login proc");
 		log.info(model.toString());
-		model.addAttribute("exception","가입하지 않은 아이디이거나, 잘못된 비밀번호입니다");
-		//return "index";
-		//return "redirect:/";
-		
 		return "/login/loginProc";
 	}
 	

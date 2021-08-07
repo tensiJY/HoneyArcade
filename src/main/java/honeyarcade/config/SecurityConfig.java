@@ -63,10 +63,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				//.anyRequest().authenticated()	//	나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근
 			.and() // 로그인 설정
 				.formLogin()
-				.loginPage("/login/form")
-				.loginProcessingUrl("/login/proc")
-				//.successHandler(null)	//	로그인 성공시 핸들러		
-				//.failureHandler(null)	//	로그인 실패시 핸들러
+				.loginPage("/login/form")				//	로그인 페이지 호출
+				.loginProcessingUrl("/login/proc")		//	로그인 프로세스
+				//.successHandler(null)					//	로그인 성공시 핸들러		
+				//.failureHandler(null)					//	로그인 실패시 핸들러
 				//.defaultSuccessUrl("/main/home") // 로그인이 성공했을 때 이동되는 페이지이며, 마찬가지로 컨트롤러에서 URL 매핑
 			.and() // 로그아웃 설정
 				.logout()
