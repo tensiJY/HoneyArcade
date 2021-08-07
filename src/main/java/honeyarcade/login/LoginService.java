@@ -32,12 +32,25 @@ public class LoginService implements UserDetailsService {
 	 * */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("call UserDetails : ");
-		System.out.println(username);
+
 		UserVO userVO = loginMapper.findByLoginId(username);
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		
+		
+		//	1. UserDetailsService -> 
+		//	2. AuthenticationFailureHandler -> 
+		//	3. login process (시큐리티 설정)
+		
+		//	오류처리를 하지 않으면 서버 에러 
+		if(userVO == null) {
+			System.out.println("## 계정정보가 존재하지 않습니다. ##");
+			throw new UsernameNotFoundException(username);
+		}
+		
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority(userVO.getRole_id()));
+		
+		
+		
 		
 		return new User(userVO.getLogin_id(), userVO.getLogin_pwd(), authorities);
 		

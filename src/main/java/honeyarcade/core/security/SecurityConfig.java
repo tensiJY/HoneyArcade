@@ -1,4 +1,4 @@
-package honeyarcade.config;
+package honeyarcade.core.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,10 +20,6 @@ import honeyarcade.login.LoginService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
-//	@Autowired
-//	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
 
 	@Autowired
 	private LoginService loginService;
@@ -32,7 +28,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-	
 	
 	
 	/* DaoAuthenticationProvider는 내부적으로 UserDetailsService를 이용해 사용자 정보를 읽는다.*/
@@ -44,33 +39,42 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authenticationProvider;
     }
 
+	
+	@Bean
+	public LoginFailureHandler loginFailureHandler() {
+		return new LoginFailureHandler();
+	};
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) {
 		  auth.authenticationProvider(authenticationProvider(loginService));
 	}
 
+
 	@Override
-	public void configure(WebSecurity web) { // scr/main/resources/static 하위 폴더들 접근 가능하게 하기
-		web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/sass/**");
+	public void configure(WebSecurity web) { 
+		//web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/sass/**",  "/favicon.ico");
+		web.ignoring().antMatchers("/cork/**",  "/favicon.ico", "/error/**");
 	}
+
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		http
 			.authorizeRequests()
-				.antMatchers("/").hasRole("OWNER")
-				.antMatchers( "/favicon.ico").permitAll()
-				//.anyRequest().authenticated()	//	나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근
+				.antMatchers("/login/form").permitAll()
+				.antMatchers("/**").hasRole("OWNER")
+				//.anyRequest().authenticated()			//	나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근
 			.and() // 로그인 설정
 				.formLogin()
 				.loginPage("/login/form")				//	로그인 페이지 호출
 				.loginProcessingUrl("/login/proc")		//	로그인 프로세스
 				//.successHandler(null)					//	로그인 성공시 핸들러		
-				//.failureHandler(null)					//	로그인 실패시 핸들러
+				.failureHandler(loginFailureHandler())	//	로그인 실패시 핸들러
 				//.defaultSuccessUrl("/main/home") // 로그인이 성공했을 때 이동되는 페이지이며, 마찬가지로 컨트롤러에서 URL 매핑
 			.and() // 로그아웃 설정
 				.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/pro/logout"))
+				.logoutUrl("/logout/proc")
 				.logoutSuccessUrl("/")	//
 				//	세션 날리기
 				.invalidateHttpSession(true)
@@ -78,5 +82,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// 403 예외처리 핸들링
             	.exceptionHandling().accessDeniedPage("/access-denied");
 	}
+	
 	
 }
