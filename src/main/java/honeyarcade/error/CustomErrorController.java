@@ -31,9 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 		HttpStatus httpStatus = HttpStatus.valueOf(Integer.valueOf(status.toString())); 
 		if (status != null) { // HttpStatus와 비교해 페이지 분기를 나누기 위한 변수 
 			int statusCode = Integer.valueOf(status.toString()); 
-			// 로그로 상태값을 기록 및 출력 
-			log.info("httpStatus : " + statusCode); 
-			
+		
 			// 404 error 
 			if (statusCode == HttpStatus.NOT_FOUND.value()) { 
 				// 에러 페이지에 표시할 정보 
@@ -58,6 +56,12 @@ import lombok.extern.slf4j.Slf4j;
 		 return ERROR_ETC_PAGE_PATH;
 	}
 	
+	
+	@RequestMapping(value = "/error/503")
+	public String accessDenied() {
+		
+		return "error/503";
+	}
 	
 	
 }

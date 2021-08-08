@@ -17,8 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoginController {
 	
-	@Autowired
-	public LoginUserDetailHelper loginUserDetailHelper;
+//	@Autowired
+//	public LoginUserDetailHelper loginUserDetailHelper;
 	
 	/**
 	 * 인덱스
@@ -41,12 +41,7 @@ public class LoginController {
 	
 	@RequestMapping("/login/form")
 	public String loginForm(Model model, HttpServletRequest req, HttpServletResponse res) throws Exception{
-		
 		log.info("login form call");
-		
-				
-		System.out.println(req.getAttribute("errorMsg"));
-		
 		return "login/loginForm";
 	}
 	
@@ -73,7 +68,7 @@ public class LoginController {
 			
 			url = (String) req.getAttribute("targetUrl");
 			
-			log.info(url);
+			log.info("이동하는 URL" + url);
 			
 			res.sendRedirect(url);
 			

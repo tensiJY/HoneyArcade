@@ -21,7 +21,7 @@ import honeyarcade.login.LoginService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class LoginSuccessHandler implements AuthenticationSuccessHandler{
+public class CustomSuccessHandler implements AuthenticationSuccessHandler{
 
 	@Autowired
 	private LoginService loginService; 
@@ -40,7 +40,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 
 		//	실패 초기화
 		String username = request.getParameter("username");
-		
+		loginService.resetFailureCount(username);
+
 		
 		//	url 리다이렉트
 		resultRedirectStrategy(request, response, authentication);
