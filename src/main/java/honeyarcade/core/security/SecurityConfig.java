@@ -45,6 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new LoginFailureHandler();
 	};
 	
+	@Bean
+	public LoginSuccessHandler loginSuccessHandler() {
+		return new LoginSuccessHandler();
+	}
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) {
 		  auth.authenticationProvider(authenticationProvider(loginService));
@@ -69,9 +74,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.formLogin()
 				.loginPage("/login/form")				//	로그인 페이지 호출
 				.loginProcessingUrl("/login/proc")		//	로그인 프로세스
-				//.successHandler(null)					//	로그인 성공시 핸들러		
+				.successHandler(loginSuccessHandler())	//	로그인 성공시 핸들러		
 				.failureHandler(loginFailureHandler())	//	로그인 실패시 핸들러
-				//.defaultSuccessUrl("/main/home") // 로그인이 성공했을 때 이동되는 페이지이며, 마찬가지로 컨트롤러에서 URL 매핑
+				//.defaultSuccessUrl("/") 				// 로그인이 성공했을 때 이동되는 페이지이며, 마찬가지로 컨트롤러에서 URL 매핑
 			.and() // 로그아웃 설정
 				.logout()
 				.logoutUrl("/logout/proc")
@@ -80,7 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.invalidateHttpSession(true)
 			.and()
 				// 403 예외처리 핸들링
-            	.exceptionHandling().accessDeniedPage("/access-denied");
+            	.exceptionHandling().accessDeniedPage("/error/access-denied");
 	}
 	
 	

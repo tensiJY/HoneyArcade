@@ -18,6 +18,7 @@ import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -58,6 +59,8 @@ public class LoginFailureHandler implements AuthenticationFailureHandler{
            // errormsg = MessageUtils.getMessage("error.Disaled");
         } else if(exception instanceof CredentialsExpiredException) {				//	인증거부 : 비밀번호 유효 기간 만료
            // errormsg = MessageUtils.getMessage("error.CredentialsExpired");
+        } else if(exception instanceof UsernameNotFoundException) {
+        	errorMsg = "계정 없음";
         }
         
         request.setAttribute("username", username);

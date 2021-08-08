@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -43,7 +44,7 @@ public class LoginService implements UserDetailsService {
 		//	오류처리를 하지 않으면 서버 에러 
 		if(userVO == null) {
 			System.out.println("## 계정정보가 존재하지 않습니다. ##");
-			throw new UsernameNotFoundException(username);
+			throw new InternalAuthenticationServiceException(username);
 		}
 		
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();

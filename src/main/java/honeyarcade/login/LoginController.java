@@ -25,7 +25,7 @@ public class LoginController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/")
+	@RequestMapping("/")
 	public String index(Model model, HttpSession session)throws Exception {
 		log.info("call index");
 		
@@ -56,16 +56,26 @@ public class LoginController {
 	 * @param model
 	 * @return
 	 */
-	@PostMapping("/login/proc")
+	@RequestMapping("/login/proc")
 	public void loginProc(Model model, HttpServletRequest req, HttpServletResponse res) throws Exception {
+		log.info("call /login/proc");
 		String url = null;
-		
 		boolean isError = (boolean) req.getAttribute("isError");
+		
 		if(isError) {
 			
 			url = "/login/form";
 			
 			req.getRequestDispatcher(url).forward(req, res);
+			
+		}else {
+			
+			
+			url = (String) req.getAttribute("targetUrl");
+			
+			log.info(url);
+			
+			res.sendRedirect(url);
 			
 		}
 	}
