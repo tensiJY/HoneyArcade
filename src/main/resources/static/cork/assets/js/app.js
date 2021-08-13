@@ -31,13 +31,25 @@ var App = function() {
         }
     };
 
-    var categoryScroll = {
+
+	var categoryScroll = {
         scrollCat: function() {
             var sidebarWrapper = document.querySelectorAll('.sidebar-wrapper [aria-expanded="true"]')[0];
-            var sidebarWrapperTop = sidebarWrapper.offsetTop - 20;
+            if( sidebarWrapper != undefined){
+				var sidebarWrapperTop = sidebarWrapper.offsetTop - 20;
+			}
+            
             setTimeout(function(){ $('.menu-categories').animate({ scrollTop: sidebarWrapperTop }, 500); }, 500);
         }
     }
+
+   // var categoryScroll = {
+   //     scrollCat: function() {
+   //         var sidebarWrapper = document.querySelectorAll('.sidebar-wrapper [aria-expanded="true"]')[0];
+   //         var sidebarWrapperTop = sidebarWrapper.offsetTop - 20;
+   //         setTimeout(function(){ $('.menu-categories').animate({ scrollTop: sidebarWrapperTop }, 500); }, 500);
+   //     }
+   // }
 
     var toggleFunction = {
         sidebar: function($recentSubmenu) {
