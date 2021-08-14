@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LoginService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
 	
 	@Autowired
@@ -35,22 +34,23 @@ public class LoginService implements UserDetailsService {
 		
 		
 		//	1. UserDetailsService -> 
-		//	2. AuthenticationFailureHandler -> 
-		//	3. login process (시큐리티 설정)
-		
+		//	2. AuthenticationFailureHandler ->
 		//	오류처리를 하지 않으면 서버 에러 
 		if(userVO == null) {
-			//	userNotFoundPassword 예외처리가 안된다 -> InternalAuthenticationServiceException 변경하여 사용
+			//	userNotFoundPassword 예외처리가 안된다 -> InternalAuthenticationServiceException 변경하여 사용함
+			//	로그인 ID가 없는경우
+			
 			throw new InternalAuthenticationServiceException(username);
 		}
 		
 		
-		
+		//	권한 넣어주기
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority(userVO.getRole_id()));
 		
 		
-		return new User(userVO.getLogin_id(), userVO.getLogin_pwd(), authorities);
+		CustomUserDetails customUserDetails = new CustomUserDetails(userVO, authorities);
+		return customUserDetails;
 		
 	}
 	
@@ -94,6 +94,7 @@ public class LoginService implements UserDetailsService {
 	public void disabledUsername(String username) {
 		// TODO Auto-generated method stub
 		
+		loginMapper.disabledUsername(username);
 	}
 
 	

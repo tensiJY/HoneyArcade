@@ -6,13 +6,15 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface LoginMapper {
 
-	public UserVO findByLoginId(@Param("login_id") String username);
+	public UserVO findByLoginId(String username);
 
-	public void resetFailureCount(@Param("login_id") String username);
+	public void resetFailureCount(String username);
 
-	public void addFailureCount(@Param("login_id") String username);
+	public void addFailureCount(String username);
 
-	public int getFailureCount(@Param("login_id") String username);
+	public int getFailureCount(String username);
+
+	public void disabledUsername(String username);
 	
 	
 

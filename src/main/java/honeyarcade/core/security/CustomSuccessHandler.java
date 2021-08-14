@@ -17,14 +17,19 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 
-import honeyarcade.login.LoginService;
+import honeyarcade.login.CustomUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 로그인 성공시 핸들러
+ * @author wndud
+ *
+ */
 @Slf4j
 public class CustomSuccessHandler implements AuthenticationSuccessHandler{
 
 	@Autowired
-	private LoginService loginService; 
+	private CustomUserDetailsService loginService; 
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -39,8 +44,8 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler{
 		clearAuthenticationAttributes(request);
 
 		//	실패 초기화
-		String username = request.getParameter("username");
-		loginService.resetFailureCount(username);
+//		String username = request.getParameter("username");
+//		loginService.resetFailureCount(username);
 
 		
 		//	url 리다이렉트
@@ -68,34 +73,13 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler{
     protected void resultRedirectStrategy(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
     	
-    	//	로그인 프로세스로 이동
-    	//	targetUrl : 방문하려는 URL이 없는 경우	"/" 으로 이동
-    	//	targetUrl : 방문하려는 URL이 있는 경우 이동하려는 페이지
+
+    	//	로그인 프로세스를 설정 하지 않는 경우, 로그인 프로세스는 타지 않는다.
+    	//	로그인 폼에서 action값을 login/form으로 설정
+    	//	로그인 화면을 보기 전에 방문하려던 URL을 찾고, 그 URL로 리다이렉트 시킨다
+    	//	
     	
-    	String url = "/login/proc";
-    	boolean isError = false;	
-    	String targetUrl = null;
-    	
-    	SavedRequest savedRequest = requestCache.getRequest(request, response);
-    	if(savedRequest!=null) {
-    		 
-    		targetUrl = savedRequest.getRedirectUrl();
-    	}else {
-    		
-    		targetUrl = "/";
-    	}
-    	
-    	request.setAttribute("targetUrl", targetUrl);
-    	request.setAttribute("isError", isError);
-    	request.getRequestDispatcher(url).forward(request, response);
-    	
-    	/*
-    	//	로그인 프로세스는 타지 않는다.
-        
-    	//	로그인 화면을 보기 전에 방문하려던 URL
-    	String targetUrl = null;
-    	
-    	//	로그인 defaultSuccessUrl 
+    	String targetUrl = null; 
     	String defaultUrl = "/";
     	
         SavedRequest savedRequest = requestCache.getRequest(request, response);
@@ -109,7 +93,36 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler{
         	
             redirectStratgy.sendRedirect(request, response, defaultUrl);
         }
-    	 */
+    	
     }
 
 }
+
+
+
+
+
+
+/*
+//	로그인 프로세스 설정 했으면 로그인 프로세스로 이동한다
+//	targetUrl : 방문하려는 URL이 없는 경우	"/" 으로 이동
+//	targetUrl : 방문하려는 URL이 있는 경우 이동하려는 페이지
+
+String url = "/login/proc";
+boolean isError = false;	
+String targetUrl = null;
+
+SavedRequest savedRequest = requestCache.getRequest(request, response);
+if(savedRequest!=null) {
+	 
+	targetUrl = savedRequest.getRedirectUrl();
+}else {
+	
+	targetUrl = "/";
+}
+
+request.setAttribute("targetUrl", targetUrl);
+request.setAttribute("isError", isError);
+request.getRequestDispatcher(url).forward(request, response);
+*/
+

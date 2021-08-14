@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,7 +28,7 @@
                         </div>
                         <h5 class="" style='padding-top:20px;padding-bottom:20px;'>허니아케이드 매장 사장님 전용</h5>
                         
-                        <form class="text-left" th:action="@{/login/proc}" method="post">
+                        <form class="text-left" th:action="@{/login/form}" method="post">
                             <div class="form">
 
                                 <div id="username-field" class="field-wrapper input">
@@ -87,10 +87,20 @@
                                 </div>-->
                                                      
                                                      
-                                                                
-                                 <span th:text="${errorMsg}"></span>
+                                 <span th:if="${errorMsg} == null">
+                                 	하이
+                                 </span>  
+                                 <span th:if="${errorMsg} != null">
+                                 	<span th:text="${errorMsg}"></span>
+                                 </span>                             
                                  
-                                
+								<div sec:authorize-expr="isAuthenticated()">
+									<h2 sec:authentication="name">Name</h2>
+									<a href="/logout" th:href="@{/logout}">Logout</a>
+								</div>
+								<div sec:authorize-expr="!isAuthenticated()">
+									<a href="/login" th:href="@{/login}">Login</a>
+								</div>
 								
                                  
 

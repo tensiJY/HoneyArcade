@@ -13,6 +13,6 @@ public class BCryptTest {
 	@Test
 	public void init() {
 		BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
-		log.info(bc.encode("owner"));
+		log.info(bc.encode("test01"));
 	}
 }

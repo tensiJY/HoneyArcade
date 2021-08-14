@@ -50,7 +50,7 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'1 ¹Ì½ÂÀÎ, 2 ½Â
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'±âº» 1' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TB_OWNER', @level2type=N'COLUMN',@level2name=N'STORE_SORT';
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'1³ëÃâ 2 ¼û±è' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TB_OWNER', @level2type=N'COLUMN',@level2name=N'STORE_STATUS';
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'1¼û±è 2 ³ëÃâ' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TB_OWNER', @level2type=N'COLUMN',@level2name=N'STORE_STATUS';
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'³ëÃâ¿©ºÎ Y/N' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TB_OWNER', @level2type=N'COLUMN',@level2name=N'DEL_FLAG';
 

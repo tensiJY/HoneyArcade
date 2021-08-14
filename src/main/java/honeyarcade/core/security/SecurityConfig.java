@@ -1,52 +1,29 @@
 package honeyarcade.core.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import honeyarcade.login.LoginService;
-
-//import honeyarcade.login.LoginService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private LoginService loginService;
-	
     @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
+    public CustomAuthenticationProvider customAuthenticationProvider() {
+    	return new CustomAuthenticationProvider();
     }
-	
-	
-	/* DaoAuthenticationProvider는 내부적으로 UserDetailsService를 이용해 사용자 정보를 읽는다.*/
-
-	@Bean
-    public DaoAuthenticationProvider authenticationProvider(LoginService loginService) {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(loginService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        
-        return authenticationProvider;
-    }
-
+    
+    
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) {
-		  auth.authenticationProvider(authenticationProvider(loginService));
+		auth.authenticationProvider(customAuthenticationProvider());
 	}
+
 	
 	
     @Bean
@@ -79,13 +56,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/").permitAll()
 				.antMatchers("/owner/ntc/**").permitAll()
-				.antMatchers("/login/form").permitAll()
+				.antMatchers("/login/form").permitAll()		
 				.antMatchers("/owner/**").hasRole("OWNER")
-				.anyRequest().authenticated()			//	나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근
+				.anyRequest().hasRole("OWNER")			//	나머지 요청들은 권한의 종류에 상관 없이 권한이 있어야 접근
 			.and() // 로그인 설정
 				.formLogin()
 				.loginPage("/login/form")				//	로그인 페이지 호출
-				.loginProcessingUrl("/login/proc")		//	로그인 프로세스
+				//.loginProcessingUrl("/login/proc")	//	로그인 프로세스
 				.successHandler(customSuccessHandler())	//	로그인 성공시 핸들러		
 				.failureHandler(customFailureHandler())	//	로그인 실패시 핸들러
 				//.defaultSuccessUrl("/") 				// 로그인이 성공했을 때 이동되는 페이지이며, 마찬가지로 컨트롤러에서 URL 매핑

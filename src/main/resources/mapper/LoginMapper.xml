@@ -7,31 +7,31 @@
 		select 
 			*
 		from
-			tb_admin
+			tb_owner
 		where 
-			login_id = #{login_id}
+			owner_id = #{username}
 	]]>
 	</select>
 	
 	<update id="resetFailureCount">
 	<![CDATA[
 		update
-			tb_admin
+			tb_owner
 		set
-			admin_fail_cnt = 0
+			owner_fail_cnt = 0
 		where
-			login_id = #{login_id}
+			owner_id = #{username}
 	]]>
 	</update>
 	
 	<update id="addFailureCount">
 	<![CDATA[
 		update
-			tb_admin
+			tb_owner
 		set
-			admin_fail_cnt = admin_fail_cnt+1
+			owner_fail_cnt = owner_fail_cnt+1
 		where
-			login_id = #{login_id}
+			owner_id = #{username}
 	]]>
 	</update>
 
@@ -39,13 +39,24 @@
 	<select id="getFailureCount" resultType="Integer">
 	<![CDATA[
 		select
-			admin_fail_cnt
+			owner_fail_cnt
 		from
-			tb_admin
+			tb_owner
 		where
-			login_id = #{login_id}
+			owner_id = #{username}
 	]]>
 	</select>
+	
+	<update id="disabledUsername">
+	<![CDATA[
+		update
+			tb_owner
+		set
+			owner_status = 1
+		where
+			owner_id = #{username}
+	]]>
+	</update>
 
 	<!-- 회원 정보 조회 -->
 <!-- 	<select id="findByLoginId" resultType="iamFreelancer.login.vo.UserVO">
