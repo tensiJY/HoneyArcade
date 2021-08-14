@@ -38,8 +38,6 @@ public class CustomUserDetails extends User{
 
 
 
-
-
 //public User(String username, String password, boolean enabled, boolean accountNonExpired,
 //		boolean credentialsNonExpired, boolean accountNonLocked,
 //		Collection<? extends GrantedAuthority> authorities) {
