@@ -53,7 +53,7 @@ public class CustomFailureHandler implements AuthenticationFailureHandler{
         	//	1. 실패회수 증가
         	//	2. 실패회수가 5회인지 조회
 
-        	
+        	//	허니아케이드는 사용하지 않는다
 //        	loginService.addFailureCount(username);
 //        	
 //        	int failureCount = loginService.getFailureCount(username);

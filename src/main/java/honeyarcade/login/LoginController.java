@@ -41,11 +41,6 @@ public class LoginController {
 		return "login/loginForm";
 	}
 	
-	
-	
-	@GetMapping("/main/home")
-	public String mainHome() {
-		return "main/index";
-	}
+
 	
 }

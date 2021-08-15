@@ -18,9 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 	
 	
 	// 에러 페이지 정의 
-	private final String ERROR_404_PAGE_PATH = "error/404"; 
-	private final String ERROR_500_PAGE_PATH = "error/500"; 
-	private final String ERROR_ETC_PAGE_PATH = "error/error"; 
+	private final String ERROR_404_PAGE_PATH = "error/404"; 				//	페이지 없는경우
+	private final String ERROR_500_PAGE_PATH = "error/500"; 				//	서버 에러
+	private final String ERROR_503_PAGE_PATH = "error/503";					//	접근 불가능한 페이지(롤)
+	private final String ERROR_ETC_PAGE_PATH = "error/error"; 				//	기타 에러 페이지
+	private final String ERROR_DUPLICATED_LOGIN = "error/duplicatedLogin";	//	로그인 중복
 	
 	@RequestMapping(value = "/error") 
 	public String handleError(HttpServletRequest request, Model model) { 
@@ -60,8 +62,14 @@ import lombok.extern.slf4j.Slf4j;
 	@RequestMapping(value = "/error/503")
 	public String accessDenied() {
 		
-		return "error/503";
+		return ERROR_503_PAGE_PATH;
 	}
+	
+	@RequestMapping(value = "/error/duplicatedLogin")
+	public String duplicatedLogin() {
+		System.out.println("session 중복");
+		return ERROR_DUPLICATED_LOGIN;
+	};
 	
 	
 }

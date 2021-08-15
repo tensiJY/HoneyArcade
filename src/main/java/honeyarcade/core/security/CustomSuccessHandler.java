@@ -17,6 +17,7 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import honeyarcade.login.CustomUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,9 +49,25 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler{
 //		loginService.resetFailureCount(username);
 
 		
-		//	url 리다이렉트
-		resultRedirectStrategy(request, response, authentication);
+		
+		// 디폴트 URI
+		String uri = "/";
+		/* 강제 인터셉트 당했을 경우의 데이터 get */
+		RequestCache requestCache = new HttpSessionRequestCache();
+		SavedRequest savedRequest = requestCache.getRequest(request, response);
+		
+		
+		//	방문하려던 페이지가 있는경우, 방문하려던 페이지로 이동
+		if (savedRequest != null) {
+			
+			uri = savedRequest.getRedirectUrl();
+		}
+
+
+		//	디폴트 페이지로 이동
+		response.sendRedirect(uri);
 	}
+	
 	
 	/**
 	 * 에러 세션 삭제
@@ -65,43 +82,45 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler{
 
 
 	
-	//	RequestCache 인터페이스를 이용해, 사용자 요청 정보들이 들어 있는 SavedRequest 클래스 객체를 세션에 저장하게 된다. 
-	//	RequestCache 객체를 생성해 SavedRequest 객체를 가져와서 로그인 화면을 보기 전에 방문했던 URL 정보를 가져오면 된다.
-    private RequestCache requestCache = new HttpSessionRequestCache();
-    private RedirectStrategy redirectStratgy = new DefaultRedirectStrategy();
-    
-    protected void resultRedirectStrategy(HttpServletRequest request, HttpServletResponse response,
-            Authentication authentication) throws IOException, ServletException {
-    	
 
-    	//	로그인 프로세스를 설정 하지 않는 경우, 로그인 프로세스는 타지 않는다.
-    	//	로그인 폼에서 action값을 login/form으로 설정
-    	//	로그인 화면을 보기 전에 방문하려던 URL을 찾고, 그 URL로 리다이렉트 시킨다
-    	//	
-    	
-    	String targetUrl = null; 
-    	String defaultUrl = "/";
-    	
-        SavedRequest savedRequest = requestCache.getRequest(request, response);
-        
-        if(savedRequest!=null) {
-        	
-        	targetUrl = savedRequest.getRedirectUrl();
-            redirectStratgy.sendRedirect(request, response, targetUrl);
-            
-        } else {
-        	
-            redirectStratgy.sendRedirect(request, response, defaultUrl);
-        }
-    	
-    }
 
 }
 
 
 
+/*
+//	RequestCache 인터페이스를 이용해, 사용자 요청 정보들이 들어 있는 SavedRequest 클래스 객체를 세션에 저장하게 된다. 
+//	RequestCache 객체를 생성해 SavedRequest 객체를 가져와서 로그인 화면을 보기 전에 방문했던 URL 정보를 가져오면 된다.
+private RequestCache requestCache = new HttpSessionRequestCache();
+private RedirectStrategy redirectStratgy = new DefaultRedirectStrategy();
 
+protected void resultRedirectStrategy(HttpServletRequest request, HttpServletResponse response,
+        Authentication authentication) throws IOException, ServletException {
+	
 
+	//	로그인 프로세스를 설정 하지 않는 경우, 로그인 프로세스는 타지 않는다.
+	//	로그인 폼에서 action값을 login/form으로 설정
+	//	로그인 화면을 보기 전에 방문하려던 URL을 찾고, 그 URL로 리다이렉트 시킨다
+	//	
+	
+	String targetUrl = null; 
+	String defaultUrl = "/";
+	
+    SavedRequest savedRequest = requestCache.getRequest(request, response);
+    
+    if(savedRequest!=null) {
+    	log.info("savedRequest.getRedirectUrl : " +  savedRequest.getRedirectUrl());
+    	
+    	targetUrl = savedRequest.getRedirectUrl();
+        redirectStratgy.sendRedirect(request, response, targetUrl);
+        
+    } else {
+    	
+        redirectStratgy.sendRedirect(request, response, defaultUrl);
+    }
+	
+}
+*/
 
 /*
 //	로그인 프로세스 설정 했으면 로그인 프로세스로 이동한다

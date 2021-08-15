@@ -5,6 +5,14 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class CustomUserDetails extends User{
 	
 	//	스프링 시큐리티는 UserDetails 라는 인터페이스를 구현한 객체를 로그인과정에서 사용합니다.
@@ -16,9 +24,9 @@ public class CustomUserDetails extends User{
 	private static final long serialVersionUID = 1L;
 
 	
+	int file_seq;
+	
     public CustomUserDetails(UserVO userVO, Collection<? extends GrantedAuthority> authorities) {
-    	
-    	
     	
         super(
             userVO.getOwner_id(),	//	username
@@ -30,71 +38,11 @@ public class CustomUserDetails extends User{
             authorities
         );
         
+        this.file_seq = userVO.getFile_seq();
       
     }
+    
+    
 
 
 }
-
-//public User(String username, String password, boolean enabled, boolean accountNonExpired,
-//		boolean credentialsNonExpired, boolean accountNonLocked,
-//		Collection<? extends GrantedAuthority> authorities) {
-//	Assert.isTrue(username != null && !"".equals(username) && password != null,
-//			"Cannot pass null or empty values to constructor");
-//	this.username = username;
-//	this.password = password;
-//	this.enabled = enabled;
-//	this.accountNonExpired = accountNonExpired;
-//	this.credentialsNonExpired = credentialsNonExpired;
-//	this.accountNonLocked = accountNonLocked;
-//	this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
-//}
-
-
-//private ArrayList<UserVO> userVO;
-//
-//public CustomUserDetails(ArrayList<UserVO> userAuthes) {
-//	this.userVO = userAuthes;
-//}
-//
-//@Override
-//public Collection<? extends GrantedAuthority> getAuthorities() { //유저가 갖고 있는 권한 목록
-//
-//	List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-//	
-//	for(int x=0; x<userVO.size(); x++) {
-//		authorities.add(new SimpleGrantedAuthority(userVO.get(x).getRole_id()));
-//	}
-//	
-//	return authorities;
-//}
-//
-//@Override
-//public String getPassword() { 				//유저 비밀번호
-//	return userVO.get(0).getOwner_id();
-//}
-//
-//@Override
-//public String getUsername() {				// 유저 이름 혹은 아이디
-//	return userVO.get(0).getOwner_pwd();
-//}
-//
-//@Override
-//public boolean isAccountNonExpired() {		// 유저 아이디가 만료 되었는지
-//	return true;
-//}
-//
-//@Override
-//public boolean isAccountNonLocked() { 		// 유저 아이디가 Lock 걸렸는지
-//	return true;
-//}
-//
-//@Override
-//public boolean isCredentialsNonExpired() {	//비밀번호가 만료 되었는지
-//	return true;
-//}
-//
-//@Override
-//public boolean isEnabled() {				 // 계정이 활성화 되었는지
-//	return true;
-//}

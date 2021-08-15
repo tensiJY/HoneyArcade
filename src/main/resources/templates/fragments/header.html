@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lagn="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
 <th:block th:fragment="headerFragment"> 
 	<!--  BEGIN NAVBAR  -->
     <div class="header-container fixed-top">
@@ -9,7 +8,7 @@
             <ul class="navbar-nav theme-brand flex-row  text-center">
                 <li class="nav-item theme-logo">
                     <a th:href="@{/}">
-                        <img th:src="@{/cork/assets/img/90x90.jpg}" class="navbar-logo" alt="logo">
+                        <img th:src="@{/resources/cork/assets/img/90x90.jpg}" class="navbar-logo" alt="logo">
                        <!-- <img th:src="@{/honeyArcade/common/img/logo.png}" class="navbar-logo" alt="logo" />-->
                     </a>
                 </li>
@@ -23,7 +22,18 @@
 
             <ul class="navbar-item flex-row navbar-dropdown ml-auto">
             	 <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
-            	 	<span class="btn btn-outline-warning mb-2" th:onclick="|location.href='@{/login/form}'|"> 사장님 로그인 </span>
+            	
+	            	 <div sec:authorize-expr="isAuthenticated()">
+						<form action="/logout" method="POST">
+	        				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />	
+	        				<button class="btn btn-outline-warning mb-2" type="submit">LOGOUT</button>
+	    				</form>
+	            	 </div>
+            	 
+					<div sec:authorize-expr="!isAuthenticated()">
+						<span class="btn btn-outline-warning mb-2" th:onclick="|location.href='@{/login/form}'|"> 사장님 로그인 </span>
+					</div>            	 
+            	 
                     <!--<a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
                     </a>-->

@@ -43,15 +43,15 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 		}
 		
-		//	계정 잠금
+		//	계정 잠겨 있는경우 에러 
 		if(!customUserDetails.isEnabled()) {
 			
 			throw new DisabledException(username);
 		}
 
-		
+			
 
-		return new UsernamePasswordAuthenticationToken(username, password, customUserDetails.getAuthorities());
+		return new UsernamePasswordAuthenticationToken(customUserDetails, customUserDetails.getPassword(), customUserDetails.getAuthorities());
 
 	}
 

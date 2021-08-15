@@ -9,11 +9,12 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/owner")
 @Slf4j
-public class NtcController {
+public class OwnerNtcController {
 	
 	@GetMapping("/ntc/list")
 	public String ownerNtcList() throws Exception{
-		System.out.println(111);
+		
+
 		
 		return "/owner/ntc/ownerNtcList";
 	}
