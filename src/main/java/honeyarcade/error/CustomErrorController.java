@@ -67,8 +67,9 @@ import lombok.extern.slf4j.Slf4j;
 	
 	@RequestMapping(value = "/error/duplicatedLogin")
 	public String duplicatedLogin() {
-		System.out.println("session 중복");
+		
 		return ERROR_DUPLICATED_LOGIN;
+		
 	};
 	
 	

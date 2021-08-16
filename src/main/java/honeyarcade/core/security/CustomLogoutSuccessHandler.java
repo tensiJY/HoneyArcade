@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+
+import honeyarcade.login.CustomUserDetails;
 
 public class CustomLogoutSuccessHandler implements LogoutSuccessHandler{
 
@@ -16,11 +19,13 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler{
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		
+		//	1. 세션 지워주기
+		//	2. 인덱스 페이지로 이동
+		
+		
         if (authentication != null && authentication.getDetails() != null) {
             try {
             	
-        		// String username = (String) authentication.getPrincipal();
-        		// String password = (String) authentication.getCredentials();
             	
             	request.getSession().invalidate();
             } catch (Exception e) {

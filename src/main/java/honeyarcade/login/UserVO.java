@@ -22,10 +22,7 @@ public class UserVO implements Serializable{
 	private int owner_status;	// 잠김여부 1:잠김-승인 이전, 2:승인-활성화
 	
 	private int file_seq;		// 사업자 등록증
-	
-	
-	
-	
+		
 	public boolean isEnabled() {	
 		//System.out.println(" this.owner_status : " + this.owner_status);
 		return this.owner_status == 1? false : true;

@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class CustomFailureHandler implements AuthenticationFailureHandler{
+public class CustomLoginFailureHandler implements AuthenticationFailureHandler{
 	
 	/**
 	 * 스프링부트에서는 messages.properties 값을 가져올 수 있다
