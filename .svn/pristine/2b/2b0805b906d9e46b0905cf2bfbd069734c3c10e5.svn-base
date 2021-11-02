@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head>
+	<th:block th:replace="fragments/meta :: metaFragment(title='마이 페이지', useMetaCsrf='true')"></th:block>
+	<!--  css style  -->
+	<th:block th:replace="fragments/style :: styleFragment"></th:block>
+	
+	<link rel="stylesheet" th:href="@{/resources/honeyArcade/owner/st/mypage/css/ownerStMyPage.css}">
+</head>
+
+
+<body class="sidebar-noneoverflow">
+    
+	<!--  header  -->
+	<th:block th:replace="fragments/header :: headerFragment"></th:block>
+	
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+		<!--  sidebar  -->
+		<th:block th:replace="fragments/sidebar :: sidebarFragment(main='st-my', sub='st-my')"></th:block>
+		        
+        <!--  BEGIN CONTENT AREA  -->
+			<section id="mypage" class="sub">
+    <article>
+      <h2>마이페이지</h2>
+      <div class="inner flex-between">
+        <div class="left-side flex-between">
+          <div>
+            <label for="">ID</label>
+            <input type="text" placeholder="아이디">
+          </div>
+          <div>
+            <label for="">매장</label>
+            <input type="text" placeholder="(예시)000일식">
+          </div>
+          <div>
+            <label for="">층수</label>
+            <input type="text" placeholder="(예시)엠스테이트 1층">
+          </div>
+        </div>
+        <div class="right-side"></div>
+      </div>
+    </article>
+    <article>
+      <h2>배너 광고 현황</h2>
+      <div class="inner flex-between">
+        <div class="left-side">
+          <div class="flex-between">
+            <label for="">배너광고 현항</label>
+            <p>
+              <input type="date"> ~
+              <input type="date">
+              <button class="btn btn-sm btn-gray">조회</button>
+            </p>
+          </div>
+          <div class="table">
+            <div class="table-head flex-between">
+              <p>상품명</p>
+              <p>기간</p>
+              <p>사용 유무</p>
+            </div>
+            <ul class="table-body">
+              <li class="flex-between">
+                <p></p>
+                <p></p>
+                <p></p>
+              </li>
+              <li class="flex-between">
+                <p>패키지A</p>
+                <p>2021.00.00 ~ 2021.00.00</p>
+                <p>사용중</p>
+              </li>
+               <li class="flex-between">
+                <p>패키지A</p>
+                <p>2021.00.00 ~ 2021.00.00</p>
+                <p>사용중</p>
+              </li>
+               <li class="flex-between">
+                <p>패키지A</p>
+                <p>2021.00.00 ~ 2021.00.00</p>
+                <p>사용중</p>
+              </li>
+               <li class="flex-between">
+                <p>패키지A</p>
+                <p>2021.00.00 ~ 2021.00.00</p>
+                <p>사용중</p>
+              </li>
+               <li class="flex-between">
+                <p>패키지A</p>
+                <p>2021.00.00 ~ 2021.00.00</p>
+                <p>사용중</p>
+              </li>
+               <li class="flex-between">
+                <p>패키지A</p>
+                <p>2021.00.00 ~ 2021.00.00</p>
+                <p>사용중</p>
+              </li>
+               <li class="flex-between">
+                <p>패키지A</p>
+                <p>2021.00.00 ~ 2021.00.00</p>
+                <p>사용중</p>
+              </li>
+               <li class="flex-between">
+                <p>패키지A</p>
+                <p>2021.00.00 ~ 2021.00.00</p>
+                <p>사용중</p>
+              </li>
+              <li class="flex-between">
+                <p>패키지A</p>
+                <p>2021.00.00 ~ 2021.00.00</p>
+                <p>사용중</p>
+              </li>
+              <li class="flex-between">
+                <p></p>
+                <p></p>
+                <p></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="right-side">
+          <button class="btn btn-orange">쿠폰 신청</button>
+          <button class="btn btn-orange">혜택 보기</button>
+        </div> 
+      </div>
+    </article>
+    <article>
+      <h2>쿠폰 현황</h2>
+      <div class="inner flex-between">
+        <div class="left-side">
+          <div>
+            <div class="flex-between">
+              <label for="">쿠폰 현황</label>
+              <p>
+                <input type="date"> ~
+                <input type="date">
+                <button class="btn btn-sm btn-gray">조회</button>
+              </p>
+            </div>
+            <div class="table">
+              <div class="table-head flex-between">
+                <p>상품명</p>
+                <p>기간</p>
+                <p>사용 유무</p>
+              </div>
+              <ul class="table-body">
+                <li class="flex-between">
+                  <p></p>
+                  <p></p>
+                  <p></p>
+                </li>
+                <li class="flex-between">
+                  <p>패키지A</p>
+                  <p>2021.00.00 ~ 2021.00.00</p>
+                  <p>사용중</p>
+                </li>
+                <li class="flex-between">
+                  <p>패키지A</p>
+                  <p>2021.00.00 ~ 2021.00.00</p>
+                  <p>사용중</p>
+                </li>
+                <li class="flex-between">
+                  <p></p>
+                  <p></p>
+                  <p></p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="flex-between">
+              <label for="">고객 쿠폰 이용 현황</label>
+              <p>
+                <input type="date"> ~
+                <input type="date">
+                <button class="btn btn-sm btn-gray">조회</button>
+              </p>
+            </div>
+            <div class="chart">
+              
+            </div>
+          </div>
+        </div>
+        <div class="right-side">
+          <button class="btn btn-orange">쿠폰 신청</button>
+          <button class="btn btn-orange">혜택 보기</button>
+        </div>
+      </div>
+    </article>
+
+  </section>
+            
+            
+            <!--  footer   -->
+            <th:block th:replace="fragments/footer"></th:block>
+			
+            
+
+        <!--  END CONTENT AREA  -->
+
+    </div>
+    <!-- END MAIN CONTAINER -->
+	
+
+
+
+	<th:block th:replace="fragments/script :: scriptFragment(useScriptCsrf='true')"></th:block>
+	
+	<script th:inline="javascript">
+	/* <![CDATA[ */
+		
+	/*]] */
+	</script>
+</body>
+
+</html>

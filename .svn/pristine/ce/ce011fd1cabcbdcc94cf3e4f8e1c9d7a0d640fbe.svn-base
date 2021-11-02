@@ -1,0 +1,222 @@
+#join {
+  position: relative;
+}
+
+#join article {
+  display: none;
+}
+
+#join article.on {
+  display: block;
+}
+
+#join .first li.id-input {
+  position: relative;
+}
+
+#join .first li.id-input span {
+  position: absolute;
+  color: #e60000;
+  font-size: 12px;
+  line-height: 32px;
+  left: 14px;
+  top: 54px;
+  opacity: 0;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+#join .first li.id-input span.on {
+  opacity: 1;
+}
+
+#join .first li.pass-input-re {
+  position: relative;
+}
+
+#join .first li.pass-input-re em {
+  color: #8c6239;
+  margin-left: 10px;
+}
+
+#join .first li.pass-input-re span {
+  display: block;
+  position: absolute;
+  width: 17px;
+  height: 20px;
+  background: url(../../img/password0.png) center center no-repeat;
+  background-size: cover;
+  left: 330px;
+  top: 38px;
+}
+
+#join .first li.pass-input-re span.correct {
+  background: url(../../img/password1.png) center center no-repeat;
+  background-size: cover;
+  color: #289600;
+}
+
+#join .first li.pass-input-re span.incorrect {
+  background: url(../../img/password2.png) center center no-repeat;
+  background-size: cover;
+  color: #e60000;
+}
+
+#join .second li.build-input {
+  width: 50%;
+}
+
+#join .second li.build-input div select {
+  width: 100%;
+  min-width: 0;
+}
+
+#join .second li.build-input div:nth-child(2) {
+  width: 68%;
+}
+
+#join .second li.build-input div:nth-child(1) {
+  width: 30%;
+}
+
+#join .first li.mobile-input input {
+  min-width: 0;
+  width: 96px;
+}
+
+#join .first li.email-input {
+  position: relative;
+}
+
+#join .first li.email-input:after {
+  content: "@";
+  display: block;
+  position: absolute;
+  width: 20px;
+  line-height: 32px;
+  text-align: center;
+  background: #fff;
+  left: 168px;
+  top: 32px;
+  color: #5a311d;
+  font-weight: bold;
+}
+
+#join .first li.email-input input {
+  min-width: 0;
+  width: 180px;
+  margin-right: 0;
+}
+
+#join .first li:last-child {
+  margin: 150px auto 0;
+  width: 300px;
+}
+
+#join .first li:last-child input[type="button"] {
+  min-width: 300px;
+  font-size: 22px;
+}
+
+#join .second li.food-select{
+  border-radius: 5px;
+  background: rgba(199, 178, 153, 0.3);
+  padding: 15px 10px;
+  margin-bottom: 12px;
+}
+#join .second li.food-select .radio-box label{
+	display: inline-block;
+	background: #fff;
+	padding : 0 22px 0 14px;
+	border-radius: 5px;
+	margin: 12px 5px;
+	vertical-align: middle;
+}
+#join .second li.food-select .radio-box input{
+	width: 30px;
+	min-width:0;
+}
+
+#join .second li:last-child {
+  margin: 150px auto 0;
+  width: 62%;
+}
+#join .second li.store-num input{
+	max-width: 120px;
+}
+
+#join .second li:last-child input[type="button"] {
+  min-width: 300px;
+  font-size: 22px;
+}
+
+#join .third button {
+  float: right;
+  margin-top: 12px;
+}
+
+#join .third li {
+  margin-bottom: 12px;
+}
+
+#join .third li:nth-child(4) > div {
+  width: 100%;
+}
+
+#join .third li:nth-child(5) {
+  margin: 150px auto 0;
+  width: 62%;
+}
+
+#join .third li:nth-child(5) input[type="button"] {
+  min-width: 300px;
+  font-size: 22px;
+}
+
+#join .third li > div {
+  width: 48%;
+}
+
+#join .third li .list {
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #8c6239;
+  padding: 16px 22px;
+  color: #5a311d;
+  font-weight: bold;
+}
+
+#join .third li .list li {
+  margin-bottom: 5px;
+}
+
+#join .third li .list.list-menu p:nth-child(1) {
+  width: 20%;
+}
+
+#join .third li .list.list-menu p:nth-child(3) span {
+  display: block;
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  background: #ccc;
+}
+
+#join .file-upload {
+  display: inline-block;
+  border-radius: 5px;
+  border: 1px solid #884f14;
+  min-width: 0;
+  font-weight: normal;
+  padding: 0 9px;
+  width: auto;
+  margin-left: 2px;
+  color: #884f14;
+  cursor: pointer;
+}
+
+#join .file-upload:hover {
+  background: #884f14;
+  color: #fff;
+}
+/*# sourceMappingURL=join.css.map */

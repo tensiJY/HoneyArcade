@@ -1,0 +1,25 @@
+package honeyarcade.owner.ad.build;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class OwnerAdBuildService {
+
+	@Autowired
+	private OwnerAdBuildMapper ownerAdBuildMapper;
+
+	/**
+	 * 건물 광고 : 건물 광고 신청권 목록 가져오기
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<OwnerAdBuildVO> getBuildList(String owner_id) throws Exception{
+		
+		return ownerAdBuildMapper.getBuildList(owner_id);
+	}
+	
+}

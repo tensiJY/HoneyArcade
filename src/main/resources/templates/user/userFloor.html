@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head>
+	<th:block th:replace="fragments/meta-mobile :: metaFragment(title='건물', useMetaCsrf='true')"></th:block>
+	<link rel="stylesheet" th:href="@{/resources/honeyArcade/user/css/mobile-web.css}">
+</head>
+
+<body>
+	<header>
+		<div>
+			<span id="backBtn"><a href=""><img src="" alt=""></a></span>
+			<p>[[${paramVO.build_name}]]</p>
+			<form id="backForm" method="GET" th:action="@{/user/build}">
+				<input type="hidden" name="QRLocation"	th:value="${paramVO.build_seq}">
+				<input type="hidden" name="build_seq"	th:value="${paramVO.build_seq}">
+				<input type="hidden" name="type"		th:value="${paramVO.type}">
+				<input type="hidden" name="search_text"	th:value="${paramVO.search_text}">
+			</form>		
+		</div>
+	</header>
+	<section class="index">
+		<h1>logo</h1>
+		<article class="build-name">
+			<p class="sub">현재 위치는</p>
+			<p class="main">[[${paramVO.build_name}]] 건물 [[${floorVO == null? '' : floorVO.floor_name}]] 입니다.</p>
+		</article>
+		<article class="build-map">
+			<div>
+				<img th:src="${floorVO == null? '' : floorVO.file_dtl_url_path}" alt="">
+			</div>
+		</article>
+		<article class="coupon">
+			<div>
+				<button type="button" id="couponBtn">쿠폰 보기</button>
+				<button type="button" id="bannerBtn">홍보 보기</button>
+				<form id="showForm" method="POST" th:action="@{/}">
+					<input type="hidden" name="build_seq"	th:value="${paramVO.build_seq}">
+					<input type="hidden" name="QRLocation"	th:value="${paramVO.build_seq}">
+					<input type="hidden" name="type"		th:value="${paramVO.type}">
+					<input type="hidden" name="search_text"	th:value="${paramVO.search_text}">
+					<input type="hidden" name="store_floor"	th:value="${paramVO.store_floor}">
+					<input type="hidden" name="owner_id"	th:value="${paramVO.owner_id}">
+					<input type="hidden" name="build_name"	th:value="${paramVO.build_name}">
+					<input type="hidden" name="position"	value="floor">
+				</form>
+			</div>
+		</article>
+		<article class="install">
+			<div>
+				<p class="appSetup" style="cursor: pointer;">앱에서 확인하기</p>
+			</div>
+		</article>
+	</section>
+	<footer>
+		<div>
+			<p>허니아케이드(주) 대표전화 02)6493-3902</p>
+		</div>
+	</footer>
+	<section class="popup on">
+		<article class="honey">
+			<div>
+				<div class="popup-title">
+					<div class="popup-logo">
+						<img th:src="@{/resources/honeyArcade/img/mobile-logo2.png}" alt="">
+					</div>
+					<div class="popup-sub">
+						<p class="small-sub">NO1. 건물검색 솔루션</p>
+						<p class="main-sub">허니 아케이드 APP을 설치하고<br>
+							다양한 기능을 이용해보세요!</p>
+					</div>
+				</div>
+				<div class="install-btn">
+					<button type="button" class="appSetup">지금 설치할래요!</button>
+				</div>
+				<div class="no-install">
+					<p class="continue">모바일 웹으로 확인할래요</p>
+				</div>
+			</div>
+		</article>
+	</section>
+	
+	<th:block th:replace="fragments/script :: scriptFragment(useScriptCsrf='true')"></th:block>
+	<script th:Src="@{/resources/honeyArcade/common/js/mobile.js}"></script>
+	<script th:Src="@{/resources/honeyArcade/user/js/userFloor.js}"></script>
+</body>
+</html>

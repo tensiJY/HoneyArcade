@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+	<th:block th:replace="fragments/meta :: metaFragment(title='마이 페이지', useMetaCsrf='true')"></th:block>
+	<th:block th:replace="fragments/style :: styleFragment"></th:block>
+	<link rel="stylesheet" th:href="@{/resources/honeyArcade/common/jquery-ui/jquery-ui.min.css}">
+	<link rel="stylesheet" th:href="@{/resources/honeyArcade/owner/st/mypage/css/ownerStMyPage.css}">
+</head>
+
+
+<body class="sidebar-noneoverflow">
+
+	<!--  header  -->
+	<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
+
+	<!--  BEGIN MAIN CONTAINER  -->
+	<div class="main-container" id="container">
+
+		<div class="overlay"></div>
+		<div class="search-overlay"></div>
+
+		<!--  sidebar  -->
+		<th:block th:replace="fragments/sidebar :: sidebarFragment(main='st-my', sub='st-my')"></th:block>
+
+		<!--  BEGIN CONTENT AREA  -->
+		<section id="mypage" class="sub">
+			<article>
+				<h2>마이페이지</h2>
+				<div class="inner flex-between">
+					<div class="left-side flex-between">
+						<div>
+							<label for="">ID</label>
+							<input type="text" placeholder="아이디"	readonly th:value="${#authentication.Principal.getUsername()}">
+						</div>
+						<div>
+							<label for="">매장</label>
+							<input type="text" placeholder="(예시)000일식" readonly th:value="${#authentication.Principal.getStore_name()}">
+						</div>
+						<div>
+							<label for="">층수</label>
+							<input type="text" placeholder="(예시)엠스테이트 1층" readonly th:value="${#authentication.Principal.getBuild_name() + ' ' + #authentication.Principal.getFloor_name()}" >
+						</div>
+					</div>
+					<div class="right-side"></div>
+				</div>
+			</article>
+			<article>
+				<h2>배너 광고 현황</h2>
+				<div class="inner flex-between">
+					<div class="left-side">
+						<div class="flex-between">
+							<label for="">지역광고 현항</label>
+							<p>
+								<input type="text" id="areaStartDay" th:value="${ownerStMypageVO == null? '' : ownerStMypageVO.banner_start_day}"> ~
+								<input type="text" id="areaEndDay"   th:value="${ownerStMypageVO == null? '' : ownerStMypageVO.banner_end_day}">
+								<button type="button" id="areaSearchBtn" class="btn btn-sm btn-gray">조회</button>
+							</p>
+						</div>
+						<div class="table">
+							<div class="table-head flex-between">
+								<p>상품명</p>
+								<p>기간</p>
+								<p>사용 유무</p>
+							</div>
+							<ul class="table-body" id="areaUl">
+								<th:block th:if="${areaList.size() == 0}">
+									<div style="height: 15px;"></div>
+									<li class="" style="color: #c7b299;">
+										조회된 데이터가 없습니다
+									</li>	
+									<div style="height: 15px;"></div>	
+								</th:block>
+								<th:block th:if="${areaList.size() != 0}">
+									<li class="flex-between">
+										<p></p>
+										<p></p>
+										<p></p>
+									</li>			
+									<th:block th:each="list : ${areaList}">
+										<li class="flex-between areaList" style="cursor: pointer;">
+											<p>[[${list.event_title}]]</p>
+											<p>[[${list.pay_dtl_use == 5 ? list.banner_start_day + ' ~ ' + list.banner_end_day  : '-'}]]</p>
+											<p>[[${list.use_text}]]</p>
+										</li>
+									</th:block>
+									<li class="flex-between">
+										<p></p>
+										<p></p>
+										<p></p>
+									</li>									
+								</th:block>
+							</ul>
+						</div>
+					</div>
+					<div class="right-side">
+						<button type="button" id="areaAdReqBtn" class="btn btn-orange">쿠폰 신청</button>
+						<button type="button" id="" class="btn btn-orange beneBtn">혜택 보기</button>
+					</div>
+				</div>
+
+				<div class="inner flex-between">
+					<div class="left-side">
+						<div class="flex-between">
+							<label for="">건물광고 현항</label>
+							<p>
+								<input type="text" id="buildStartDay" th:value="${ownerStMypageVO == null? '' : ownerStMypageVO.banner_start_day}"> ~
+								<input type="text" id="buildEndDay"   th:value="${ownerStMypageVO == null? '' : ownerStMypageVO.banner_end_day}">
+								<button type="button" id="buildSearchBtn" class="btn btn-sm btn-gray">조회</button>
+							</p>
+						</div>
+						<div class="table">
+							<div class="table-head flex-between">
+								<p>상품명</p>
+								<p>기간</p>
+								<p>사용 유무</p>
+							</div>
+							<ul class="table-body" id="buildUl">
+								<th:block th:if="${buildList.size() == 0}">
+									<div style="height: 15px;"></div>
+									<li class="" style="color: #c7b299;">
+										조회된 데이터가 없습니다
+									</li>	
+									<div style="height: 15px;"></div>	
+								</th:block>
+								<th:block th:if="${buildList.size() != 0}">
+									<li class="flex-between">
+										<p></p>
+										<p></p>
+										<p></p>
+									</li>			
+									<th:block th:each="list : ${buildList}">
+										<li class="flex-between buildList" style="cursor: pointer;">
+											<p>[[${list.event_title}]]</p>
+											<p>[[${list.pay_dtl_use == 5 ? list.banner_start_day + ' ~ ' + list.banner_end_day  : '-'}]]</p>
+											<p>[[${list.use_text}]]</p>
+										</li>
+									</th:block>									
+									<li class="flex-between">
+										<p></p>
+										<p></p>
+										<p></p>
+									</li>									
+								</th:block>
+							</ul>
+						</div>
+					</div>
+					<div class="right-side">
+						<button type="button" id="buildAdReqBtn" class="btn btn-orange">쿠폰 신청</button>
+						<button type="button" id="" class="btn btn-orange beneBtn">혜택 보기</button>
+					</div>
+				</div>				
+			</article>
+			<article>
+				<h2>쿠폰 현황</h2>
+				<div class="inner flex-between">
+					<div class="left-side">
+						<div>
+							<div class="flex-between">
+								<label for="">쿠폰 현황</label>
+								<p>
+									<input type="text" id="couponStartDay" th:value="${ownerStMypageVO == null? '' : ownerStMypageVO.coupon_start_day}"> ~
+									<input type="text" id="couponEndDay"   th:value="${ownerStMypageVO == null? '' : ownerStMypageVO.coupon_end_day}">
+									<button type="button" id="couponSearchBtn" class="btn btn-sm btn-gray">조회</button>
+								</p>
+							</div>
+							<div class="table">
+								<div class="table-head flex-between">
+									<p>상품명</p>
+									<p>기간</p>
+									<p>사용 유무</p>
+								</div>
+								<ul class="table-body" id="couponUl">
+									<th:block th:if="${couponList.size() == 0}">
+										<div style="height: 15px;"></div>
+										<li class="" style="color: #c7b299;">
+											조회된 데이터가 없습니다
+										</li>	
+										<div style="height: 15px;"></div>	
+									</th:block>
+									<th:block th:if="${couponList.size() != 0}">
+										<li class="flex-between">
+											<p></p>
+											<p></p>
+											<p></p>
+										</li>			
+										<th:block th:each="list : ${couponList}">
+											<li class="flex-between couponList" style="cursor: pointer;">
+												<p>[[${list.event_title}]]</p>
+												<p>[[${list.pay_dtl_use == 5 ? list.coupon_start_day + ' ~ ' + list.coupon_end_day  : '-'}]]</p>
+												<p>[[${list.use_text}]]</p>
+											</li>
+										</th:block>									
+										<li class="flex-between">
+											<p></p>
+											<p></p>
+											<p></p>
+										</li>									
+									</th:block>									
+								</ul>
+							</div>
+						</div>
+						<div>
+							<div class="flex-between">
+								<label for="">고객 쿠폰 이용 현황</label>
+								<p>
+									<input type="text" id="weekDate" th:value="${ownerStMypageVO.search_start_day + ' ~ ' + ownerStMypageVO.search_end_day}">
+									<button type="button" id="searchChart" class="btn btn-sm btn-gray">조회</button>
+								</p>
+							</div>
+							<div class="chart" id="chartArea" style="height:500px;">
+								<canvas id="myChart" width="400" height="200"></canvas>
+							</div>
+						</div>
+					</div>
+					<div class="right-side">
+						<button type="button" id="couponAdReqBtn" class="btn btn-orange">쿠폰 신청</button>
+						<button type="button" class="btn btn-orange beneBtn">혜택 보기</button>
+					</div>
+				</div>
+			</article>
+
+		</section>
+
+		<!--  footer   -->
+		<th:block th:replace="fragments/footer"></th:block>
+		<!--  END CONTENT AREA  -->
+
+	</div>
+	<!-- END MAIN CONTAINER -->
+
+
+<div id="noDataClone" style="display: none;">
+	<ul>
+		<div style="height: 15px;"></div>
+		<li class="" style="color: #c7b299;">
+			조회된 데이터가 없습니다
+		</li>
+		<div style="height: 15px;"></div>
+	</ul>
+</div>
+
+<div id="clone1" style="display: none;">
+	<ul>
+		<li class="flex-between">
+			<p class="evtTitle"></p>
+			<p class="evtDate"></p>
+			<p class="useText"></p>
+		</li>
+	</ul>
+</div>
+
+<div id="clone2" style="display: none;">
+	<ul>
+		<li class="flex-between">
+			<p></p>
+			<p></p>
+			<p></p>
+		</li>	
+	</ul>
+</div>
+
+	<th:block th:replace="fragments/script :: scriptFragment(useScriptCsrf='true')"></th:block>
+	<script th:src="@{/resources/honeyArcade/common/jquery-ui/jquery-ui.min.js}"></script>	
+	<script th:src="@{/resources/honeyArcade/common/jquery-ui/i18n/datepicker-ko.js}"></script>	
+	<script th:src="@{/resources/honeyArcade/common/moment/moment.js}"></script>
+	<script th:src="@{/resources/honeyArcade/common/chart.js/chart.js}"></script>
+	<script th:Src="@{/resources/honeyArcade/common/js/stringUtil.js}"></script>
+	<script th:src="@{/resources/honeyArcade/owner/st/mypage/js/ownerStMyPage.js}"></script>
+	<script th:inline="javascript">
+		/* <![CDATA[ */
+
+		/*]] */
+	</script>
+</body>
+
+</html>

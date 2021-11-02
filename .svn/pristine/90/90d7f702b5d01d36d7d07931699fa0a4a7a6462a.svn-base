@@ -1,0 +1,185 @@
+#noticeInner .promotion-table {
+  border-radius: 5px;
+  border: 1px solid #5a311d;
+  background: #fff;
+}
+
+#noticeInner .promotion-table ul li {
+  cursor: pointer;
+}
+
+#noticeInner .promotion-table ul li:first-child {
+  line-height: 40px;
+  font-weight: 600;
+  border-bottom: 1px solid #5a311d;
+}
+
+#noticeInner .promotion-table ul li:first-child p {
+  text-align: center;
+  color: #5a311d;
+}
+
+#noticeInner .promotion-table ul li.arcodian {
+  max-height: 45px;
+  overflow: hidden;
+  -webkit-transition: .5s;
+  transition: .7s ease;
+}
+
+#noticeInner .promotion-table ul li.arcodian.on {
+  max-height: 400px;
+}
+
+#noticeInner .promotion-table ul li.arcodian.on .table-list {
+  background: rgba(242, 147, 0, 0.1);
+}
+
+#noticeInner .promotion-table ul li.arcodian.on .table-list p {
+  color: #5a311d;
+  font-weight: bold;
+}
+#noticeInner .promotion-table ul li.arcodian.selected .table-list {
+  background: rgba(242, 147, 0, 0.3);
+}
+
+#noticeInner .promotion-table ul li.arcodian.selected .table-list p {
+  color: #5a311d;
+  font-weight: bold;
+}
+#noticeInner .promotion-table ul li .table-list, #noticeInner .promotion-table ul li .table-inner-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #c7b299;
+  pointer-events: none;
+}
+
+#noticeInner .promotion-table ul li .table-list p, #noticeInner .promotion-table ul li .table-inner-list p {
+  line-height: 45px;
+}
+
+#noticeInner .promotion-table ul li .table-list p:nth-child(1), #noticeInner .promotion-table ul li .table-inner-list p:nth-child(1) {
+  pointer-events: auto;
+  width: 5%;
+  text-align: center;
+}
+
+#noticeInner .promotion-table ul li .table-list p:nth-child(1) input[type="checkbox"] + label, #noticeInner .promotion-table ul li .table-inner-list p:nth-child(1) input[type="checkbox"] + label {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  border: 1px solid rgba(199, 178, 153, 0.3);
+  background: rgba(199, 178, 153, 0.3);
+  cursor: pointer;
+  margin-left: 0;
+}
+
+#noticeInner .promotion-table ul li .table-list p:nth-child(1) input[type="checkbox"]:checked + label, #noticeInner .promotion-table ul li .table-inner-list p:nth-child(1) input[type="checkbox"]:checked + label {
+  background: rgba(199, 178, 153, 0.3) url(../../../../img/check.png) center center no-repeat;
+  border: 1px solid rgba(199, 178, 153, 0.3);
+}
+
+#noticeInner .promotion-table ul li .table-list p:nth-child(1) input[type="checkbox"], #noticeInner .promotion-table ul li .table-inner-list p:nth-child(1) input[type="checkbox"] {
+  display: none;
+}
+
+#noticeInner .promotion-table ul li .table-list p:nth-child(2), #noticeInner .promotion-table ul li .table-inner-list p:nth-child(2) {
+  padding: 0 40px;
+  width: 70%;
+  white-space: pre-wrap;
+  border-right: 1px solid #c7b299;
+  border-left: 1px solid #c7b299;
+}
+
+#noticeInner .promotion-table ul li .table-list p:nth-child(2) span, #noticeInner .promotion-table ul li .table-inner-list p:nth-child(2) span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  vertical-align: middle;
+  background: url(../../../../img/select-arrow.png) center center no-repeat;
+}
+
+#noticeInner .promotion-table ul li .table-list p:nth-child(3), #noticeInner .promotion-table ul li .table-inner-list p:nth-child(3) {
+  text-align: center;
+  width: 25%;
+}
+
+#noticeInner .promotion-table ul li .table-inner-list {
+  border-bottom: 1px solid #c7b299;
+}
+
+#noticeInner .promotion-table ul li .table-inner-list p {
+  line-height: 1.5;
+}
+
+#noticeInner .promotion-table ul li .table-inner-list p:nth-child(2) {
+  padding: 12px 45px;
+  color: #5a311d;
+  font-size: 13px;
+}
+
+#noticeInner .promotion-table ul li:last-child {
+  padding: 50px 22px;
+  border-top: 1px solid rgba(199, 178, 153, 0.3);
+}
+
+#noticeInner .promotion-table ul li:last-child div {
+  width: 100%;
+  border-radius: 5px;
+  padding: 45px 76px;
+  background: rgba(140, 98, 57, 0.15);
+  color: #5a311d;
+  font-weight: 600;
+}
+
+#noticeInner .promotion-table ul li:last-child div b {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+#noticeInner .last-notice {
+  font-size: 12px;
+  color: #8c6239;
+  padding: 12px 24px;
+}
+
+#noticeInner .last-notice span {
+  color: #5a311d;
+}
+
+#noticeInner .last-notice input[type="checkbox"] + label {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid rgba(199, 178, 153, 0.3);
+  background: rgba(199, 178, 153, 0.3);
+  cursor: pointer;
+  margin-left: 0;
+  vertical-align: middle;
+}
+
+#noticeInner .last-notice input[type="checkbox"]:checked + label {
+  background: rgba(199, 178, 153, 0.3) url(../../../../img/check-round.png) center center no-repeat;
+  border: 1px solid rgba(199, 178, 153, 0.3);
+}
+
+#noticeInner .last-notice input[type="checkbox"] {
+  display: none;
+}
+
+#noticeInner .last-btn {
+  text-align: center;
+  margin-top: 100px;
+}
+
+#noticeInner .last-btn .btn {
+  width: 300px;
+  font-size: 22px;
+}
+/*# sourceMappingURL=promotion.css.map */

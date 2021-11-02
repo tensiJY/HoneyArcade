@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+	<th:block th:replace="fragments/meta :: metaFragment(title='신청 접수', useMetaCsrf='true')"></th:block>
+	<!--  css style  -->
+	<th:block th:replace="fragments/style :: styleFragment"></th:block>
+	<link rel="stylesheet" th:href="@{/resources/honeyArcade/owner/ad/pro/css/promotion.css}">
+</head>
+
+
+<body class="sidebar-noneoverflow">
+
+	<!--  header  -->
+	<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
+
+	<!--  BEGIN MAIN CONTAINER  -->
+	<div class="main-container" id="container">
+
+		<!--  sidebar  -->
+		<th:block th:replace="fragments/sidebar :: sidebarFragment(main='ad-pro', sub='ad-pro')"></th:block>
+
+		<!--  BEGIN CONTENT AREA  -->
+		<section id="noticeInner" class="sub">
+			<h2>프로모션 가입</h2>
+			<div class="inner">
+				<div class="promotion-table">
+					<ul id="arcodian-menu">
+						<li>
+							<div class="table-list">
+								<p></p>
+								<p>상품명</p>
+								<p>가격</p>
+							</div>
+						</li>
+						<th:block th:if="${eventList.size() == 0}">
+						<li class="arcodian">
+							<div class="table-list">
+								<p>
+									<input type="checkbox" id="checked3">
+									<label for="checked3"></label>
+								</p>
+								<p>상품을 준비중입니다 <span></span></p>
+								<p></p>
+							</div>
+							<div class="table-inner-list">
+								<p></p>
+								<p>
+※ 상품을 준비중입니다
+※ 빠른 시일 내에 준비하도록 하겠습니다
+※ 허니아케이드를 이용해주셔서 감사합니다
+								</p>
+								<p></p>
+							</div>
+						</li>
+						</th:block>
+						
+						<th:block th:if="${eventList.size() != 0}">
+							<th:block th:each="list : ${eventList}">
+								<li class="arcodian">
+									<div class="table-list">
+										<p>
+											<input type="checkbox" th:id="${'event_check_' + listStat.count}" name="event_check">
+											<label th:for="${'event_check_' + listStat.count}"></label>
+										</p>
+										<p>[[${list.event_title}]] <span></span></p>
+										<p>[[${#numbers.formatInteger(list.event_price, 0, 'COMMA')}]] 원</p>
+									</div>
+									<div class="table-inner-list">
+										<p></p>
+										<p>
+[[${list.event_text}]]											
+										</p>
+										<p></p>
+									</div>
+									<input type="hidden" name="event_seq" 	th:value="${list.event_seq}">
+									<input type="hidden" name="event_price" th:value="${list.event_price}">
+								</li>					
+							</th:block>	
+						</th:block>
+						<!--<li class="arcodian">
+							<div class="table-list">
+								<p>
+									<input type="checkbox" id="checked3">
+									<label for="checked3"></label>
+								</p>
+								<p>상품 A <span></span></p>
+								<p>000,000원</p>
+							</div>
+							<div class="table-inner-list">
+								<p></p>
+								<p>
+									※ 쿠폰 4주 사용권 (4주 사용 시 1달로 적용됨)
+									※ 건물 홍보 4주 사용권
+									※ 유튜브 영상 제작 1회
+									※ 월 정액 10만원
+									※ 패키지 A 결제 시, 초기 1회 비용 결제 이후 담당자 방문하여 첫 달 비용 환급과 자동이체 안내 방문 드립니다.
+								</p>
+								<p></p>
+							</div>
+						</li>-->
+						<li>
+							<div class="flex-between">
+								<p>총 결제 금액</p>
+								<p><b><span id="sumPrice">0</span></b>원</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="flex-between last-notice">
+					<p>
+						※ 허니아케이드는 아임포트 결제 서비스를 이용하여 안전한 거래 환경을 제공합니다.<br>
+						※ 허니아케이드를 통해 결제 진행 시 관련 정책에 의해 보호 받을 수 있습니다.
+					</p>
+					<div>
+						<input type="checkbox" id="agree">
+						<label for="agree"></label>
+						<span>결제 내용을 확인하였으며, 결제에 동의합니다. (필수)</span>
+					</div>
+				</div>
+				<div class="last-btn">
+					<button type="button" id="buyBtn" class="btn btn-orange">결제하기</button>
+				</div>
+			</div>
+		</section>
+
+		<!--  footer   -->
+		<th:block th:replace="fragments/footer"></th:block>
+
+
+		<!--  END CONTENT AREA  -->
+
+	</div>
+	<!-- END MAIN CONTAINER -->
+
+
+<div style="display: none;">
+	<input type="hidden" name="imp_uid" th:value="${imp_uid}"> 
+</div>
+
+	<th:block th:replace="fragments/script :: scriptFragment(useScriptCsrf='true')"></th:block>
+	<!-- iamport.payment.js -->
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	<script th:src="@{/resources/honeyArcade/common/js/iamport.js}"></script>
+	<script th:Src="@{/resources/honeyArcade/common/js/stringUtil.js}"></script>
+	<script th:Src="@{/resources/honeyArcade/owner/ad/pro/js/ownerAdPro.js}"></script>
+	<script th:inline="javascript">
+		/* <![CDATA[ */
+
+		/*]] */
+	</script>
+</body>
+
+</html>

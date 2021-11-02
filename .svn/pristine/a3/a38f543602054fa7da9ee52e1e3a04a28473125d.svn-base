@@ -1,0 +1,47 @@
+.kakao {
+  width: 433px;
+  margin: 100px auto 20px;
+}
+
+.kakao > p {
+  font-size: 16px;
+  color: #5a311d;
+  padding-left: 30px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.kakao .footer-container {
+  border-radius: 5px;
+  padding: 10px 30px;
+  background: #c3a87c;
+}
+
+.kakao .footer-container p {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 30px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.kakao .footer-container p span {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  background: url(../../img/kakao.png) center center no-repeat;
+  background-size: cover;
+}
+.kakao address{
+	margin-top: 12px;
+	font-size: 12px;
+	padding: 0 44px ;
+	color: #3d3d3d;
+}
+.kakao address p:nth-child(2){
+	font-weight: bold;
+	margin-left: 100px;
+}
+/*# sourceMappingURL=footer.css.map */

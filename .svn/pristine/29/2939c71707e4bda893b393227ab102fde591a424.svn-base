@@ -1,0 +1,18 @@
+package honeyarcade.owner.ad.coupon;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface OwnerAdCouponMapper {
+
+	/**
+	 * 할인쿠폰 : 할인쿠폰 목록 가져오기
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<OwnerAdCouponVO> getCouponList(String owner_id) throws Exception;
+
+}

@@ -1,0 +1,41 @@
+package honeyarcade.owner.ad.area;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class OwnerAdAreaService {
+
+	@Autowired
+	private OwnerAdAreaMapper ownerAdAreaMapper;
+	
+	/**
+	 * 지역광고 : 지역 광고 신청권 리스트 가져오기
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<OwnerAdAreaVO> getAreaList(String owner_id) throws Exception{
+		return ownerAdAreaMapper.getAreaList(owner_id);
+	}
+
+		
+	public void reqProc(HashMap dataMap) throws Exception {
+		String pay_dtl_type	= String.valueOf(dataMap.get("pay_dtl_type"));
+		String ad_Req_text 	= String.valueOf(dataMap.get("ad_req_text"));
+		String pay_dtl_day 	= String.valueOf(dataMap.get("pay_dtl_day"));
+		String pay_seq 		= String.valueOf(dataMap.get("pay_seq"));
+		
+		
+		List fileList = (List) dataMap.get("file");
+		if(fileList.size() == 0) {
+			throw new Exception("이미지 파일이 없습니다");
+		}
+		
+		
+	}
+
+}

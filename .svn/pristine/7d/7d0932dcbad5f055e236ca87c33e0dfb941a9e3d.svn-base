@@ -1,0 +1,30 @@
+package honeyarcade.user;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/user")
+public class UserController {
+
+	@RequestMapping("/build")
+	public String build() throws Exception{
+		return "user/userBuild";
+	}
+	
+	@RequestMapping("/floor")
+	public String floor() throws Exception{
+		return "user/userFloor";
+	}
+	
+	@RequestMapping("/coupon")
+	public String coupon() throws Exception{
+		return "user/userCoupon";
+	}
+	
+	@RequestMapping("/banner")
+	public String banner() throws Exception{
+		return "user/userBanner";
+	}
+	
+}

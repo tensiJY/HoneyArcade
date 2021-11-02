@@ -1,0 +1,70 @@
+body {
+  width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  min-width: 320px;
+  min-height: 700px;
+  line-height: 1.5;
+  background: #fef3d3;
+}
+
+#mobile-qr {
+  width: 100%;
+  text-align: center;
+  padding-top: 40px;
+  position: relative;
+}
+
+#mobile-qr h1 {
+  margin: 0 auto;
+  font-size: 0;
+  background: url(/resources/honeyArcade/img/mobile-logo.png) center center no-repeat;
+  background-size: cover;
+  width: 180px;
+  height: 102px;
+}
+
+#mobile-qr .hand-img {
+  text-align: right;
+  margin-top: 50px;
+}
+
+#mobile-qr .hand-img img {
+  width: 90%;
+  height: 90%;
+}
+
+#mobile-qr .qr-text {
+  margin-bottom: 20px;
+}
+
+#mobile-qr .qr-text p {
+  color: #5B321E;
+  font-weight: 500;
+}
+
+#mobile-qr .qr-text a {
+  text-decoration: underline;
+  color: blue;
+}
+
+#mobile-qr .qr-btn {
+  margin-bottom: 20px;
+}
+
+#mobile-qr .qr-btn a {
+  display: inline-block;
+  background: #5B321E;
+  font-size: 20px;
+  color: #fff;
+  border-radius: 50px;
+  width: 80%;
+  line-height: 60px;
+  min-width: 320px;
+}
+
+#mobile-qr footer {
+  color: #97755a;
+}
+/*# sourceMappingURL=mobile-qr.css.map */

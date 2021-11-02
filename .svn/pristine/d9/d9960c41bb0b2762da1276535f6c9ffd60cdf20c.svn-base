@@ -1,0 +1,174 @@
+$(function(){
+	var _regForm = function(){
+		
+		var _init = function(){
+			const pageBtn = document.querySelectorAll('.page');
+			const page = document.querySelectorAll('article');
+			let pageNum;
+			pageBtn.forEach(function(item) {
+				item.addEventListener('click', function(e) {
+					e.preventDefault;
+					pageNum = e.target.dataset.num;
+					page.forEach(function(item) {
+						item.classList.remove('on')
+					})
+					page[pageNum].classList.add('on')
+				})
+			})
+			
+			//	아이디 중복 확인
+			$("#idCheckBtn").on("click", function(){
+				var _userName = $("#username").val().trim();
+				var _obj = {};
+				_obj.owner_id = _userName;
+				if(_userName == "" || _userName == null){
+					$("#username").focus();
+					return alert("아이디를 입력해주시기 바랍니다");
+				}
+				
+				var _check = koreasoft.modules.regex.isId(_userName);
+				if(!_check){
+					
+					$("#idMsg").text("아이디는 영문자로 시작하며 6~20자 영문자 숫자 이어야 합니다");
+					$("#check_username").val("");
+					$("#idMsg").addClass("on");
+					
+					return;
+				}
+				
+				
+				var _url = "/reg/isId";
+				
+				_doAjax(_url, _obj, _idCheckCall);
+			});
+			
+			//	아이디 on 이벤트 제거
+			$("#username").on("focus", function(){
+				$("#idMsg").text("");
+				$("#idMsg").removeClass("on")
+			});
+			
+			
+			//	이메일 체인지 이벤트
+			$("#emailSelect").on("change", function(){
+				
+				if($(this).val() == 0){
+					$("#email_sub").val("");
+				}else{
+					var _text = $("select[id=emailSelect] option:selected").text();
+					$("#email_sub").val(_text)
+				}
+			})
+			
+			//	이메일 중복 확인
+			$("#emailCheckBtn").on("click", function(){
+				var _pre = $("#email_pre").val().trim();
+				var _sub = $("#email_sub").val().trim();
+				
+				if(_pre == "" || _pre == null){
+					$("#email_pre").focus();
+					alert("이메일을 입력해주세요");
+					return;
+				}
+				
+				if(_sub == "" || _sub == null){
+					$("#email_sub").focus();
+					alert("이메일을 입력해주세요");
+					return;
+				}
+				
+				var _ownerEmail = _pre + "@"+ _sub;;
+				
+				if(!koreasoft.modules.regex.isEmail(_ownerEmail)){
+					alert("이메일 형식에 맞게 입력해주세요");
+					return;
+				}
+				
+				var _url = "/reg/isEmail";
+				var _obj = {};
+				_obj.owner_email = _ownerEmail;
+				
+				_doAjax(_url, _obj, _emailCheckCall);
+				
+			
+			});
+			
+			//	저장 버튼
+			$("#saveBtn").on("click", function(){
+				var _obj = {};
+				
+			});
+			
+			//	매장 대표 사진
+			$("#ex_filename").on("change", function(){
+				
+			})
+		}
+		
+		//	이메일 중복 컬백 이벤트
+		function _emailCheckCall(res){
+			if(res.result == false || res.result == 'false'){
+				alert("에러가 발생하였습니다. 관리자에게 문의바랍니다.");
+			}else{
+				alert(res.msg);	
+				if(res.type == 1 || res.type == '1'){
+					$("#check_email").val("");
+				}else if(res.type==2 || res.type == '2'){
+					//	사용할수 있는 EMAIL인경우
+					$("#check_email").val(res.owner_email);
+				}
+			}
+		}
+		
+		//	아이디 중복 컬백 이벤트
+		function _idCheckCall(res){
+			
+			if(res.result == false || res.result == 'false'){
+				alert("에러가 발생하였습니다. 관리자에게 문의바랍니다.");
+			}else{
+				//console.log(res)
+				$("#idMsg").text(res.msg);
+				$("#idMsg").addClass("on");
+				
+				if(res.type == 1 || res.type == '1'){
+					$("#check_username").val("");
+				}else if(res.type==2 || res.type == '2'){
+					//	사용할수 있는 ID인경우
+					$("#check_username").val(res.owner_id);
+				}
+			}
+		}
+		
+		
+		//	ajax 공통
+		function _doAjax(url, obj, callback){
+			
+			$.ajax({
+				type: "POST",
+				url: url,
+				data: JSON.stringify(obj),
+				contentType : "application/json; charset=utf-8", 
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader(_csrfHeader, _csrfToken);
+				},
+				success: function (res) {
+					
+					callback(res);
+					
+				},
+				error: function (e) {
+					alert("서버 처리중 에러가 발생하였습니다. 관리자에게 문의 바랍니다.");
+					console.log("error : " + e.toString())
+				}
+			});
+		}
+		
+		return {
+			init : _init
+		}
+		
+		
+	}//
+	
+	new _regForm().init();
+});

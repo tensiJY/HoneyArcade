@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+
+<th:block th:fragment="footerFragment"> 
+	<!--  BEGIN FOOTER  -->
+              <footer class="kakao">
+			      <p>고객센터</p>
+			      <div class="footer-container">
+			      	<div class="flex-between">
+			        	<p>전화 문의: 02-6423-3902</p>
+			        	<p><a href="#">카카오톡 플러스 친구 문의<span></span></a></p>		      	
+			      	</div>
+			      </div>
+			      <address>
+			      		<p>주소 : 서울특별시 송파구 법원로 128 (문정동, SK V1 GL 메트로시티)</p>
+			      		<div class="flex-between">
+				      		<p>사업자번호 : 423-88-01893 </p>
+				      		<p>대표 : 김민균</p>
+			      		</div>
+			      		
+
+			      	</address>
+			    </footer>
+    <!--  END FOOTER  -->
+
+</th:block>
+  
+</html> 

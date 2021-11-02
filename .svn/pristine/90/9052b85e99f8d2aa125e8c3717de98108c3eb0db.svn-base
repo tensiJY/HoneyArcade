@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head>
+	<th:block th:replace="fragments/meta-mobile :: metaFragment(title='허니아케이드', useMetaCsrf='true')"></th:block>
+	<link rel="stylesheet" th:href="@{/resources/honeyArcade/user/css/mobile-qr.css}">	
+</head>
+
+
+<body>
+
+<section id="mobile-qr">
+	<div class="qr-wrap">
+		<h1 class="logo">
+			logo
+		</h1>
+		<div class="hand-img">
+			<img th:src="@{/resources/honeyArcade/img/mobile-hand-img.png}" alt="">
+		</div>
+		<div class="qr-text">
+			<p>단순 위치 확인은 <a href="javascript:void(0)" id="findBuild">여기</a>를 클릭하세요.</p>
+			<p>앱에서 단지 내 모든 정보(할인,꿀팁)를 받아가세요.</p>
+		</div>
+		<div class="qr-btn">
+			<a href="javascript:void(0)" id="appSetup">앱에서 찾기</a>
+		</div>
+	</div>
+	<footer>(주)허니아케이드 대표전화 : 02-6423-3902</footer>
+</section>
+
+<form id="userForm" th:action="@{/user/build}" method="GET">
+	<input type="hidden" name="QRLocation" th:value="${paramVO.QRLocation}" readonlay>
+</form>
+
+	<th:block th:replace="fragments/script :: scriptFragment(useScriptCsrf='true')"></th:block>
+	<script th:Src="@{/resources/honeyArcade/common/js/mobile.js}"></script>
+	<script th:Src="@{/resources/honeyArcade/user/js/userIdx.js}"></script>
+</body>
+</html>

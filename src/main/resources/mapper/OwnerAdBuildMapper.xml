@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="honeyarcade.owner.ad.build.OwnerAdBuildMapper">
+
+	<select id="getBuildList" parameterType="honeyarcade.owner.ad.build.OwnerAdBuildVO" resultType="honeyarcade.owner.ad.build.OwnerAdBuildVO">
+	<![CDATA[
+		select
+			tb_pay.event_title 
+			, tb_pay_dtl.pay_seq 
+			, tb_pay_dtl.pay_dtl_type 
+			, tb_pay_dtl.pay_dtl_day
+			, tb_pay_dtl.pay_dtl_use 
+		from 
+			tb_pay 
+		inner join tb_pay_dtl 
+			on tb_pay.pay_seq = tb_pay_dtl.pay_seq 
+		where 
+				tb_pay.owner_id = #{owner_id}
+			and tb_pay_dtl.pay_dtl_type = 1
+			and tb_pay_dtl.pay_dtl_use in (1,4)
+	]]>
+	</select>
+	
+	<select id="getAdReq" parameterType="honeyarcade.owner.ad.build.OwnerAdBuildVO" resultType="honeyarcade.owner.ad.build.OwnerAdBuildVO">
+	<![CDATA[
+		select 
+			  ad_seq
+			, ad_req_type
+			, ad_req_id
+			, file_seq
+			, ad_req_total
+		from 
+			tb_ad_req
+		where
+				ad_seq 		= #{ad_seq}
+			and ad_req_type = #{ad_req_type}
+			and ad_req_id	= #{ad_req_id}
+	]]>
+	</select>
+	
+	<insert id="insertAdReq" parameterType="honeyarcade.owner.ad.build.OwnerAdBuildVO">
+	<![CDATA[
+		insert into tb_ad_req
+			(
+				  ad_seq
+				, ad_req_type
+				, ad_req_id
+				, file_seq
+				, ad_req_day
+				, ad_req_text
+				, ad_req_total
+				, ad_req_dt
+				, ad_req_status
+				, del_flag
+				, sido_seq
+				, sigungu_seq
+				, dong_seq
+				, build_seq
+			)
+		values
+			(
+				    #{ad_seq}
+				  , #{ad_req_type}
+				  , #{ad_req_id}
+				  , #{file_seq}
+				  , #{ad_req_day}
+				  , #{ad_req_text}
+				  , 1
+				  , getDate()
+				  , 1
+				  , 'N'
+				  , #{sido_seq}
+				  , #{sigungu_seq}
+				  , #{dong_seq}
+				  , #{build_seq}	
+			)
+	]]>
+	</insert>
+	
+	<update id="updateAdReq" parameterType="honeyarcade.owner.ad.build.OwnerAdBuildVO">
+	<![CDATA[
+		update
+			tb_ad_req
+		set
+			  file_seq				= #{file_seq}
+			, ad_req_day			= #{ad_req_day}
+			, ad_req_text			= #{ad_req_text} 
+			, ad_req_total			= #{ad_req_total} + 1
+			, ad_req_dt				= getDate()
+			, ad_req_reject_reason	= ''
+			, ad_req_status			= 1
+			, ad_req_status_dt		= ''
+			, sido_seq				= #{sido_seq}
+			, sigungu_seq			= #{sigungu_seq}
+			, dong_seq				= #{dong_seq}
+			, build_seq				= #{build_seq}
+			, del_flag				= 'N'
+		where
+				ad_seq 		= #{ad_seq}
+			and	ad_req_type = #{ad_req_type}
+			and ad_req_id	= #{ad_req_id}
+	]]>
+	</update>
+	
+	<update id="updatePayDtl" parameterType="honeyarcade.owner.ad.build.OwnerAdBuildVO">
+	<![CDATA[
+		update
+			tb_pay_dtl
+		set	
+			  pay_dtl_use = 2
+			, pay_dtl_use_dt = getDate()
+		where
+				pay_dtl_type = #{ad_req_type}
+			and pay_seq = #{ad_seq}	
+	]]>
+	</update>
+	
+</mapper>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="honeyarcade.login.LoginMapper">
+
+	<select id="findByLoginId" resultType="honeyarcade.login.UserVO">
+	<![CDATA[
+		select 
+			*
+		from 
+			tb_member
+		inner join tb_owner
+			on tb_member.owner_id = tb_owner.owner_id 
+		where
+			tb_member.member_id = #{username}
+			and tb_member.del_flag = 'N'
+			and tb_owner.del_flag = 'N'
+	]]>
+	</select>
+	
+	<update id="resetFailureCount">
+	<![CDATA[
+		update
+			tb_owner
+		set
+			owner_fail_cnt = 0
+		where
+			owner_id = #{username}
+	]]>
+	</update>
+	
+	<update id="addFailureCount">
+	<![CDATA[
+		update
+			tb_owner
+		set
+			owner_fail_cnt = owner_fail_cnt+1
+		where
+			owner_id = #{username}
+	]]>
+	</update>
+
+
+	<select id="getFailureCount" resultType="Integer">
+	<![CDATA[
+		select
+			owner_fail_cnt
+		from
+			tb_owner
+		where
+			owner_id = #{username}
+	]]>
+	</select>
+	
+	<update id="disabledUsername">
+	<![CDATA[
+		update
+			tb_owner
+		set
+			owner_status = 1
+		where
+			owner_id = #{username}
+	]]>
+	</update>
+	
+	<select id="getOwnerId" parameterType="honeyarcade.login.UserVO" resultType="honeyarcade.login.UserVO">
+	<![CDATA[
+		select
+			member_id
+			, owner_email 
+		from
+			tb_owner
+		inner join TB_MEMBER 
+			on tb_owner.OWNER_ID = tb_member.OWNER_id
+		where
+				owner_email = #{owner_email}
+			and tb_member.del_flag = 'N'
+			and tb_owner.del_flag = 'N'
+	]]>
+	</select>
+	
+	<select id="existsOwner" parameterType="honeyarcade.login.UserVO" resultType="Integer">
+	<![CDATA[
+		select
+			count(member_id) as count
+		from
+			tb_owner
+		inner join tb_member 
+			on tb_owner.OWNER_ID = tb_member.OWNER_ID
+			and tb_member.del_flag = 'N'
+		where
+				tb_member.member_id = #{member_id}
+			and tb_owner.owner_email = #{owner_email}
+			and tb_owner.del_flag = 'N'
+	]]>
+	</select>	
+	
+	<update id="updateOwnerPwd" parameterType="honeyarcade.login.UserVO">
+	<![CDATA[
+		update
+			TB_MEMBER
+		set
+			owner_pwd = #{crypt_owner_pwd}
+		where
+				member_id	= #{member_id}
+			and owner_id	= (select owner_id from tb_owner where owner_email = #{owner_email})  
+	]]>
+	</update>
+
+	<!-- 회원 정보 조회 -->
+<!-- 	<select id="findByLoginId" resultType="iamFreelancer.login.vo.UserVO">
+		SELECT *
+		  FROM tb_member m LEFT OUTER JOIN TB_MEMBER_ROLE r ON m.login_id = r.login_id
+		 WHERE m.login_id = #{login_id}
+    </select> -->
+    
+    <!-- 이름과 이메일로 로그인 아이디 찾기 -->
+<!--    	<select id="findIdByNameAndEmail" resultType="String">
+		SELECT m.login_id
+		  FROM tb_member m LEFT OUTER JOIN TB_MEMBER_ROLE r ON m.login_id = r.login_id
+		 WHERE m.name = #{name}
+		   AND m.email = #{email}
+    </select> -->
+    
+    <!-- 아이디와 이름과 이메일로 로그인 아이디 찾기 -->
+ <!--   	<select id="findPwdByIdAndNameAndEmail" resultType="String">
+		SELECT m.login_id
+		  FROM tb_member m LEFT OUTER JOIN TB_MEMBER_ROLE r ON m.login_id = r.login_id
+		 WHERE m.login_id = #{login_id}
+		   AND m.email = #{email}
+		   AND m.name = #{name}
+    </select> -->
+    
+	<!-- 회원 저장 -->
+<!-- 	<insert id="memberSave" parameterType="iamFreelancer.login.vo.UserVO">
+	    INSERT INTO tb_member
+        (
+            login_id,
+			login_pwd,
+			name,
+			email,
+			phone_num,
+			mobile_num,
+			addr,
+			post_num,
+			user_type,
+			bank,
+			bank_account,
+			regist_route,
+			user_kind,
+			addr_detail
+        )
+        VALUES
+        (
+            #{login_id},
+			#{login_pwd},
+			#{name},
+			#{email},
+			#{phone_num},
+			#{mobile_num},
+			#{addr},
+			#{post_num},
+			#{user_type},
+			#{bank},
+			#{bank_account},
+			#{regist_route},
+			#{user_kind},
+			#{addr_detail}
+        )
+	</insert> -->
+
+	<!-- 회원 권한 insert -->
+<!-- 	<insert id="memberRoleSave">
+		INSERT INTO tb_member_role
+        (
+            login_id,
+            role_id
+        )
+        VALUES
+        (
+            #{login_id},
+            #{role_id}
+        )
+	</insert> -->
+	
+	<!-- 회원 존재 여부 -->
+<!-- 	<select id="existYnByLoginId" parameterType="iamFreelancer.login.vo.UserVO" resultType="Integer">
+			SELECT count(1)
+			  FROM tb_member
+			 WHERE login_id = #{login_id}
+	</select> -->
+	
+	<!-- 회원 정보 update -->
+<!-- 	<update id="memberInfoUpdate" parameterType="iamFreelancer.login.vo.UserVO">
+		UPDATE tb_member SET
+			name = #{name},
+			mobile_num = #{mobile_num},
+			phone_num = #{phone_num},
+			email = #{email},
+			post_num = #{post_num},
+			addr = #{addr},
+			addr_detail = #{addr_detail},
+			user_type = #{user_type}
+	    WHERE login_id = #{login_id}
+	</update> -->
+	
+	<!-- 회원 로그인 패스워드 update -->
+<!-- 	<update id="memberLoginPwdUpdate" parameterType="iamFreelancer.login.vo.UserVO">
+		UPDATE tb_member SET
+			login_pwd = #{login_pwd}
+		WHERE login_id = #{login_id}
+	</update> -->
+	
+</mapper>

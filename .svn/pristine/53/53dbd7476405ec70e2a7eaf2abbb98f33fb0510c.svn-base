@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+	<th:block th:replace="fragments/meta :: metaFragment(title='세부 정보', useMetaCsrf='true')"></th:block>
+	<!--  css style  -->
+	<th:block th:replace="fragments/style :: styleFragment"></th:block>
+	<link rel="stylesheet" th:href="@{/resources/honeyArcade/owner/st/dtl/css/ownerStDtl.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/cork/plugins/flatpickr/flatpickr.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/honeyArcade/common/viewerjs/css/viewer.css}">
+	<link rel="stylesheet" th:href="@{/resources/honeyArcade/owner/st/mypage/css/ownerStMyPage.css}">
+	<link rel="stylesheet" th:href="@{/resources/honeyArcade/common/jquery-ui/jquery-ui.min.css}">
+	<link rel="stylesheet" th:href="@{/resources/honeyArcade/common/jquery-ui/date-picker-custom.css}">
+</head>
+
+
+<body class="sidebar-noneoverflow">
+
+	<!--  header  -->
+	<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
+
+	<!--  BEGIN MAIN CONTAINER  -->
+	<div class="main-container" id="container">
+
+		<div class="overlay"></div>
+		<div class="search-overlay"></div>
+
+		<!--  sidebar  -->
+		<th:block th:replace="fragments/sidebar :: sidebarFragment(main='st-dtl', sub='st-dtl')"></th:block>
+
+		<!--  BEGIN CONTENT AREA  -->
+		<section id="sebu" class="sub">
+			<h2>세부 정보</h2>
+			<div class="inner">
+				<form action="">
+					<ul>
+						<li class="flex-between two-way">
+							<div>
+								<label for="">매장명</label>
+								<input type="text" id="store_name" placeholder="000문정점"
+									th:value="${ownerInfo.store_name}">
+							</div>
+							<div class="store-num">
+								<label>가게 전화번호</label>
+								<input type="text" id="store_tel" placeholder="02-1234-5678"
+									th:value="${ownerInfo.store_tel}">
+							</div>
+						</li>
+						<li class="flex-between two-way">
+							<div>
+								<label for="">매장 대표 사진<span class="size">(규격:000 X 000)</span></label>
+								<div class="filebox bs3-primary">
+									<th:block th:if="${mainVO == null}">
+										<input class="upload-name name1 main_img" value="" readonly>
+									</th:block>
+
+									<th:block th:if="${mainVO != null}">
+										<input class="upload-name name1 main_img" th:value="${mainVO.file_dtl_origin}"
+											readonly>
+									</th:block>
+									<label class="file-upload" for="main_img">파일 첨부</label>
+									<input type="file" accept="image/*" name='img' id="main_img"
+										class="upload-hidden file1">
+
+								</div>
+							</div>
+							<div>
+								<label for="">사업장 등록증</label>
+								<div class="filebox bs3-primary">
+									<th:block th:if="${busiVO == null}">
+										<input class="upload-name name1 busi_img" value="" readonly>
+									</th:block>
+
+									<th:block th:if="${busiVO != null}">
+										<input class="upload-name name1 busi_img" th:value="${busiVO.file_dtl_origin}"
+											readonly>
+									</th:block>
+									<label class="file-upload" for="busi_img">파일 첨부</label>
+									<input type="file" accept="image/*" name='img' id="busi_img"
+										class="upload-hidden file1">
+
+								</div>
+							</div>
+						</li>
+
+						<li class="flex-between three-way">
+							<div class="store-num">
+								<label>휴대폰 번호</label>
+								<input type="text" id="store_tel" placeholder="02-1234-5678"
+									th:value="${ownerInfo.owner_phone}" disabled>
+							</div>
+							<div class="store-num">
+								<label>이메일</label>
+								<input type="email" id="owner_email" placeholder="hong@naver.com"
+									th:value="${ownerInfo.owner_email}" disabled>
+							</div>
+						</li>
+						<li>
+							<label for="">지역</label>
+							<select name="" id="sidoSelect" disabled>
+								<option value="">시,도</option>
+								<th:block th:if="${sidoList.size()!=0}">
+									<th:block th:each="list : ${sidoList}">
+										<option th:value="${list.sido_seq}" th:text="${list.sido_name}"
+											th:selected="${ownerInfo.sido_seq == list.sido_seq}"></option>
+									</th:block>
+								</th:block>
+							</select>
+							<select name="" id="sigunguSelect" disabled>
+								<option value="">군,구</option>
+								<th:block th:if="${sigunguList != null}">
+									<th:block th:if="${sigunguList.size() != 0}">
+										<!-- 값이 있는경우 -->
+										<th:block th:each="list : ${sigunguList}">
+											<option th:value="${list.sigungu_seq}" th:text="${list.sigungu_name}"
+												th:selected="${ownerInfo.sigungu_seq == list.sigungu_seq}"></option>
+										</th:block>
+									</th:block>
+								</th:block>
+							</select>
+							<select name="" id="dongSelect" disabled>
+								<option value="">지역</option>
+								<th:block th:if="${dongList != null}">
+									<th:block th:if="${dongList.size() != 0}">
+										<th:block th:each="list : ${dongList}">
+											<option th:value="${list.dong_seq}" th:text="${list.dong_name}"
+												th:selected="${ownerInfo.dong_seq == list.dong_seq}"></option>
+										</th:block>
+									</th:block>
+								</th:block>
+							</select>
+							<select class="build-name" id="buildSelect" disabled>
+								<option>건물명</option>
+								<th:block th:if="${buildList != null}">
+									<th:block th:if="${buildList.size() != 0}">
+										<th:block th:each="list : ${buildList}">
+											<option th:value="${list.build_seq}" th:text="${list.build_name}"
+												th:selected="${ownerInfo.build_seq == list.build_seq}"></option>
+										</th:block>
+									</th:block>
+								</th:block>
+							</select>
+							<select class="build-name" id="floorSelect" disabled>
+								<option>층수</option>
+								<th:block th:if="${floorList != null}">
+									<th:block th:if="${floorList.size() != 0}">
+										<th:block th:each="list : ${floorList}">
+											<option th:value="${list.floor_seq}"
+												th:text="${list.floor_seq < 0? '지하 ' +  (-list.floor_seq)  + '층': '지상 ' + list.floor_seq +'층'}"
+												th:selected="${ownerInfo.store_floor == list.floor_seq}"></option>
+										</th:block>
+									</th:block>
+								</th:block>
+							</select>
+							<select class="build-name" id="hoSelect" disabled>
+								<option>호실</option>
+								<th:block th:if="${hoList != null}">
+									<th:block th:if="${hoList.size() != 0}">
+										<th:block th:each="list : ${hoList}">
+											<option th:value="${list.store_ho}" th:text="${list.store_ho}"
+												th:selected="${ownerInfo.store_ho == list.store_ho}"></option>
+										</th:block>
+									</th:block>
+								</th:block>
+							</select>
+						</li>
+
+						<li class="food-select">
+							<label for="">업종</label>
+							<div class="radio-box">
+								<th:block th:if="${lcateList.size() !=0}">
+									<label for="big">
+										<input type="radio" name="lcate" th:data-build-seq="${lcateList[0].build_seq}"
+											th:value="${lcateList[0].lcate_seq}"
+											th:checked="${ownerInfo.lcate_seq == lcateList[0].lcate_seq}? checked">[[${lcateList[0].lcate_name}]]
+									</label>
+									<label for="big">
+										<input type="radio" name="lcate" th:data-build-seq="${lcateList[1].build_seq}"
+											th:value="${lcateList[1].lcate_seq}"
+											th:checked="${ownerInfo.lcate_seq == lcateList[1].lcate_seq}? checked">[[${lcateList[1].lcate_name}]]
+									</label>
+									<label for="big">
+										<input type="radio" name="lcate" th:data-build-seq="${lcateList[2].build_seq}"
+											th:value="${lcateList[2].lcate_seq}"
+											th:checked="${ownerInfo.lcate_seq == lcateList[2].lcate_seq}? checked">[[${lcateList[2].lcate_name}]]
+									</label>
+								</th:block>
+							</div>
+							<label for="">세부업종</label>
+							<select name="" id="mcateSelect">
+								<option value="">소분류</option>
+								<th:block th:if="${mcateList != null}">
+									<th:block th:if="${mcateList.size() != 0}">
+										<th:block th:each="list : ${mcateList}">
+											<option class="areaSelect" th:value="${list.mcate_seq}"
+												th:text="${list.mcate_name}"
+												th:selected="${ownerInfo.mcate_seq == list.mcate_seq}"></option>
+										</th:block>
+									</th:block>
+								</th:block>
+							</select>
+						</li>
+						<li class="flex-between">
+							<div>
+								<div class="select-box">
+									<label for="">영업 시간</label>
+									<select name="" id="opendaySelect">
+										<option value=1>주중</option>
+										<option value=2>주말</option>
+										<option value=3>월~토</option>
+										<option value=4>월</option>
+										<option value=5>화</option>
+										<option value=6>수</option>
+										<option value=7>목</option>
+										<option value=8>금</option>
+										<option value=9>토</option>
+										<option value=10>일</option>
+										<option value=11>해당사항없음</option>
+									</select>
+									<input type="text" id="openDayStart" class="datepick" placeholder="오픈시간">
+									<input type="text" id="openDayEnd" class="datepick" placeholder="마감시간">
+									<button type="button" id="openAddBtn" class="btn btn-orange btn-sm">추가</button>
+								</div>
+								<div class="list">
+									<ul id="openDayList">
+										<!--<li class="flex-between">
+											<p><span>월 ~ 토</span><span> 09:00 ~ 23:00</span></p>
+											<button class="btn btn-delete btn-sm">삭제</button>
+										</li>-->
+										<th:block th:if="${openList.size() == 0}">
+											<li class="noData" style="text-align: center;">
+												등록 후 이용할 수 있습니다
+											</li>
+										</th:block>
+										<th:block th:if="${openList.size() !=0}">
+											<th:block th:each="list : ${openList}">
+												<li class="flex-between openDayClass">
+													<p><span class="openDaySpan">[[${list.open_day_text}]]</span><span
+															class="openTimeSpan"> [[${list.open_time}]] ~
+															[[${list.close_time}]]</span></p>
+													<button type="button"
+														class="btn btn-delete btn-sm openDayDelBtn">삭제</button>
+													<input type="hidden" name="open_day" th:value="${list.open_day}">
+													<input type="hidden" name="open_time" th:value="${list.open_time}">
+													<input type="hidden" name="close_time"
+														th:value="${list.close_time}">
+												</li>
+											</th:block>
+										</th:block>
+									</ul>
+								</div>
+							</div>
+							<div>
+								<div class="select-box">
+									<label for="">휴무일</label>
+									<select name="" id="dayOffWeekSelect">
+										<option value="A">매주</option>
+										<option value="1">첫째 주</option>
+										<option value="2">둘째 주</option>
+										<option value="3">셋째 주</option>
+										<option value="4">넷째 주</option>
+										<option value="5">마지막 주</option>
+									</select>
+									<select name="" id="dayOffDaySelect">
+										<option value="0">일요일</option>
+										<option value="1">월요일</option>
+										<option value="2">화요일</option>
+										<option value="3">수요일</option>
+										<option value="4">목요일</option>
+										<option value="5">금요일</option>
+										<option value="6">토요일</option>
+									</select>
+									<button type="button" id="dayOffAddBnt" class="btn btn-orange btn-sm">추가</button>
+								</div>
+								<div class="list">
+									<ul id="dayOffList">
+										<!--<li class="flex-between">
+											<p><span>매주</span> <span>월요일</span></p>
+											<button class="btn btn-delete btn-sm">삭제</button>
+										</li>-->
+										<th:block th:if="${dayOffList.size() == 0}">
+											<li class="noData" style="text-align: center;">
+												등록 후 이용할 수 있습니다
+											</li>
+										</th:block>
+										<th:block th:if="${dayOffList.size() != 0}">
+											<th:block th:each="list : ${dayOffList}">
+												<li class="flex-between dayOffClass">
+													<p><span class="offWeekSpan">[[${list.week_text}]]</span> <span
+															class="offDaySpan">[[${list.day_text}]]</span></p>
+													<button type="button"
+														class="btn btn-delete btn-sm dayOffDelBtn">삭제</button>
+													<input type="hidden" name="day_off_week"
+														th:value="${list.day_off_week}">
+													<input type="hidden" name="day_off_day"
+														th:value="${list.day_off_day}">
+												</li>
+											</th:block>
+										</th:block>
+									</ul>
+								</div>
+
+							</div>
+						</li>
+						<li>
+							<div>
+								<div class="select-box">
+									<label for="">휴게 시간</label>
+									<select name="" id="breakDaySelect">
+										<option value=1>주중</option>
+										<option value=2>주말</option>
+										<option value=3>월~토</option>
+										<option value=4>월</option>
+										<option value=5>화</option>
+										<option value=6>수</option>
+										<option value=7>목</option>
+										<option value=8>금</option>
+										<option value=9>토</option>
+										<option value=10>일</option>
+										<option value=11>해당사항없음</option>
+									</select>
+									<input type="text" id="breakDayStart" class="datepick" placeholder="오픈시간">
+									<input type="text" id="breakDayEnd" class="datepick" placeholder="마감시간">
+									<button id="breakDayAddBtn" type="button" class="btn btn-orange btn-sm">추가</button>
+								</div>
+								<div class="list">
+									<ul id="breakDayList">
+										<!--<li class="flex-between">
+											<p><span>월 ~ 토</span><span> 09:00 ~ 23:00</span></p>
+											<button class="btn btn-delete btn-sm">삭제</button>
+										</li>-->
+										<th:block th:if="${breakList.size() == 0}">
+											<li class="noData" style="text-align: center;">
+												등록 후 이용할 수 있습니다
+											</li>
+										</th:block>
+										<th:block th:if="${breakList.size() != 0}">
+											<th:block th:each="list : ${breakList}">
+												<li class="flex-between breakDayClass">
+													<p><span class="breakDaySpan">[[${list.break_day_text}]]</span><span
+															class="breakTimeSpan"> [[${list.open_time}]] ~
+															[[${list.close_time}]]</span></p>
+													<button type="button"
+														class="btn btn-delete btn-sm breakDelBtn">삭제</button>
+													<input type="hidden" name="break_day" th:value="${list.break_day}">
+													<input type="hidden" name="open_time" th:value="${list.open_time}">
+													<input type="hidden" name="close_time"
+														th:value="${list.close_time}">
+												</li>
+											</th:block>
+										</th:block>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li class="flex-between">
+							<div>
+								<div class="select-box">
+									<label for="">휴가 설정(긴급휴무)</label>
+									<input type="text" id="holDayStart" placeholder="휴무 시작일" readonly> ~ <input type="text"
+										id="holDayEnd" placeholder="휴무 종료일" readonly>
+									<button type="button" id="holDayAddBtn" class="btn btn-orange btn-sm">추가</button>
+								</div>
+								<div class="list">
+									<ul id="holDayList">
+										<th:block th:if="${holDayList.size() == 0 }">
+											<li class="noData" style="text-align: center;">
+												등록 후 이용할 수 있습니다
+											</li>
+										</th:block>
+
+										<th:block th:if="${holDayList.size() != 0}">
+											<th:block th:each="list : ${holDayList}">
+												<th:block th:if="${list.holiday_type == 1}">
+													<li class="flex-between holDayClass">
+														<p><span
+																class="holDayStartSpan">[[${list.holiday_start_day}]]</span>
+															~ <span
+																class="holDayEndSpan">[[${list.holiday_end_day}]]</span>
+														</p>
+														<button type="button"
+															class="btn btn-delete btn-sm holdayDelBtn">삭제</button>
+														<input type="hidden" name="holiday_type"
+															th:value="${list.holiday_type}">
+														<input type="hidden" name="holiday_start_day"
+															th:value="${list.holiday_start_day}">
+														<input type="hidden" name="holiday_end_day"
+															th:value="${list.holiday_end_day}">
+													</li>
+												</th:block>
+											</th:block>
+										</th:block>
+
+										<!--<li class="flex-between">
+											<p><span>2021/10/20</span> ~ <span>2021/10/31</span></p>
+											<button class="btn btn-delete btn-sm">삭제</button>
+										</li>-->
+
+									</ul>
+								</div>
+							</div>
+							<div>
+								<div>
+									<label for="">공휴일 설정</label>
+									<input type="text" id="phDate" placeholder="공휴일" readonly>
+									<button type="button" id="phAddBtn" class="btn btn-orange btn-sm">추가</button>
+								</div>
+								<div class="list">
+									<ul id="phDateList">
+										<!--<li class="flex-between">
+											<p><span> 2021/10/20</span></p>
+											<button class="btn btn-delete btn-sm">삭제</button>
+										</li>-->
+										<th:block th:if="${holDayList.size() == 0 }">
+											<li class="noData" style="text-align: center;">
+												등록 후 이용할 수 있습니다
+											</li>
+										</th:block>
+										<th:block th:if="${holDayList.size() != 0}">
+											<th:block th:each="list : ${holDayList}">
+												<th:block th:if="${list.holiday_type == 2}">
+													<li class="flex-between phDateClass">
+														<p><span class="phDateSpan">[[${list.holiday_start_day}]]</span>
+														</p>
+														<button type="button"
+															class="btn btn-delete btn-sm phDelBtn">삭제</button>
+														<input type="hidden" name="holiday_type"
+															th:value="${list.holiday_type}">
+														<input type="hidden" name="holiday_start_day"
+															th:value="${list.holiday_start_day}">
+														<input type="hidden" name="holiday_end_day"
+															th:value="${list.holiday_end_day}">
+													</li>
+												</th:block>
+											</th:block>
+										</th:block>
+
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li>
+							<label for="">가게 상세 소개 및 공지</label>
+							<textarea name="" id="storeText" cols="30" rows="5"
+								placeholder="내용을 입력하세요.">[[${ownerInfo.store_text}]]</textarea>
+						</li>
+						<li class="search-keyword">
+							<label for="">검색 키워드 설정</label>
+							<input type="text" id="storeKeyword" placeholder="최대 5개/쉼표로 구분해주세요."
+								th:value="${ownerInfo.store_keyword}">
+						</li>
+						<li>
+							<div class="menus">
+								<label for="">상품명(메뉴 등)</label>
+								<input type="text" placeholder="상품명" id="productName">
+								<input type="number" min="0" placeholder="가격" style="min-width: 80px; width: 10%;"
+									id="productPrice">
+								<div class="filebox bs3-primary inline">
+									<input class="upload-name name2 product-file" value="" disabled="disabled"
+										placeholder="사진 첨부">
+									<label class="file-upload" for="product_file">첨부</label>
+									<input type="file" accept="image/*" name='img' id="product_file"
+										class="upload-hidden file2">
+								</div>
+								<button type="button" id="productAddBtn" class="btn btn-sm btn-orange">추가</button>
+							</div>
+							<div class="list list-menu">
+								<ul id="target-product">
+									<!--<li class="flex-between">
+										<p>상품A</p>
+										<p>000,000원</p>
+										<div>
+											<button class="btn btn-gray btn-sm" style="float:none;">이미지 확인</button>
+											<button class="btn btn-delete btn-sm" style="float:none;">삭제</button>
+										</div>
+									</li>-->
+									<th:block th:if="${productList.size() == 0}">
+										<li class="no-product-text" style="width:100%;text-align: center;">
+											상품을 등록해주세요
+										</li>
+									</th:block>
+
+									<th:block th:if="${productList.size() != 0}">
+										<th:block th:each="list : ${productList}">
+											<li class="flex-between productList">
+												<p class="productName">[[${list.product_name}]]</p>
+												<p class="priductPrice">[[${#numbers.formatInteger(list.product_price, 0 , 'COMMA')}]]</p>
+												<div style="width:auto;">	
+													<button type="button" class="btn btn-gray btn-sm imgPrevBtn" style="float:none;">이미지 확인</button>
+													<button type="button" class="btn btn-delete btn-sm imgDelBtn" style="float:none;">삭제</button>
+												</div>
+												
+												<div style="display: none;">
+													<input type="hidden" name="file_dtl_desc" 		th:value="${list.file_dtl_desc}">
+													<input type="hidden" name="file_dtl_ext" 		th:value="${list.file_dtl_ext}">
+													<input type="hidden" name="file_dtl_origin" 	th:value="${list.file_dtl_origin}">
+													<input type="hidden" name="file_dtl_path" 		th:value="${list.file_dtl_path}">
+													<input type="hidden" name="file_dtl_url_path" 	th:value="${list.file_dtl_url_path}">
+													<input type="hidden" name="file_type"		 	th:value="${list.file_type}">
+													<input type="hidden" name="file_seq" 			th:value="${list.file_seq}">
+													<img class="file_image" 						th:src="${list.file_dtl_url_path}">
+												</div>
+											</li>
+										</th:block>
+									</th:block>
+								</ul>
+							</div>
+						</li>
+						<li class="flex-between submit">
+							<button type="button" id="saveBtn" class="btn btn-orange">저장</button>
+							<button type="button" id="resetBtn" class="btn btn-orange">초기화</button>
+						</li>
+					</ul>
+				</form>
+			</div>
+		</section>
+
+
+	<div id="del_file" style="display: none;">
+	
+	</div>
+
+	<!--	데이터 없는 경우 -->
+	<div id="noDataClone" style="display: none;">
+		<ul>
+			<li class="noData" style="text-align: center;">
+				등록 후 이용할 수 있습니다
+			</li>
+		</ul>
+	</div>
+	
+	<!--	공휴일 설정 -->
+	<div id="phDateClone" style="display:none;">
+		<ul>
+			<li class="flex-between phDateClass">
+				<p><span class="phDateSpan"></span></p>
+				<button type="button" class="btn btn-delete btn-sm phDelBtn">삭제</button>
+				<input type="hidden" name="holiday_type">
+				<input type="hidden" name="holiday_start_day">
+				<input type="hidden" name="holiday_end_day">
+			</li>
+		</ul>
+	</div>
+	
+	<!--	휴가 설정	-->
+	<div id="holDayClone" style="display: none;">
+		<ul>
+			<li class="flex-between holDayClass">
+				<p><span class="holDayStartSpan"></span> ~ <span class="holDayEndSpan"></span></p>
+				<button type="button" class="btn btn-delete btn-sm holdayDelBtn">삭제</button>
+				<input type="hidden" name="holiday_type">
+				<input type="hidden" name="holiday_start_day">
+				<input type="hidden" name="holiday_end_day">
+			</li>
+		</ul>
+	</div>
+	
+	<!--	휴게 시간	-->
+	<div id="breakClone" style="display: none;">
+		<ul>
+			<li class="flex-between breakDayClass">
+				<p><span class="breakDaySpan"></span><span class="breakTimeSpan"></span></p>
+				<button type="button" class="btn btn-delete btn-sm breakDelBtn">삭제</button>
+				<input type="hidden" name="break_day">
+				<input type="hidden" name="open_time">
+				<input type="hidden" name="close_time">							
+			</li>
+		</ul>
+	</div>
+	
+	
+	<!--	휴무일	-->
+	<div id="dayOffClone" style="display: none;">
+		<ul>
+			<li class="flex-between dayOffClass">
+				<p><span class="offWeekSpan"></span> <span class="offDaySpan"></span></p>
+				<button type="button" class="btn btn-delete btn-sm dayOffDelBtn">삭제</button>
+				<input type="hidden" name="day_off_week">
+				<input type="hidden" name="day_off_day">
+			</li>
+		</ul>
+	</div>
+
+	<!--	영업 시간		-->
+	<div id="openDayClone" style="display: none;">
+		<ul>
+			<li class="flex-between openDayClass">
+				<p><span class="openDaySpan"></span><span class="openTimeSpan"></span></p>
+				<button type="button" class="btn btn-delete btn-sm openDayDelBtn">삭제</button>
+				<input type="hidden" name="open_day">
+				<input type="hidden" name="open_time">
+				<input type="hidden" name="close_time">
+			</li>
+		</ul>
+	</div>
+
+
+	<!--	매장 대표 사진	-->
+	<div id="owner_main_img" style="display: none;">
+		<th:block th:if="${mainVO != null}">
+			<div>
+				<input type="hidden" name="file_dtl_desc" 		th:value="${mainVO.file_dtl_desc}">
+				<input type="hidden" name="file_dtl_ext" 		th:value="${mainVO.file_dtl_ext}">
+				<input type="hidden" name="file_dtl_origin" 	th:value="${mainVO.file_dtl_origin}">
+				<input type="hidden" name="file_dtl_path" 		th:value="${mainVO.file_dtl_path}">
+				<input type="hidden" name="file_dtl_url_path" 	th:value="${mainVO.file_dtl_url_path}">
+				<input type="hidden" name="file_type"	 		th:value="${mainVO.file_type}">
+				<input type="hidden" name="file_seq" 			th:value="${mainVO.file_seq}">
+				<img class="file_image"							th:src="${mainVO.file_dtl_url_path}">
+			</div>
+		</th:block>
+	</div>
+
+	<!--	사업자 등록증	-->
+	<div id="owner_busi_img" style="display: none;">
+		<th:block th:if="${busiVO != null}">
+			<div>
+				<input type="hidden" name="file_dtl_desc" 		th:value="${busiVO.file_dtl_desc}">
+				<input type="hidden" name="file_dtl_ext" 		th:value="${busiVO.file_dtl_ext}">
+				<input type="hidden" name="file_dtl_origin" 	th:value="${busiVO.file_dtl_origin}">
+				<input type="hidden" name="file_dtl_path" 		th:value="${busiVO.file_dtl_path}">
+				<input type="hidden" name="file_dtl_url_path" 	th:value="${busiVO.file_dtl_url_path}">
+				<input type="hidden" name="file_type"	 		th:value="${busiVO.file_type}">
+				<input type="hidden" name="file_seq" 			th:value="${busiVO.file_seq}">
+				<img class="file_image"							th:src="${busiVO.file_dtl_url_path}">
+			</div>
+		</th:block>
+	</div>
+	
+	<div id="noProduct" style="display: none;">
+		<ul>
+			<li class="no-product-text" style="width:100%;text-align: center;">
+				상품을 등록해주세요
+			</li>
+		</ul>
+	</div>
+
+	<div id="productImsiImg" style="display: none;">
+		
+	</div>
+
+	<div id="productClone" style="display: none;">
+		<ul>
+			<li class="flex-between productList">
+				<p class="productName"></p>
+				<p class="priductPrice"></p>
+				<div style="width:auto;">
+					<button type="button" class="btn btn-gray btn-sm imgPrevBtn" style="float:none;">이미지 확인</button>
+					<button type="button" class="btn btn-delete btn-sm imgDelBtn" style="float:none;">삭제</button>
+				</div>
+				
+				<div style="display: none;">
+					<input type="hidden" name="file_dtl_desc" value="">
+					<input type="hidden" name="file_dtl_ext" value="">
+					<input type="hidden" name="file_dtl_origin" value="">
+					<input type="hidden" name="file_dtl_path" value="">
+					<input type="hidden" name="file_dtl_url_path" value="">
+					<input type="hidden" name="file_type" value="">
+					<input type="hidden" name="file_seq" value="">
+					<img class="file_image">
+				</div>
+			</li>
+		</ul>
+	</div>
+	
+	<div id="fileClone" style="display: none;">
+		<div>
+			<input type="hidden" name="file_dtl_desc" value="">
+			<input type="hidden" name="file_dtl_ext" value="">
+			<input type="hidden" name="file_dtl_origin" value="">
+			<input type="hidden" name="file_dtl_path" value="">
+			<input type="hidden" name="file_dtl_url_path" value="">
+			<input type="hidden" name="file_type" value="">
+			<input type="hidden" name="file_seq" value="">
+			<img class="file_image">
+		</div>
+	</div>
+
+		
+		<!--  END CONTENT AREA  -->
+			<th:block th:replace="fragments/footer"></th:block>
+	</div>
+	<!-- END MAIN CONTAINER -->
+
+	<th:block th:replace="fragments/script :: scriptFragment(useScriptCsrf='true')"></th:block>
+	<script th:src="@{/resources/cork/plugins/flatpickr/flatpickr.js}"></script>
+	<script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
+	<script th:Src="@{/resources/honeyArcade/common/js/fileUpload.js}"></script>
+	<script th:Src="@{/resources/honeyArcade/common/js/areaSelect.js}"></script>
+	<script th:Src="@{/resources/honeyArcade/common/js/regex.js}"></script>
+	<script th:Src="@{/resources/honeyArcade/common/js/stringUtil.js}"></script>
+	<script th:src="@{/resources/honeyArcade/common/viewerjs/js/viewer.js}"></script>
+	<script th:src="@{/resources/honeyArcade/common/jquery-ui/jquery-ui.min.js}"></script>
+	<script th:src="@{/resources/honeyArcade/common/jquery-ui/i18n/datepicker-ko.js}"></script>
+	<script th:Src="@{/resources/honeyArcade/owner/st/dtl/js/ownerStDtl.js}"></script>
+
+	<script th:inline="javascript">
+		/* <![CDATA[ */
+
+		/*]] */
+	</script>
+</body>
+
+</html>

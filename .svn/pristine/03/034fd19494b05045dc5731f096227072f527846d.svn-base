@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head>
+	<th:block th:replace="fragments/meta :: metaFragment(title='세부 정보', useMetaCsrf='true')"></th:block>
+	<!--  css style  -->
+	<th:block th:replace="fragments/style :: styleFragment"></th:block>
+	 <link rel="stylesheet" th:href="@{/resources/honeyArcade/owner/st/dtl/css/ownerStDtl.css}">
+</head>
+
+
+<body class="sidebar-noneoverflow">
+    
+	<!--  header  -->
+	<th:block th:replace="fragments/header :: headerFragment"></th:block>
+	
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+		<!--  sidebar  -->
+		<th:block th:replace="fragments/sidebar :: sidebarFragment(main='st', sub='st-dtl')"></th:block>
+		        
+        <!--  BEGIN CONTENT AREA  -->
+		<section id="sebu" class="sub">
+    <h2>세부 정보</h2>
+    <div class="inner">
+      <form action="">
+        <ul>
+          <li>
+            <label for="">매장명</label>
+            <input type="text" placeholder="000문정점">
+          </li>
+          <li>
+            <label for="">매장 대표 사진</label>
+            <div class="filebox bs3-primary">
+              <input class="upload-name name1" value="" disabled="disabled">
+              <label class="file-upload" for="ex_filename">파일 첨부</label> 
+              <input type="file" name = 'img' id="ex_filename" class="upload-hidden file1">
+              <span class="size">(규격:000 X 000)</span> 
+            </div>
+          </li>
+          <li>
+            <label for="">지역</label>
+            <select name="" id="">
+              <option value="">시,도</option>
+              <option value="">시,도</option>
+              <option value="">시,도</option>
+              <option value="">시,도</option>
+              <option value="">시,도</option>
+              <option value="">시,도</option>
+              <option value="">시,도</option>
+            </select>
+            <select name="" id="">
+              <option value="">군,구</option>
+            </select>
+            <select name="" id="">
+              <option value="">읍,면,동</option>
+            </select>
+            <select class="build-name">
+            	<option>건물명</option>
+            </select>
+            <select class="build-name">
+            	<option>층수</option>
+            </select>
+          </li>
+       		<li class="flex-between">
+	       		<div class="store-num">
+	       			<label>가게 전화번호</label>
+	       			<input type="text">
+	       			<input type="text">
+	       			<input type="text">
+	       		</div>
+       			<div>
+       				<label>유투브 URL</label>
+       				<input type="text">
+       			</div>
+       		</li>
+          <li class="food-select">
+            <label for="">업종</label>
+           <div class="radio-box">
+	           	<label for="big">
+	           		<input type="radio" name="big">대분류1</label>
+	            <label for="big">
+	            	<input type="radio" name="big">대분류1</label>
+	            <label for="big">
+	            	<input type="radio" name="big">대분류1</label>
+            </div>
+             <label for="">세부업종</label>
+            <select name="" id="">
+              <option value="0">소분류1</option>
+            </select>
+          </li>
+          <li class="flex-between">
+            <div>
+              <div class="select-box">
+                <label for="">영업 시간</label>
+                <select name="" id="">
+                  <option value="">요일</option>
+                  <option value="">월요일</option>
+                  <option value="">화요일</option>
+                  <option value="">수요일</option>
+                  <option value="">목요일</option>
+                  <option value="">금요일</option>
+                  <option value="">토요일</option>
+                  <option value="">일요일</option>
+                </select>
+                <input type="text" class="datepick" placeholder="오픈시간">
+                <input type="text" class="datepick" placeholder="마감시간">
+                <button class="btn btn-orange btn-sm">추가</button>
+              </div>
+              <div class="list">
+                <ul>
+                  <li class="flex-between">
+                    <p><span>월 ~ 토</span><span> 09:00 ~ 23:00</span></p>
+                    <button class="btn btn-delete btn-sm">삭제</button>
+                  </li>
+                  <li class="flex-between">
+                    <p><span>월 ~ 토</span><span> 09:00 ~ 23:00</span></p>
+                    <button class="btn btn-delete btn-sm">삭제</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div class="select-box">
+                <label for="">휴게 시간</label>
+                <select name="" id="">
+                  <option value="">요일</option>
+                  <option value="">월요일</option>
+                  <option value="">화요일</option>
+                  <option value="">수요일</option>
+                  <option value="">목요일</option>
+                  <option value="">금요일</option>
+                  <option value="">토요일</option>
+                  <option value="">일요일</option>
+                </select>
+                <input type="text" class="datepick" placeholder="오픈시간">
+                <input type="text" class="datepick" placeholder="마감시간">
+                <button class="btn btn-orange btn-sm">추가</button>
+              </div>
+              <div class="list">
+                <ul>
+                  <li class="flex-between">
+                    <p><span>월 ~ 토</span><span> 09:00 ~ 23:00</span></p>
+                    <button class="btn btn-delete btn-sm">삭제</button>
+                  </li>
+                  <li class="flex-between">
+                    <p><span>월 ~ 토</span><span> 09:00 ~ 23:00</span></p>
+                    <button class="btn btn-delete btn-sm">삭제</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li>
+          	<div>
+              <div class="select-box">
+                <label for="">휴무일</label>
+                <select name="" id="">
+                  <option value="">주차</option>
+                  <option value="">매주</option>
+                  <option value="">첫째 주</option>
+                  <option value="">둘째 주</option>
+                  <option value="">셋째 주</option>
+                  <option value="">넷째 주</option>
+                  <option value="">마지막 주</option>
+                </select>
+                <select name="" id="">
+                  <option value="">요일</option>
+                  <option value="">월요일</option>
+                  <option value="">화요일</option>
+                  <option value="">수요일</option>
+                  <option value="">목요일</option>
+                  <option value="">금요일</option>
+                  <option value="">토요일</option>
+                  <option value="">일요일</option>
+                </select>
+                <button class="btn btn-orange btn-sm">추가</button>
+              </div>
+              <div class="list">
+                <ul>
+                  <li class="flex-between">
+                    <p><span>매주</span>  <span>월요일</span></p>
+                    <button class="btn btn-delete btn-sm">삭제</button>
+                  </li>
+                  <li class="flex-between">
+                    <p><span>첫째주</span>  <span>일요일</span></p>
+                    <button class="btn btn-delete btn-sm">삭제</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="flex-between">
+            <div>
+              <div class="select-box">
+                <label for="">휴가 설정(긴급휴무)</label>
+                <input type="date" placeholder="휴무 시작일">~<input type="date" placeholder="휴무 종료일">
+                <button class="btn btn-orange btn-sm">추가</button>
+              </div>
+              <div class="list">
+                <ul>
+                  <li class="flex-between">
+                    <p><span>2021/10/20</span> ~ <span>2021/10/31</span></p>
+                    <button class="btn btn-delete btn-sm">삭제</button>
+                  </li>
+                  <li class="flex-between">
+                    <p><span>2021/10/20</span> ~ <span>2021/10/31</span></p>
+                    <button class="btn btn-delete btn-sm">삭제</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div>
+            <div>
+              <div>
+                <label for="">공휴일 설정</label>
+                <input type="date" placeholder="000문정점">
+                <button class="btn btn-orange btn-sm">추가</button>
+              </div>
+              <div class="list">
+                <ul>
+                  <li class="flex-between">
+                    <p><span> 2021/10/20</span></p>
+                    <button class="btn btn-delete btn-sm">삭제</button>
+                  </li>
+                  <li class="flex-between">
+                    <p><span> 2021/10/20</span></p>
+                    <button class="btn btn-delete btn-sm">삭제</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li>
+            <label for="">가게 상세 소개 및 공지</label>
+            <textarea name="" id="" cols="30" rows="3" placeholder="내용을 입력하세요."></textarea>
+          </li>
+          <li>
+            <label for="">검색 키워드 설정</label>
+            <input type="text" placeholder="최대 5개/쉼표로 구분해주세요.">
+          </li>
+          <li>
+            <div class="menus">
+              <label for="">상품명(메뉴 등)</label>
+              <input type="text" placeholder="상품명">
+              <input type="text" placeholder="가격" style="min-width: 80px; width: 10%;">
+              <div class="filebox bs3-primary inline">
+                <input class="upload-name name2" value="" disabled="disabled" placeholder="사진 첨부">
+                <label class="file-upload" for="filename">첨부</label> 
+                <input type="file" name = 'img' id="filename" class="upload-hidden file2">
+              </div>
+              <button class="btn btn-sm btn-orange">추가</button>
+            </div>
+            <div class="list list-menu">
+              <ul>
+                <li class="flex-between">
+                  <p>상품A</p>
+                  <p>000,000원</p>
+                  <div>
+                  <button class="btn btn-gray btn-sm" style="float:none;">이미지 확인</button>
+                  <button class="btn btn-delete btn-sm" style="float:none;">삭제</button>
+                  </div>
+                </li>
+                <li class="flex-between">
+                  <p>상품A</p>
+                  <p>000,000원</p>
+                  <div>
+                  <button class="btn btn-gray btn-sm" style="float:none;">이미지 확인</button>
+                  <button class="btn btn-delete btn-sm" style="float:none;">삭제</button>
+                  </div>
+                </li>
+                <li class="flex-between">
+                  <p>상품A</p>
+                  <p>000,000원</p>
+                  <div>
+                  <button class="btn btn-gray btn-sm" style="float:none;">이미지 확인</button>
+                  <button class="btn btn-delete btn-sm" style="float:none;">삭제</button>
+                  </div>
+                </li>
+                
+                
+              </ul>
+            </div>
+          </li>
+          <li class="flex-between submit">
+            <button class="btn btn-orange">저장</button>
+            <button class="btn btn-orange">초기화</button>
+          </li>
+        </ul>
+      </form>
+    </div>
+  </section>
+
+
+  <script>
+    $(document).ready(function(){
+        var fileTarget1 = $('.file1');
+        fileTarget1.on('change', function(){
+          if(window.FileReader){
+            var filename = $(this)[0].files[0].name;
+            } else {
+            var filename = $(this).val().split('/').pop().split('\\').pop();
+            }
+        $(this).siblings('.name1').val(filename);
+        });
+    
+        var fileTarget2 = $('.file2');
+        fileTarget2.on('change', function(){
+          if(window.FileReader){
+            var filename2 = $(this)[0].files[0].name;
+            } else {
+            var filename2 = $(this).val().split('/').pop().split('\\').pop();
+            }
+        $(this).siblings('.name2').val(filename2);
+        });
+    }); 
+    </script>
+        <!--  END CONTENT AREA  -->
+
+    </div>
+    <!-- END MAIN CONTAINER -->
+	
+
+
+
+	<th:block th:replace="fragments/script :: scriptFragment(useScriptCsrf='true')"></th:block>
+	
+	<script th:inline="javascript">
+	/* <![CDATA[ */
+		
+	/*]] */
+	</script>
+</body>
+
+</html>

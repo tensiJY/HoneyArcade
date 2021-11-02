@@ -1,0 +1,62 @@
+#mypage article {
+  margin-top: 30px;
+}
+input:read-only {
+	background-color: rgba(0,0,0,.1);
+	font-weight: bold;
+	}  
+
+#mypage article:first-child {
+  margin-top: 0;
+}
+
+#mypage article > div .left-side {
+  width: 80%;
+}
+
+#mypage article > div .left-side input {
+  min-width: 280px;
+}
+
+#mypage article > div .left-side input[type="date"] {
+  min-width: 170px;
+}
+
+#mypage article > div .left-side .table {
+  margin-top: 0;
+}
+
+#mypage article > div .chart {
+  width: 100%;
+  height: 150px;
+  border-radius: 5px;
+  border: 1px solid #5a311d;
+  background: #fff;
+}
+
+#mypage article > div .right-side {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  width: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 70px;
+}
+
+#mypage article > div .right-side button {
+  display: block;
+  width: 130px;
+  margin-bottom: 12px;
+}
+/*# sourceMappingURL=mypage.css.map */

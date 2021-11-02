@@ -1,0 +1,361 @@
+$main-color: #5B321E;
+$sub-color: #FEF3D3;
+$yellow-color: #FCC91E;
+$normal-margin: 15px;
+
+body{
+  width: 100vw;  
+  height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  min-width: 320px;
+  min-height: 700px;
+  line-height: 1.5;
+}
+header{
+  width: 100%;
+  height: 50px;
+  background: $main-color;
+  >div{
+    height: 100%;
+    text-align: center;
+    position: relative;
+    span{
+      position: absolute;
+      background: url(../images/arrow-left.png)  center center no-repeat;
+      background-size: cover;
+      width: 24px;
+      height: 24px;
+      left: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    p{
+      line-height: 50px;
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+}
+.index{
+  padding: 20px;
+  height: 90%;
+  background: $sub-color;
+  h1{
+    margin: 0 auto;
+    width: 154px;
+    height: 88px;
+    font-size: 0;
+    background: url(../images/logo.png) center center no-repeat;
+    background-size: contain;
+    margin-bottom: 20px;
+  }
+  .build-name{
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    border-radius: 24px;
+    position: relative;
+    margin-bottom: $normal-margin;
+    .sub{
+      position: absolute;
+      color: #888787;
+      font-size: 10px;
+      font-weight: bold;
+      left: 20%;
+      top: 10%;
+    }
+    .main{
+      padding-top: 20px;
+      color: #5B321E;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+  .search{
+    width: 100%;
+    height: 35px;
+    border-radius: 24px;
+    background: #F6F5F1;
+    position: relative;
+    margin-bottom: $normal-margin;
+    input{
+      background: transparent;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 24px;
+      padding: 0 24px;
+      ::placeholder{
+        font-family: "Noto Sans KR",sans-serif;
+        font-size: 12px;
+        color: #C3B8B2;
+      }
+    }
+    span{
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      background: url(../images/search-icon.png) center center no-repeat;
+      background-size: cover;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  .coupon{
+    margin-bottom: $normal-margin;
+    >div{
+      display: flex;
+      justify-content: space-between;
+      button{
+        background: transparent;
+        border: 0;
+        border-radius: 16px;
+        background: $main-color;
+        color: #fff;
+        font-size: 12px;
+        font-weight: bold;
+        width: 48%;
+        height: 30px;
+      }
+    }
+  }
+  .install{
+    width: 100%;
+    height: 44px;
+    border-radius: 24px;
+    background: $yellow-color;
+    position: relative;
+    margin-bottom: $normal-margin;
+    >div{
+      text-align: center;
+      line-height: 44px;
+      color: $main-color;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &::before{
+        display: block;
+        content: "";
+        width: 28px;
+        height: 28px;
+        background: url(../images/logo2.png) center center no-repeat;
+        background-size: cover;
+        margin-right: 5px;
+      }
+      &:after{
+        display: block;
+        content: "";
+        width: 28px;
+        height: 28px;
+        background: url(../images/arrow-right.png) center center no-repeat;
+      }
+    }
+  }
+  .build-list-container{
+    margin-bottom: $normal-margin;
+    >ul{
+      max-height: 260px;
+      overflow-y: scroll;
+    }
+    .build-list{
+      border-radius: 6px;
+      border: 1px solid $main-color;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: space-between;
+      background: #F6F5F1;
+      padding: 0 15px;
+      margin-bottom: 10px;
+      .left-side{
+        p{
+          line-height: 38px;
+          font-weight: bold;
+          color: $main-color;
+        }
+      }
+      .right-side{
+        button{
+          border: 0;
+          background: $yellow-color;
+          border-radius: 10px;
+          color: $main-color;
+          font-size: 10px;
+          padding: 4px 18px;
+          margin-bottom: 2px;
+        }
+        p{
+          font-size: 8px;
+          color: $main-color;
+        }
+      }
+    }
+  }
+  .build-map{
+    margin-bottom: $normal-margin;
+    >div{
+      width: 100%;
+      min-height: 300px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 10px;
+      box-sizing: border-box;
+      img{
+        width: 100%;
+        height: auto;
+        max-height: 280px;
+      }
+    }
+  }
+  .build-text{
+    margin-bottom: $normal-margin;
+    text-align: center;
+    color: #8A8383;
+    font-size: 10px;
+    strong{
+      font-size: 12px;
+      font-weight: bold;
+      color: $main-color;
+    }
+  }
+  .coupon-container{
+    margin-bottom: $normal-margin;
+    >ul{
+      max-height: 260px;
+      overflow-y: scroll;
+      .coupon-list{
+        display: flex;
+        justify-content: space-between;
+        line-height: 40px;
+        background: $yellow-color;
+        border-radius: 10px;
+        padding: 0 20px;
+        font-size: 12px;
+        font-weight: bold;
+        color: $main-color;
+        margin-bottom: 5px;
+      }
+    }
+  }
+  .ad-container{
+    margin-bottom: $normal-margin;
+    >ul{
+      max-height: 400px;
+      overflow-y: scroll;
+    }
+    .ad-list{
+      width: 80%;
+      margin: 0 auto;
+      margin-bottom: 5px;
+      overflow: hidden;
+      img{
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+
+@keyframes popup{
+  from{
+    bottom: -100%;
+  }
+  to{
+    bottom: 0%;
+  }
+}
+
+.popup{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-width: 340px;
+  height: 100%;
+  background: rgba(0,0,0,.5);
+  display: none;
+  &.on{
+    display: block;
+    .honey{
+      animation: popup 1s forwards;
+    }
+  }
+  .honey{
+    position: absolute;
+    left: 0;
+    bottom: -100%;
+    background: #fff;
+    width: 100%;
+    height: 40%;
+    border-radius: 30px 30px 0 0;
+    box-shadow: 2px -4px 6px rgba(0,0,0,.5);
+    >div{
+      padding: 40px 24px;
+      .popup-title{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
+        .popup-logo{
+          margin-right: 10px;
+          height: auto;
+        }
+        .popup-sub{
+          font-weight: bold;
+          .small-sub{
+            font-size: 12px;
+            color: #9B9B9B;
+            margin-bottom: 10px;
+          }
+          .main-sub{
+            font-size: 15px;
+            color: $main-color;
+          }
+        }
+      }
+      .install-btn{
+        text-align: center;
+        margin-bottom: 20px;
+        button{
+          width: 100%;
+          max-width: 320px;
+          padding: 12px 0;
+          background: $main-color;
+          border-radius: 28px;
+          font-size: 24px;
+          font-weight: bold;
+          color: #fff;
+          border: 0;
+        }
+      }
+      .no-install{
+        text-align: center;
+        font-weight: bold;
+        color: #948E8E;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+
+
+
+
+footer{
+  background: $main-color;
+  width: 100%;
+  height: 25px;
+  >div{
+    text-align: center;
+    line-height: 25px;
+    p{
+      color: #fff;
+      font-size: 10px;
+    }
+  }
+}

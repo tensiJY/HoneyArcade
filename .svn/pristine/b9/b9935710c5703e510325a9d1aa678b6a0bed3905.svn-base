@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="honeyarcade.owner.ad.build.OwnerAdBuildMapper">
+
+	<select id="getBuildList" parameterType="honeyarcade.owner.ad.build.OwnerAdBuildVO" resultType="honeyarcade.owner.ad.build.OwnerAdBuildVO">
+	<![CDATA[
+		select
+			tb_pay.event_title 
+			, tb_pay_dtl.pay_seq 
+			, tb_pay_dtl.pay_dtl_type 
+			, tb_pay_dtl.pay_dtl_day
+			, tb_pay_dtl.pay_dtl_use 
+		from 
+			tb_pay 
+		inner join tb_pay_dtl 
+			on tb_pay.pay_seq = tb_pay_dtl.pay_seq 
+		where 
+				tb_pay.owner_id = #{owner_id}
+			and tb_pay_dtl.pay_dtl_type = 1
+			and tb_pay_dtl.pay_dtl_use in (1,4)
+	]]>
+	</select>
+	
+</mapper>

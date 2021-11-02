@@ -1,0 +1,172 @@
+var koreasoft = koreasoft || {}; 
+koreasoft.namespace = function(ns_string) { 
+	var parts = ns_string.split('.'), parent = koreasoft, i; 
+	if (parts[0] === "koreasoft") { 
+		parts = parts.slice(1); 
+	} 
+	for (i = 0; i < parts.length; i += 1) { 
+		if (typeof parent[parts[i]] === "undefined") { 
+			parent[parts[i]] = {}; 
+		} 
+		parent = parent[parts[i]]; 
+	} 
+	return parent; 
+} 
+
+koreasoft.namespace('koreasoft.modules.pay');
+
+koreasoft.modules.pay = function() {
+	//	_csrfToken 필요
+	var _impUid = null;
+	
+	var _init = function(){
+		//	가맹점 식별코드 가져오기
+		var _url = "/common/pay/getImpUid";
+		var _response = _doAjaxAsync(_url, null);
+		
+		if(_response.result == 'false' || _response.result == false){
+			//alert("결제를 진행할수 없습니다");
+			
+		}else{
+			_impUid = _response.imp_uid;	
+		}
+		
+	}
+	
+	//	객체 생성시 >> 가맹점 식별코드(결제자 고유번호) 가져옮
+	_init();
+	
+	
+	/////
+	//	주문번호 및 결제자 정보, 결제 상품 등 정보 가져오기 
+	var _getPayInfo = function(data){
+		var _obj = {};
+		_obj.landom_length = 8;
+		_obj.evt_seq_arr = data.evt_seq_arr;
+		
+		var _url = "/common/pay/getPayInfo";
+		var _result = _doAjaxAsync(_url, _obj);
+		return _result;
+	}
+	
+	//	공통 ajax
+	function _doAjax(url, data, callBack ){
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: data == null? null : JSON.stringify(data),
+			contentType : "application/json; charset=utf-8", 
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader(_csrfHeader, _csrfToken);
+			},
+			success: function (res) {
+				callBack(res)
+				
+			},
+			error: function (e) {
+				//console.log(e)
+			}
+		});
+	}
+	
+	function _doAjaxAsync(url, data){
+		var _result = null;
+						
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: data == null? null : JSON.stringify(data),
+			async: false,
+			contentType : "application/json; charset=utf-8", 
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader(_csrfHeader, _csrfToken);
+				
+			},
+			success: function (res) {
+				_result = res
+			},
+			error: function (e) {
+				//console.log(e)
+			}
+		});
+		
+		return _result;
+	}	
+	
+	function _cancelCallback(res){
+		console.log(res);
+	}
+	
+	/////////////////
+		
+	// 결재 요청
+    function _requestPay(data, callback) {
+	
+		var _payInfoRes = _getPayInfo(data);	//	ORD-20211001-81485315
+		
+		debugger;
+		
+		if(_payInfoRes.result == false || _payInfoRes.result == 'false'){
+			alert("처리하는데 문제가 생겼습니다. 관리자에게 문의 바랍니다");
+			return;
+		}
+		
+		/*
+		var _uid = _uidResult.uid;	//	결제번호
+		
+        IMP.init(_impUid); //가맹점 식별코드 : 운영에 반영시 고객이 신청해서 발급받으면 그 식별코드로 적용	imp03528463
+        IMP.request_pay({ // param
+            pg: "html5_inicis",
+            // pg: "kakao",
+            pay_method: "card",
+            merchant_uid: "1111",//createMerchant_Uid(8), // 주문번호 : 서버에서 생성
+            name: "노르웨이 회전 의자", // 결재품목
+            amount: 100,
+            buyer_email: "huhutt@naver.com", // 결재자(점주) Email
+            buyer_name: "홍길동", // 결재자(점주) 이름
+            buyer_tel: "010-4242-4242", // 결재자(점주) 핸드폰 번호
+            buyer_addr: "",
+            buyer_postcode: ""
+        }, function (rsp) { // callback
+			console.log(callback)
+			console.log("rsp::::::: ", rsp);
+            if ( rsp.success ) {
+                var msg = '결제가 완료되었습니다.';    
+               
+                
+                callback(rsp);
+                
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                //msg += '에러내용 : ' + rsp.error_msg;
+            }
+            alert(msg);
+            
+        });
+        */
+    }
+    
+    //	결제 환불
+    function _cancelPay(data){
+		var _obj = {}
+		_obj.mechant_uid = "1111";
+		_obj.amount = 100;			//	환불금액
+		_obj.checksum = 100;		//	[권장] 환불 가능 금액
+		_obj.reason	= "테스트 결제 환불 "
+		var _url = "/common/pay/cancelPay";
+		
+		_doAjax(_url, _obj, _cancelCallback);
+	}	
+    
+    
+    
+
+	//	결제가 완료되었습니다.고유ID : imp_087497711012상점 거래ID : 1111결제 금액 : 100카드 승인번호 : 
+
+	// 특권 메서드가 들어있는 객체를 반환 
+	return { 
+		requestPay : _requestPay
+		, cancelPay: _cancelPay
+	}; 
+}; 
+

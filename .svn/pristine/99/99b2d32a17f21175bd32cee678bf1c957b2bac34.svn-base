@@ -1,0 +1,25 @@
+package honeyarcade.owner.ad.coupon;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class OwnerAdCouponService {
+	
+	@Autowired
+	private OwnerAdCouponMapper ownerAdCouponMapper;
+	
+	/**
+	 * 할인쿠폰 : 할인쿠폰 목록 가져오기
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<OwnerAdCouponVO> getCouponList(String owner_id) throws Exception{
+		// TODO Auto-generated method stub
+		return ownerAdCouponMapper.getCouponList(owner_id);
+	}
+	
+}

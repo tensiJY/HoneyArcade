@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="honeyarcade.common.imp.ImpMapper">
+
+	<select id="isKey" parameterType="String" resultType="Integer">
+	<![CDATA[
+		select 
+			count(pay_uid) as cnt 
+		from 
+			tb_pay
+		where
+			pay_uid = #{uid}
+	]]>
+	</select>
+	
+	
+	
+</mapper>

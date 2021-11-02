@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="honeyarcade.owner.ad.bene.OwnerAdBeneMapper">
+
+	<select id="getBeneInfo" resultType="honeyarcade.owner.ad.bene.OwnerAdBeneVO">
+	<![CDATA[
+		select 
+			tb_file_dtl.file_dtl_url_path
+		from 
+			tb_benefit  
+		inner join tb_file 
+			on tb_benefit.file_seq = tb_file.file_seq
+			and tb_file.del_flag = 'N'
+		inner join tb_file_dtl
+			on tb_file.file_seq = tb_file_dtl.file_seq 
+		where 
+			tb_benefit.del_flag = 'N'
+	]]>
+	</select>
+	
+</mapper>

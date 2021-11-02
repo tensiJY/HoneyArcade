@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="honeyarcade.common.imp.ImpMapper">
+
+	<select id="isKey" parameterType="String" resultType="Integer">
+	<![CDATA[
+		select 
+			count(merchant_uid) as cnt 
+		from 
+			tb_pay
+		where
+			merchant_uid = #{uid}
+	]]>
+	</select>
+	
+	<select id="getEvtList" parameterType="java.util.List" resultType="honeyarcade.common.imp.ImpVO">
+		select 
+			  event_seq
+			, event_title
+			, event_price
+			, event_text
+		from 
+			tb_event
+		where
+			event_seq
+				in
+		<foreach item="item" index="index" collection="list" separator="," open="(" close=")">
+			#{item.event_seq}
+		</foreach>
+		
+	</select>
+	
+	<select id="getOwnerInfo" parameterType="String" resultType="honeyarcade.common.imp.ImpVO">
+	<![CDATA[
+		select 
+			tb_member.member_id 
+			, tb_owner.store_name 
+			, tb_owner.owner_email 
+			, tb_owner.owner_phone
+			, tb_owner.owner_id
+		from tb_member 
+		inner join tb_owner
+			on tb_member.owner_id = tb_owner.owner_id
+			and tb_owner.del_flag = 'N'
+		where
+				tb_member.owner_id = #{owner_id}
+			and	tb_member.del_flag = 'N'
+				
+	]]>
+	</select>
+	
+	<select id="getEvtDtlList" parameterType="java.util.List" resultType="honeyarcade.common.imp.ImpVO">
+		select 
+			  event_seq
+			, event_dtl_type
+			, event_dtl_day
+		from 
+			tb_event_dtl
+		where
+			event_seq
+				in
+		<foreach item="item" index="index" collection="list" separator="," open="(" close=")">
+			#{item.event_seq}
+		</foreach>
+		
+	</select>
+	
+	<select id="insertPay" parameterType="honeyarcade.common.imp.ImpVO" resultType="Integer">
+	<![CDATA[
+		insert into tb_pay
+			(
+				  event_seq
+				, owner_id
+				, pay_dt
+				, pay_money
+				, event_title
+				, event_text
+				, merchant_uid
+				, imp_uid
+			)
+		values
+			(
+				  #{event_seq}
+				, #{owner_id}
+				, getDate()
+				, #{pay_money}
+				, #{event_title}
+				, #{event_text}
+				, #{merchant_uid}
+				, #{imp_uid}
+			)	
+		
+		SELECT @@IDENTITY AS pay_seq
+	]]>
+	</select>
+	
+	<insert id="insertPayDtl" parameterType="honeyarcade.common.imp.ImpVO">
+	<![CDATA[
+		insert into tb_pay_dtl
+			(
+				  pay_dtl_type
+				, pay_seq
+				, pay_dtl_day
+				, pay_dtl_use
+			)
+		values
+			(
+				  #{pay_dtl_type}
+				, #{pay_seq}
+				, #{pay_dtl_day}
+				, 1
+			)	
+	]]>
+	</insert>
+	
+	
+</mapper>

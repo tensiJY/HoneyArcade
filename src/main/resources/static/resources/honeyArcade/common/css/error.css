@@ -1,0 +1,50 @@
+.error-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.error-logo {
+  margin-bottom: 80px;
+  width: 100%;
+  text-align: center;
+}
+
+.error-logo img {
+  width: 50%;
+  height: auto;
+}
+
+.error-text {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.error-text p:nth-child(1) {
+  font-weight: bold;
+  font-size: 80px;
+}
+
+.error-btn {
+  text-align: center;
+}
+
+.error-btn a {
+  display: inline-block;
+  padding: 12px 24px;
+  color: #3d3d3d;
+  border-radius: 5px;
+  font-size: 18px;
+  border: 1px solid #5a311d;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.error-btn a:hover {
+  background: #5a311d;
+  color: #fff;
+}
+/*# sourceMappingURL=error.css.map */

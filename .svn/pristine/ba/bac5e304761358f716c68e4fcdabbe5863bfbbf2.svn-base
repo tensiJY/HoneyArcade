@@ -1,0 +1,459 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  min-width: 320px;
+  min-height: 700px;
+  line-height: 1.5;
+}
+
+header {
+  width: 100%;
+  height: 50px;
+  background: #5B321E;
+}
+
+header > div {
+  height: 100%;
+  text-align: center;
+  position: relative;
+}
+
+header > div span {
+  position: absolute;
+  background: url(/resources/honeyArcade/img/mobile-arrow-left.png) center center no-repeat;
+  background-size: cover;
+  width: 24px;
+  height: 24px;
+  left: 5%;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+header > div p {
+  line-height: 50px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.index {
+  padding: 20px;
+  height: 90%;
+  background: #FEF3D3;
+}
+
+.index h1 {
+  margin: 0 auto;
+  width: 154px;
+  height: 88px;
+  font-size: 0;
+  background: url(/resources/honeyArcade/img/mobile-logo.png) center center no-repeat;
+  background-size: contain;
+  margin-bottom: 20px;
+}
+
+.index .build-name {
+  width: 100%;
+  height: 50px;
+  background: #fff;
+  border-radius: 24px;
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.index .build-name .sub {
+  position: absolute;
+  color: #888787;
+  font-size: 10px;
+  font-weight: bold;
+  left: 20%;
+  top: 10%;
+}
+
+.index .build-name .main {
+  padding-top: 20px;
+  color: #5B321E;
+  text-align: center;
+  font-weight: bold;
+}
+
+.index .search {
+  width: 100%;
+  height: 35px;
+  border-radius: 24px;
+  background: #F6F5F1;
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.index .search input {
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 24px;
+  padding: 0 24px;
+}
+
+.index .search input ::-webkit-input-placeholder {
+  font-family: "Noto Sans KR",sans-serif;
+  font-size: 12px;
+  color: #C3B8B2;
+}
+
+.index .search input :-ms-input-placeholder {
+  font-family: "Noto Sans KR",sans-serif;
+  font-size: 12px;
+  color: #C3B8B2;
+}
+
+.index .search input ::-ms-input-placeholder {
+  font-family: "Noto Sans KR",sans-serif;
+  font-size: 12px;
+  color: #C3B8B2;
+}
+
+.index .search input ::placeholder {
+  font-family: "Noto Sans KR",sans-serif;
+  font-size: 12px;
+  color: #C3B8B2;
+}
+
+.index .search span {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background: url(/resources/honeyArcade/img/mobile-search-icon.png) center center no-repeat;
+  background-size: cover;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.index .coupon {
+  margin-bottom: 15px;
+}
+
+.index .coupon > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.index .coupon > div button {
+  background: transparent;
+  border: 0;
+  border-radius: 16px;
+  background: #5B321E;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  width: 48%;
+  height: 30px;
+}
+
+.index .install {
+  width: 100%;
+  height: 44px;
+  border-radius: 24px;
+  background: #FCC91E;
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.index .install > div {
+  text-align: center;
+  line-height: 44px;
+  color: #5B321E;
+  font-weight: bold;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.index .install > div::before {
+  display: block;
+  content: "";
+  width: 28px;
+  height: 28px;
+  background: url(/resources/honeyArcade/img/mobile-logo2.png) center center no-repeat;
+  background-size: cover;
+  margin-right: 5px;
+}
+
+.index .install > div:after {
+  display: block;
+  content: "";
+  width: 28px;
+  height: 28px;
+  background: url(/resources/honeyArcade/img/mobile-arrow-right.png) center center no-repeat;
+}
+
+.index .build-list-container {
+  margin-bottom: 15px;
+}
+
+.index .build-list-container > ul {
+  max-height: 260px;
+  overflow-y: scroll;
+}
+
+.index .build-list-container .build-list {
+  border-radius: 6px;
+  border: 1px solid #5B321E;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background: #F6F5F1;
+  padding: 0 15px;
+  margin-bottom: 10px;
+}
+
+.index .build-list-container .build-list .left-side p {
+  line-height: 38px;
+  font-weight: bold;
+  color: #5B321E;
+}
+
+.index .build-list-container .build-list .right-side button {
+  border: 0;
+  background: #FCC91E;
+  border-radius: 10px;
+  color: #5B321E;
+  font-size: 10px;
+  padding: 4px 18px;
+  margin-bottom: 2px;
+}
+
+.index .build-list-container .build-list .right-side p {
+  font-size: 8px;
+  color: #5B321E;
+}
+
+.index .build-map {
+  margin-bottom: 15px;
+}
+
+.index .build-map > div {
+  width: 100%;
+  min-height: 300px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.index .build-map > div img {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+}
+
+.index .build-text {
+  margin-bottom: 15px;
+  text-align: center;
+  color: #8A8383;
+  font-size: 10px;
+}
+
+.index .build-text strong {
+  font-size: 12px;
+  font-weight: bold;
+  color: #5B321E;
+}
+
+.index .coupon-container {
+  margin-bottom: 15px;
+}
+
+.index .coupon-container > ul {
+  max-height: 260px;
+  overflow-y: scroll;
+}
+
+.index .coupon-container > ul .coupon-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  line-height: 40px;
+  background: #FCC91E;
+  border-radius: 10px;
+  padding: 0 20px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #5B321E;
+  margin-bottom: 5px;
+}
+
+.index .ad-container {
+  margin-bottom: 15px;
+}
+
+.index .ad-container > ul {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.index .ad-container .ad-list {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  overflow: hidden;
+}
+
+.index .ad-container .ad-list img {
+  width: 100%;
+  height: auto;
+}
+
+@-webkit-keyframes popup {
+  from {
+    bottom: -100%;
+  }
+  to {
+    bottom: 0%;
+  }
+}
+
+@keyframes popup {
+  from {
+    bottom: -100%;
+  }
+  to {
+    bottom: 0%;
+  }
+}
+
+.popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-width: 340px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+.popup.on {
+  display: block;
+}
+
+.popup.on .honey {
+  -webkit-animation: popup 1s forwards;
+          animation: popup 1s forwards;
+}
+
+.popup .honey {
+  position: absolute;
+  left: 0;
+  bottom: -100%;
+  background: #fff;
+  width: 100%;
+  height: 40%;
+  border-radius: 30px 30px 0 0;
+  -webkit-box-shadow: 2px -4px 6px rgba(0, 0, 0, 0.5);
+          box-shadow: 2px -4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.popup .honey > div {
+  padding: 40px 24px;
+}
+
+.popup .honey > div .popup-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 30px;
+}
+
+.popup .honey > div .popup-title .popup-logo {
+  margin-right: 10px;
+  height: auto;
+}
+
+.popup .honey > div .popup-title .popup-sub {
+  font-weight: bold;
+}
+
+.popup .honey > div .popup-title .popup-sub .small-sub {
+  font-size: 12px;
+  color: #9B9B9B;
+  margin-bottom: 10px;
+}
+
+.popup .honey > div .popup-title .popup-sub .main-sub {
+  font-size: 15px;
+  color: #5B321E;
+}
+
+.popup .honey > div .install-btn {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.popup .honey > div .install-btn button {
+  width: 100%;
+  max-width: 320px;
+  padding: 12px 0;
+  background: #5B321E;
+  border-radius: 28px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  border: 0;
+}
+
+.popup .honey > div .no-install {
+  text-align: center;
+  font-weight: bold;
+  color: #948E8E;
+  cursor: pointer;
+}
+
+footer {
+  background: #5B321E;
+  width: 100%;
+  height: 25px;
+}
+
+footer > div {
+  text-align: center;
+  line-height: 25px;
+}
+
+footer > div p {
+  color: #fff;
+  font-size: 10px;
+}
+/*# sourceMappingURL=mobile-web.css.map */

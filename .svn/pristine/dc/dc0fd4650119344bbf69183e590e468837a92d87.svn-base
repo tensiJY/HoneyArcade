@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="honeyarcade.reg.RegMapper">
+
+	<select id="idCheck" parameterType="String" resultType="Integer">
+	<![CDATA[
+		select
+			count(member_id) as cnt
+		from
+			tb_member
+		where
+			member_id = #{member_id}
+	]]>
+	</select>
+	
+	<select id="emailCheck" parameterType="String" resultType="Integer">
+	<![CDATA[
+		select
+			count(owner_email) as cnt
+		from
+			tb_owner
+		where
+			owner_email = #{owner_email}
+	]]>
+	</select>
+	
+	<insert id="insertProduct" parameterType="honeyarcade.reg.RegVO">
+	<![CDATA[
+		insert into tb_product
+			(	
+				  owner_id
+				, product_seq
+				, product_name
+				, product_price
+				, file_seq
+			)
+		values
+			(
+				  #{owner_id		}
+				, #{product_seq     }
+				, #{product_name    }
+				, #{product_price   }
+				, #{file_seq        }
+			)
+	]]>
+	</insert>
+	
+	<insert id="insertOpen" parameterType="honeyarcade.reg.RegVO">
+	<![CDATA[
+		insert into tb_open
+			(
+				  open_day
+				, owner_id
+				, open_time
+				, close_time
+			)
+		values
+			(
+				  #{open_day}
+				, #{owner_id}
+				, #{open_time}
+				, #{close_time}
+			)
+	]]>
+	</insert>		
+	
+	<insert id="insertBreak" parameterType="honeyarcade.reg.RegVO">
+	<![CDATA[
+		insert into tb_break
+			(
+				  break_day
+				, owner_id
+				, open_time
+				, close_time
+			)
+		values
+			(
+				  #{break_day}
+				, #{owner_id}
+				, #{open_time}
+				, #{close_time}
+			)
+	]]>
+	</insert>		
+	
+	<insert id="insertDayOff" parameterType="honeyarcade.reg.RegVO">
+	<![CDATA[
+		insert into tb_day_off
+			(
+				  day_off_week
+				, owner_id
+				, day_off_day
+			)
+		values
+			(
+				  #{day_off_week}
+				, #{owner_id}
+				, #{day_off_day}
+			)
+	]]>
+	</insert>
+	
+	<insert id="insertHoliday" parameterType="honeyarcade.reg.RegVO">
+	<![CDATA[
+		insert into tb_holiday
+			(
+				  holiday_seq
+				, holiday_type
+				, owner_id
+				, holiday_start_day
+				, holiday_end_day
+			)
+		values
+			(
+				  #{holiday_seq}
+				, #{holiday_type}
+				, #{owner_id}
+				, #{holiday_start_day}
+				, #{holiday_end_day}
+			)
+	]]>
+	</insert>
+	
+	<update id="updateOwnerInfo" parameterType="honeyarcade.reg.RegVO">
+	<![CDATA[
+		update
+			tb_owner
+		set
+			  owner_status		= #{owner_status}
+			, owner_phone		= #{owner_phone}
+			, busi_reg_file_seq = #{busi_reg_file_seq}
+			, store_sort		= #{store_sort}
+			, store_keyword		= #{store_keyword}
+			, store_text		= #{store_text}
+			, lcate_seq			= #{lcate_seq}
+			, mcate_seq			= #{mcate_seq}
+			, store_link		= #{store_link}
+			, store_tel			= #{store_tel}
+			, mod_dt			= getDate()
+			, mod_id			= #{mod_id}
+			, main_file_seq		= #{main_file_seq}
+			, owner_email		= #{owner_email}
+		where
+			owner_id = #{owner_id}
+	]]>
+	</update>
+	
+	<insert id="insertMember" parameterType="honeyarcade.reg.RegVO">
+	<![CDATA[
+		insert into tb_member
+			(
+				  member_id
+				, role_id
+				, owner_id
+				, owner_pwd
+				, owner_join_dt
+				, del_flag
+			)
+		values
+			(
+				  #{member_id}
+				, 'ROLE_OWNER'
+				, #{owner_id}
+				, #{owner_pwd}
+				, getDate()
+				, 'N'
+			)	
+	]]>
+	</insert>		
+	
+</mapper>

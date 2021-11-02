@@ -1,0 +1,194 @@
+#login {
+  padding-top: 114px;
+  width: 535px;
+  margin: 0 auto;
+}
+
+#login .title {
+  text-align: center;
+}
+
+#login .title h1 {
+  font-size: 0;
+  width: 302px;
+  height: 174px;
+  background: url(../images/logo2.png) center center no-repeat;
+  background-size: cover;
+  margin: 0 auto;
+}
+
+#login .title h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+}
+
+#login .title h3 span {
+  color: #5a311d;
+}
+
+#login .login {
+  margin-top: 50px;
+  width: 100%;
+}
+
+#login .login form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#login .login form .login-input {
+  position: relative;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+#login .login form .login-input input {
+  all: unset;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  font-size: 15px;
+  color: #c7b299;
+  padding: 14px 31px;
+  background: #fff;
+  border: 1px solid #8c6239;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#login .login form .login-input input::-webkit-input-placeholder {
+  color: #c7b299;
+}
+
+#login .login form .login-input input:-ms-input-placeholder {
+  color: #c7b299;
+}
+
+#login .login form .login-input input::-ms-input-placeholder {
+  color: #c7b299;
+}
+
+#login .login form .login-input input::placeholder {
+  color: #c7b299;
+}
+
+#login .login form .login-input span {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 15px;
+  color: #c7b299;
+  cursor: pointer;
+}
+
+#login .login form .login-input span.on {
+  color: #f29300;
+  font-weight: bold;
+}
+
+#login .login form .auto-login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 14px;
+  color: #5a311d;
+  font-weight: 500;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 60px;
+}
+
+#login .login form .auto-login label {
+  margin-right: 10px;
+}
+
+#login .login form button {
+  font-size: 18px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid #5a311d;
+}
+
+#login .login form button:hover {
+  background: #5a311d;
+  color: #fff;
+  -webkit-transform: translateY(-8px);
+          transform: translateY(-8px);
+  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+#login .join ul li {
+  margin: 20px 0;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 14px;
+  width: 32.4%;
+  background: rgba(255, 255, 255, 0.5);
+  font-weight: bold;
+  border-radius: 5px;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+#login .join ul li:hover {
+  background: #fff;
+  -webkit-transform: translateY(-4px);
+          transform: translateY(-4px);
+}
+
+#login .join p {
+  font-size: 12px;
+  text-align: center;
+  color: #000;
+  font-weight: 500;
+}
+
+#login .kakao {
+  width: 80%;
+  margin: 100px auto 0;
+}
+
+#login .kakao > p {
+  font-size: 16px;
+  color: #5a311d;
+  padding-left: 30px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#login .kakao div {
+  border-radius: 5px;
+  padding: 10px 30px;
+  background: #c3a87c;
+}
+
+#login .kakao div p {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 30px;
+  color: #fff;
+  font-weight: 500;
+}
+
+#login .kakao div p span {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  background: url(../images/kakao.png) center center no-repeat;
+  background-size: cover;
+}
+/*# sourceMappingURL=login.css.map */

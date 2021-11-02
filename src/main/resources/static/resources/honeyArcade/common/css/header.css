@@ -1,0 +1,24 @@
+header {
+  padding: 26px 0 10px;
+  border-bottom: 1px solid #8c6239;
+}
+
+header h1 {
+  font-size: 0;
+  background: url(../../img/logo.png) center center no-repeat;
+  background-size: cover;
+  width: 108px;
+  height: 49px;
+}
+
+header .welcome p {
+  color: #5a311d;
+  font-size: 15px;
+  margin-right: 20px;
+}
+
+header .welcome p span {
+  font-size: 18px;
+  font-weight: bold;
+}
+/*# sourceMappingURL=header.css.map */

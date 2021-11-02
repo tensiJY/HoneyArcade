@@ -1,0 +1,16 @@
+package honeyarcade.owner.st.mypage;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/owner/st")
+public class OwnerStMypageController {
+
+	@RequestMapping("/mypage")
+	public String stMypage() throws Exception{
+		
+		return "owner/st/mypage/ownerStMypage";
+	}
+	
+}

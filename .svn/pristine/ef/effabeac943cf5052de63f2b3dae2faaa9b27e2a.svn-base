@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head>
+	<th:block th:replace="fragments/meta-mobile :: metaFragment(title='쿠폰', useMetaCsrf='true')"></th:block>
+	<link rel="stylesheet" th:href="@{/resources/honeyArcade/user/css/mobile-web.css}">
+</head>
+<body>
+	<header>
+		<div>
+			<span id="backBtn"><a href=""><img src="" alt=""></a></span>
+			<p>[[${paramVO.build_name}]]</p>
+			<form id="backForm" method="POST" th:action="@{/}">
+				<input type="hidden" name="build_seq"	th:value="${paramVO.build_seq}">
+				<input type="hidden" name="QRLocation"	th:value="${paramVO.build_seq}">
+				<input type="hidden" name="type"		th:value="${paramVO.type}">
+				<input type="hidden" name="search_text"	th:value="${paramVO.search_text}">
+				<input type="hidden" name="store_floor"	th:value="${paramVO.store_floor}">
+				<input type="hidden" name="owner_id"	th:value="${paramVO.owner_id}">
+				<input type="hidden" name="build_name"	th:value="${paramVO.build_name}">
+				<input type="hidden" name="position"	th:value="${paramVO.position}">
+			</form>
+		</div>
+	</header>
+	<section class="index">
+		<h1>logo</h1>
+		<article class="build-name">
+			<p class="sub">현재 접속하신 건물은</p>
+			<p class="main">[[${paramVO.build_name}]] 건물입니다.</p>
+		</article>
+		<article class="build-text">
+			<p>현재 건물에서 사용가능한 쿠폰 목록입니다.</p>
+		</article>
+		<article class="coupon-container">
+			<ul>
+				<!--<li class="coupon-list">
+					<p>평일 식사 10% 할인 쿠폰</p>
+					<span>
+						<img src="../images/coupon-icon.png" alt="">
+					</span>
+				</li>-->
+				<th:block th:if="${couponList.size() == 0}">
+					<li class="coupon-list">
+						<p>조회된 쿠폰이 없습니다</p>
+						<span>
+							<!--<img src="../images/coupon-icon.png" alt="">-->
+						</span>
+					</li>
+				</th:block>
+				<th:block th:if="${couponList.size() != 0}">
+					<th:block th:each="list : ${couponList}">
+						<li class="coupon-list">
+							<p>[[${list.coupon_dtl_text}]]</p>
+							<span>
+								<img th:src="@{/resources/honeyArcade/img/mobile-coupon-icon.png}" alt="">
+							</span>
+						</li>
+					</th:block>
+				</th:block>
+			</ul>
+		</article>
+		<article class="build-text">
+			<p>현재 건물에서 사용 가능한</p>
+			<p>허니 아케이드 쿠폰 가맹점은 <strong>[[${memberCount}]]곳</strong> 입니다.</p>
+		</article>
+		<article class="install">
+			<div>
+				<p class="appSetup" style="cursor: pointer;">앱에서 확인하기</p>
+			</div>
+		</article>
+	</section>
+	<footer>
+		<div>
+			<p>허니아케이드(주) 대표전화 02)6493-3902</p>
+		</div>
+	</footer>
+	<section class="popup on">
+		<article class="honey">
+			<div>
+				<div class="popup-title">
+					<div class="popup-logo">
+						<img th:src="@{/resources/honeyArcade/img/mobile-logo2.png}" alt="">
+					</div>
+					<div class="popup-sub">
+						<p class="small-sub">NO1. 건물검색 솔루션</p>
+						<p class="main-sub">허니 아케이드 APP을 설치하고<br>
+							다양한 기능을 이용해보세요!</p>
+					</div>
+				</div>
+				<div class="install-btn">
+					<button type="button" class="appSetup">지금 설치할래요!</button>
+				</div>
+				<div class="no-install">
+					<p class="continue">모바일 웹으로 확인할래요</p>
+				</div>
+			</div>
+		</article>
+	</section>
+	
+	<th:block th:replace="fragments/script :: scriptFragment(useScriptCsrf='true')"></th:block>
+	<script th:Src="@{/resources/honeyArcade/common/js/mobile.js}"></script>
+	<script th:Src="@{/resources/honeyArcade/user/js/userCoupon.js}"></script>	
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<th:block th:fragment="headerFragment"> 
+	<div class="l-wrapper" id="loding-wrapper">
+	    <svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	      <symbol id="s--circle">
+	        <circle r="10" cx="20" cy="20"></circle>
+	      </symbol>
+	        <g class="g-circles g-circles--v3">
+	          <g class="g--circle">
+	            <use xlink:href="#s--circle" class="u--circle"/>
+	          </g>  
+	          <g class="g--circle">
+	            <use xlink:href="#s--circle" class="u--circle"/>
+	          </g>
+	          <g class="g--circle">
+	            <use xlink:href="#s--circle" class="u--circle"/>
+	          </g>
+	          <g class="g--circle">
+	            <use xlink:href="#s--circle" class="u--circle"/>
+	          </g>
+	          <g class="g--circle">
+	            <use xlink:href="#s--circle" class="u--circle"/>
+	          </g>
+	          <g class="g--circle">
+	            <use xlink:href="#s--circle" class="u--circle"/>
+	          </g>
+	          <g class="g--circle">
+	            <use xlink:href="#s--circle" class="u--circle"/>
+	          </g>
+	          <g class="g--circle">
+	            <use xlink:href="#s--circle" class="u--circle"/>
+	          </g>
+	          <g class="g--circle">
+	            <use xlink:href="#s--circle" class="u--circle"/>
+	          </g>
+	          <g class="g--circle">
+	            <use xlink:href="#s--circle" class="u--circle"/>
+	          </g>
+	          <g class="g--circle">
+	            <use xlink:href="#s--circle" class="u--circle"/>
+	          </g>
+	          <g class="g--circle">
+	            <use xlink:href="#s--circle" class="u--circle"/>
+	          </g>
+    </svg>
+  </div>
+
+	<header class="flex-between">
+		
+	    <h1>
+	    	<a href="#"><img src=""></a>
+	    </h1>
+	    
+	    <div class="flex-between welcome">
+	    	<th:block sec:authorize-expr="!isAuthenticated()">
+	    		<input type="button" class="btn btn-gray" value="로그인" th:onclick="|location.href='@{/login/form}'|">
+	    	</th:block>
+	    	<th:block sec:authorize-expr="isAuthenticated()">    		
+					<p><span>사장님 </span>반갑습니다.</p>
+					<form action="/logout" method="POST">	
+						<button class="btn btn-gray" value="로그아웃">로그 아웃</button>
+				    	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			    	</form>
+	    		
+	    	</th:block>
+		</div>
+		
+	</header>
+
+</th:block>
+  
+</html>

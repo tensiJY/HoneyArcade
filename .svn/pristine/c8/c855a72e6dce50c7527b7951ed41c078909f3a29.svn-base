@@ -1,0 +1,20 @@
+$(function(){
+	var _userIdx = function(){
+		var _init = function(){
+			$("#findBuild").on("click", function(){
+				$("#userForm").submit();
+			});
+			
+			$("#appSetup").on("click", function(){
+				koreasoft.modules.mobile.appSetup();
+			});
+		}
+		
+		return{
+			init : _init
+		}
+	}
+	
+	
+	new _userIdx().init()
+})

@@ -1,0 +1,306 @@
+#login {
+  padding-top: 114px;
+  width: 535px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+#login .title {
+  text-align: center;
+}
+
+#login .title h1 {
+  font-size: 0;
+  width: 302px;
+  height: 174px;
+  background: url(../../img/logo2.png) center center no-repeat;
+  background-size: cover;
+  margin: 0 auto;
+}
+
+#login .title h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+}
+
+#login .title h3 span {
+  color: #5a311d;
+}
+
+#login .login {
+  position: relative;
+  margin-top: 50px;
+  width: 100%;
+}
+
+#login .login form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#login .login form .login-input {
+  position: relative;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+#login .login form .login-input input {
+  all: unset;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  font-size: 15px;
+  color: #c7b299;
+  padding: 14px 31px;
+  background: #fff;
+  border: 1px solid #8c6239;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#login .login form .login-input input::-webkit-input-placeholder {
+  color: #c7b299;
+}
+
+#login .login form .login-input input:-ms-input-placeholder {
+  color: #c7b299;
+}
+
+#login .login form .login-input input::-ms-input-placeholder {
+  color: #c7b299;
+}
+
+#login .login form .login-input input::placeholder {
+  color: #c7b299;
+}
+
+#login .login form .login-input:nth-child(2) span:before {
+  background: url(../../img/login-save.png) center center no-repeat;
+  background-size: contain;
+}
+#login .login form .login-input:nth-child(2) span.on:before {
+  background: url(../../img/login-save-hover.png) center center no-repeat;
+  background-size: contain;
+}
+
+#login .login form .login-input span {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 15px;
+  color: #c7b299;
+  cursor: pointer;
+}
+
+#login .login form .login-input span:before {
+  display: block;
+  position: absolute;
+  left: -24px;
+  top: 2px;
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: url(../../img/login-watch.png) center center no-repeat;
+  background-size: contain;
+}
+
+#login .login form .login-input span.on:before {
+  background: url(../../img/login-watch-hover.png) center center no-repeat;
+  background-size: contain;
+}
+#login .login form .login-input span.on {
+  color: #f29300;
+  font-weight: bold;
+}
+#login .login form .auto-login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 14px;
+  color: #5a311d;
+  font-weight: 500;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 60px;
+}
+
+#login .login form .auto-login label {
+  margin-right: 10px;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+#login .login form .error {
+  display: none;
+  position: absolute;
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 5px;
+  background: red;
+  color: #fff;
+  font-weight: bold;
+  -webkit-animation: fadein 1s;
+          animation: fadein 1s;
+  top: 150px;
+}
+
+#login .login form .error.on {
+  display: block;
+}
+
+#login .login form button {
+  font-size: 18px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid #5a311d;
+}
+
+#login .login form button:hover {
+  background: #5a311d;
+  color: #fff;
+  -webkit-transform: translateY(-8px);
+          transform: translateY(-8px);
+  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+#login .join ul li {
+  cursor: pointer;
+  margin: 20px 0;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 14px;
+  width: 32.4%;
+  background: rgba(255, 255, 255, 0.5);
+  font-weight: bold;
+  border-radius: 5px;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+#login .join ul li:hover {
+  background: #fff;
+  -webkit-transform: translateY(-4px);
+          transform: translateY(-4px);
+}
+
+#login .join p {
+  font-size: 12px;
+  text-align: center;
+  color: #000;
+  font-weight: 500;
+}
+
+
+#login .modal {
+  position: absolute;
+  left: 50%;
+  top: 150%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 100%;
+  -webkit-transition: .5s;
+  transition: .5s;
+  text-align: center;
+  background: #fff;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+          box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  padding: 30px 12px;
+}
+
+#login .modal.on {
+  z-index: 2;
+  top: 50%;
+}
+
+#login .modal .close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  background: url(../../img/close-btn.png) center center no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+#login .modal h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#login .modal input {
+  all: unset;
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+  overflow: hidden;
+  font-size: 15px;
+  color: #c7b299;
+  padding: 14px 31px;
+  background: #fff;
+  border: 1px solid #8c6239;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+#login .modal input::-webkit-input-placeholder {
+  color: #c7b299;
+}
+
+#login .modal input:-ms-input-placeholder {
+  color: #c7b299;
+}
+
+#login .modal input::-ms-input-placeholder {
+  color: #c7b299;
+}
+
+#login .modal input::placeholder {
+  color: #c7b299;
+}
+
+#login .modal button {
+  width: 84%;
+}
+/*# sourceMappingURL=login.css.map */

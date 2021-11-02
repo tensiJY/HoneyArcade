@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="honeyarcade.owner.st.ntc.OwnerStNtcMapper">
+
+	<select id="getTotalCount" parameterType="honeyarcade.owner.st.ntc.OwnerStNtcVO" resultType="Integer">
+	<![CDATA[
+		select 
+			count(ntc_seq) as total_count
+		from 
+			tb_ntc 
+		where 
+				ntc_type = 3
+			and del_flag = 'N'
+	]]>
+	
+	<if test="type == 'search'">
+	<![CDATA[
+		and ntc_title like '%'+ #{search_text} + '%'
+	]]>
+	</if>
+	</select>
+	
+	<select id="getNtcList" parameterType="honeyarcade.owner.st.ntc.OwnerStNtcVO" resultType="honeyarcade.owner.st.ntc.OwnerStNtcVO">
+	<![CDATA[
+		select 
+			*
+			, case when diff_dt <= 7 then 1 else 2 end as 'diff'
+		from 
+		(
+			select 
+				  row_number () over (order by ntc_seq) as row_num
+				, row_number () over (order by ntc_seq desc) as row_num_desc
+				, ntc_seq
+				, ntc_title
+				, datediff(day, add_dt, getdate()) as diff_dt 
+				, convert(char(10), add_dt , 23) as add_dt
+			from 
+				tb_ntc 
+			where 
+				ntc_type = 3
+				and del_flag = 'N'
+	]]>
+			<if test="type == 'search'">
+			<![CDATA[
+				and ntc_title like '%'+ #{search_text} + '%'
+			]]>
+			</if>
+	
+	<![CDATA[
+		)a	
+		where
+			row_num_desc between #{start_num} and #{end_num}
+	]]>
+	</select>
+	
+	<select id="getNtcView" parameterType="honeyarcade.owner.st.ntc.OwnerStNtcVO" resultType="honeyarcade.owner.st.ntc.OwnerStNtcVO">
+	<![CDATA[
+		select
+			*
+			, case when diff_dt <= 7 then 1 else 2 end as 'diff'
+		from
+			(select
+				 ntc_title
+				 , ntc_text
+				 , convert(char(10), add_dt , 23) as add_dt
+				 , datediff(day, add_dt, getdate()) as diff_dt
+				 , ntc_seq
+			from 
+				tb_ntc
+			where
+					tb_ntc.ntc_seq = #{ntc_seq}
+				and del_flag = 'N'
+				and ntc_type = 3) s
+	]]>
+	</select>
+	
+	<select id="getPrevSeq" parameterType="honeyarcade.owner.st.ntc.OwnerStNtcVO" resultType="Integer">
+	<![CDATA[
+		select
+			top 1
+			NTC_SEQ 
+		from 
+			TB_NTC
+		where
+			tb_ntc.NTC_SEQ < #{ntc_seq}
+			and tb_ntc.DEL_FLAG ='N'
+			and tb_ntc.NTC_TYPE = 3	
+		order by
+			ntc_seq desc
+	]]>
+	</select>
+	
+	<select id="getNextSeq" parameterType="honeyarcade.owner.st.ntc.OwnerStNtcVO" resultType="Integer">
+	<![CDATA[
+		select
+			top 1
+			NTC_SEQ 
+		from 
+			TB_NTC
+		where
+			tb_ntc.NTC_SEQ > #{ntc_seq}
+			and tb_ntc.DEL_FLAG ='N'
+			and tb_ntc.NTC_TYPE = 3	
+		order by
+			ntc_seq asc
+	]]>
+	</select>	
+	
+</mapper>

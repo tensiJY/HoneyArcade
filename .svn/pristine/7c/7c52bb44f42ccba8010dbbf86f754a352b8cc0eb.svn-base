@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head>
+	<th:block th:replace="fragments/meta :: metaFragment(title='공지 사항', useMetaCsrf='true')"></th:block>
+	<!--  css style  -->
+	<th:block th:replace="fragments/style :: styleFragment"></th:block>
+</head>
+
+
+<body class="sidebar-noneoverflow">
+    
+	<!--  header  -->
+	<th:block th:replace="fragments/header :: headerFragment"></th:block>
+	
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+		<!--  sidebar  -->
+		<th:block th:replace="fragments/sidebar :: sidebarFragment(main='ntc')"></th:block>
+		        
+        <!--  BEGIN CONTENT AREA  -->
+        <div id="content" class="main-content">
+         
+		<section id="notice" class="sub">
+			<h2>공지사항</h2>
+			<div class="inner">
+				<div class="table-wrap">
+					<table class="notice-table">
+						<!-- tr 일주일 이내 게시된 글일 경우 class new 붙일것 -->
+						<!--<tr class="new">
+							<td>01</td>
+							<td class="flex-between">
+								<p>허니 아케이드 개인 정보 처리방침</p>
+								<p class="date">2021-00-00/21:41</p>
+							</td>
+						</tr>-->
+						<th:block th:if="${ntcList.size == 0}">
+							<tr>
+								<td colspan='2'>
+									공지사항이 없습니다
+								</td>
+							</tr>
+						</th:block>
+						
+						<th:block th:if="${ntcList.size != 0}">
+							<th:if th:each="list : ${ntcList}">
+								<tr th:classappend="${list.diff == 1}? new" class="evtClass">
+									<td>
+										<input type="hidden" name="ntc_seq" th:value="${list.ntc_seq}" >
+										
+										[[${list.row_num}]]	
+									</td>
+									
+									<td class="flex-between">
+										<p>[[${list.ntc_title}]]</p>
+										<p>[[${list.add_dt}]]</p>
+									</td>
+									
+								</tr>
+							</th:if>
+						</th:block>
+					</table>
+				</div>
+			</div>
+		</section>
+         
+         
+         
+         
+            <!--  footer   -->
+           	<th:block th:replace="fragments/footer"></th:block>
+			
+        </div>     
+        <!--  END CONTENT AREA  -->
+
+    </div>
+    <!-- END MAIN CONTAINER -->
+
+<div id="cloneTag" style="display: none;">
+	<table>
+		<tr class="evtClass">
+			<td>
+											
+			</td>
+			<td class="flex-between">
+				<p></p>
+				<p></p>
+			</td>		
+		</tr>
+	</table>
+</div>	
+
+
+<form method="POST" th:action="@{/ntc/view}" id="hiddenForm" style="display: none;">
+	<input type="hidden" name="ntc_seq">
+</form>
+
+<input type="hidden" id="totalPage" 	th:value="${pageUtil.totalPage}"	readonly>
+<input type="hidden" id="nowPage" 		th:value="${pageUtil.nowPage}"		readonly>
+<input type="hidden" id="listCount"		th:value="${pageUtil.listCount}"	readonly>
+<input type="hidden" id="type"			th:value="${type}"					readonly>
+    
+
+	<th:block th:replace="fragments/script :: scriptFragment(useScriptCsrf='true')"></th:block>
+	<script th:src="@{/resources/honeyArcade/ntc/js/ntcList.js}"></script>	
+	
+	<script th:inline="javascript">
+	/* <![CDATA[ */
+
+
+	/*]] */
+	</script>
+</body>
+
+</html>

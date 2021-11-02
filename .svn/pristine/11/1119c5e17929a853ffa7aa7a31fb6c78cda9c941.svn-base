@@ -1,0 +1,30 @@
+package honeyarcade.common.imp;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ImpService {
+
+	@Autowired
+	private ImpMapper impMapper;
+	
+	/**
+	 * 결제 키 중복 조회
+	 * @param uid
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer isKey(String uid) throws Exception{
+		// TODO Auto-generated method stub
+		return impMapper.isKey(uid);
+	}
+
+	public List getEvtList(List evtSeqList) throws Exception {
+		// TODO Auto-generated method stub
+		return impMapper.getEvtList(evtSeqList);
+	}
+
+}

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="honeyarcade.owner.st.mypage.OwnerStMypageMapper">
+
+	<select id="getAreaList" parameterType="honeyarcade.owner.st.mypage.OwnerStMypageVO" resultType="honeyarcade.owner.st.mypage.OwnerStMypageVO">
+	<![CDATA[
+		select 
+			  event_title
+			, case when pay_dtl_use = 1 then '사용 전'
+			  	   when pay_dtl_use = 2 then '광고 요청 중'
+			  	   when pay_dtl_use = 3 then '광고 승인'
+			  	   when pay_dtl_use = 4 then '반려 (사용 가능)'
+			  	   when pay_dtl_use = 5 and  banner_end_day >= convert(char(10), getdate(), 23)  then '사용 중'
+			  	   when pay_dtl_use = 5 and  banner_end_day < convert(char(10), getdate(), 23)  then '사용 완료'
+			  end as 'use_text'
+			, banner_start_day
+			, banner_end_day
+			, pay_dtl_use
+		from 
+			(select 
+				  tb_pay.event_title 
+				, tb_pay_dtl.pay_dtl_use
+				, case when tb_banner.banner_start_day is null then 1 else 0 end as banner_flag
+				, convert(char(10), tb_banner.banner_start_day, 23) as banner_start_day
+				, convert(char(10), tb_banner.banner_end_day, 23)  as banner_end_day
+			from tb_pay
+			inner join tb_pay_dtl
+				on tb_pay.pay_seq = tb_pay_dtl.pay_seq 
+			left outer join tb_banner
+				on tb_pay_dtl.pay_seq = tb_banner.banner_seq 
+				and tb_pay_dtl.pay_dtl_type = tb_banner.banner_type
+			where
+					tb_pay.owner_id = #{owner_id}
+				and tb_pay_dtl.pay_dtl_type = 2
+				and isnull(tb_banner.del_flag, 'N') ='N')t
+		where 
+			#{banner_start_day} between banner_start_day and banner_end_day
+			or
+			#{banner_end_day} between banner_start_day and banner_end_day
+			or banner_flag = 1
+	]]>
+	</select>
+	
+	<select id="getBuildList" parameterType="honeyarcade.owner.st.mypage.OwnerStMypageVO" resultType="honeyarcade.owner.st.mypage.OwnerStMypageVO">
+	<![CDATA[
+		select 
+			  event_title
+			, case when pay_dtl_use = 1 then '사용 전'
+			  	   when pay_dtl_use = 2 then '광고 요청 중'
+			  	   when pay_dtl_use = 3 then '광고 승인'
+			  	   when pay_dtl_use = 4 then '반려 (사용 가능)'
+			  	   when pay_dtl_use = 5 and  banner_end_day >= convert(char(10), getdate(), 23)  then '사용 중'
+			  	   when pay_dtl_use = 5 and  banner_end_day < convert(char(10), getdate(), 23)  then '사용 완료'
+			  end as 'use_text'
+			, banner_start_day
+			, banner_end_day
+			, pay_dtl_use
+		from 
+			(select 
+				  tb_pay.event_title 
+				, tb_pay_dtl.pay_dtl_use
+				, case when tb_banner.banner_start_day is null then 1 else 0 end as banner_flag
+				, convert(char(10), tb_banner.banner_start_day, 23) as banner_start_day
+				, convert(char(10), tb_banner.banner_end_day, 23)  as banner_end_day
+			from tb_pay
+			inner join tb_pay_dtl
+				on tb_pay.pay_seq = tb_pay_dtl.pay_seq 
+			left outer join tb_banner
+				on tb_pay_dtl.pay_seq = tb_banner.banner_seq 
+				and tb_pay_dtl.pay_dtl_type = tb_banner.banner_type
+			where
+					tb_pay.owner_id = #{owner_id}
+				and tb_pay_dtl.pay_dtl_type = 1
+				and isnull(tb_banner.del_flag, 'N') ='N')t
+		where 
+			#{banner_start_day} between banner_start_day and banner_end_day
+			or
+			#{banner_end_day} between banner_start_day and banner_end_day
+			or
+			banner_flag = 1
+	]]>
+	</select>	
+	
+	<select id="getCouponList" parameterType="honeyarcade.owner.st.mypage.OwnerStMypageVO" resultType="honeyarcade.owner.st.mypage.OwnerStMypageVO">
+	<![CDATA[
+		select 
+			  event_title
+			, case when pay_dtl_use = 1 then '사용 전'
+			  	   when pay_dtl_use = 2 then '광고 요청 중'
+			  	   when pay_dtl_use = 3 then '광고 승인'
+			  	   when pay_dtl_use = 4 then '반려 (사용 가능)'
+			  	   when pay_dtl_use = 5 and  coupon_end_day >= convert(char(10), getdate(), 23)  then '사용 중'
+			  	   when pay_dtl_use = 5 and  coupon_end_day < convert(char(10), getdate(), 23)  then '사용 완료'
+			  end as 'use_text'
+			, coupon_start_day
+			, coupon_end_day
+			, pay_dtl_use
+		from 
+			(select 
+				  tb_pay.event_title 
+				, tb_pay_dtl.pay_dtl_use
+				, case when tb_coupon.coupon_start_day is null then 1 else 0 end as banner_flag
+				, convert(char(10), tb_coupon.coupon_start_day, 23) as coupon_start_day 
+				, convert(char(10), tb_coupon.coupon_end_day, 23) as coupon_end_day
+			from tb_pay
+			inner join tb_pay_dtl
+				on tb_pay.pay_seq = tb_pay_dtl.pay_seq 
+			left outer join tb_coupon
+				on tb_pay_dtl.pay_seq = tb_coupon.coupon_seq
+			where
+					tb_pay.owner_id = #{owner_id}
+				and tb_pay_dtl.pay_dtl_type = 3
+				and isnull(tb_coupon.del_flag, 'N') ='N'
+			) t
+		where    
+			#{coupon_start_day} between coupon_start_day and coupon_end_day
+			or
+			#{coupon_end_day} between coupon_start_day and coupon_end_day
+			or
+			banner_flag = 1
+	]]>
+	</select>		
+	
+	<select id="getChartData" parameterType="honeyarcade.owner.st.mypage.OwnerStMypageVO" resultType="honeyarcade.owner.st.mypage.OwnerStMypageVO">
+	<![CDATA[
+		WITH A AS (
+		SELECT idx = 1
+		   , CAST( replace(#{search_start_day}, '-', '') AS date) as 'dt'
+		 UNION ALL
+		 SELECT idx + 1
+		   , DATEADD(D, 1, dt)
+		   FROM A
+		  WHERE dt < CAST( replace(#{search_end_day}, '-', '') AS date)
+		), 
+			B AS (
+					select 
+						  convert(char(19), coupon_used_dt, 23) as used_date
+						, count(COUPON_USED_DT) as used_count
+					from
+						TB_USER_COUPON
+					inner join (
+									select 
+										tb_coupon.coupon_seq
+										, tb_coupon_dtl.coupon_dtl_seq
+										, tb_coupon.OWNER_ID
+									from
+										tb_coupon
+									inner join tb_coupon_dtl
+										on	tb_coupon.COUPON_SEQ = tb_coupon_dtl.COUPON_SEQ
+									where 
+										OWNER_ID = #{owner_id}
+								) t
+						on	t.coupon_seq = tb_user_coupon.COUPON_SEQ
+						and t.coupon_dtl_seq = tb_user_coupon.COUPON_DTL_SEQ
+					where 
+						convert(char(19), coupon_used_dt, 23) BETWEEN #{search_start_day} and #{search_end_day}
+					and COUPON_USED_FLAG = 'Y'
+					group by convert(char(19), coupon_used_dt, 23)
+		) select 
+			  idx
+			, dt
+			, isnull(used_count,0) as used_count
+		from A
+		left outer join B
+			on A.dt = B.used_date
+	]]>
+	</select>			
+
+
+</mapper>

@@ -1,0 +1,5 @@
+package honeyarcade.user;
+
+public interface UserMapper {
+
+}

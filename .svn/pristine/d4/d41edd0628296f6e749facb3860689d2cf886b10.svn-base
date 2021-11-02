@@ -1,0 +1,68 @@
+package honeyarcade.owner.st.dtl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class OwnerStDtlService {
+
+	@Autowired
+	private OwnerStDtlMapper ownerStDtlMapper;
+	
+	/**
+	 * 사용자 정보 가져오기
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public OwnerStDtlVO getOwnerInfo(String owner_id) throws Exception{
+		// TODO Auto-generated method stub
+		return ownerStDtlMapper.getOwnerInfo(owner_id);
+	}
+
+	/**
+	 * 상품 정보 목록 
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<OwnerStDtlVO> getProductList(String owner_id) throws Exception {
+		// TODO Auto-generated method stub
+		return ownerStDtlMapper.getProductList(owner_id);
+	}
+
+	/**
+	 * 상점 오픈시간
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<OwnerStDtlVO> getOpenDay(String owner_id) throws Exception {
+		// TODO Auto-generated method stub
+		return ownerStDtlMapper.getOpenDay(owner_id);
+	}
+
+	/**
+	 * 상점 휴게시간
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<OwnerStDtlVO> getBreakDay(String owner_id) throws Exception{
+		// TODO Auto-generated method stub
+		return ownerStDtlMapper.getBreakDay(owner_id);
+	}
+
+	/**
+	 * 상점 휴무일
+	 * @param owner_id
+	 * @return
+	 */
+	public List<OwnerStDtlVO> getDayOffList(String owner_id) throws Exception{
+		// TODO Auto-generated method stub
+		return ownerStDtlMapper.getDayOffList(owner_id);
+	}
+
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+
+
+<th:block th:fragment="sidebarFragment"> 
+
+        <!--  BEGIN SIDEBAR  -->
+		
+		
+		<section id="sidebar">
+			<!--	비로그인	-->
+			<th:block sec:authorize-expr="!isAuthenticated()">
+				<ul>허니아케이드
+					<li th:classappend="${main == 'main'}? on">
+						<a th:href="@{/}">
+							회사소개
+						</a>
+					</li>
+					<li th:classappend="${main == 'ntc'}? on">
+						<a th:href="@{/ntc/list}">
+							공지사항
+						</a>
+					</li>
+				</ul>
+			</th:block>
+			
+			<!--	로그인 O	-->
+			<th:block sec:authorize-expr="isAuthenticated()">
+				<ul class="info">매장 정보
+					<li th:classappend="${main == 'st-my'}? on">
+						<a th:href="@{/owner/st/mypage}">마이페이지</a>
+					</li>
+					<li th:classappend="${main == 'st-dtl'}? on">
+						<a th:href="@{/owner/st/dtl}">세부정보</a>
+					</li>
+					<li th:classappend="${main=='st-ntc'}? on">
+						<a th:href="@{/owner/st/ntc/list}">공지사항</a>
+					</li>
+				</ul>
+				<!-- 승인 유저만 보임 -->
+				<th:block th:with="owner_status=${#authentication.Principal.getOwner_status()}">
+						<th:blcok th:if="${owner_status == 2}">
+							<ul class="promotion">프로모션
+								<li th:classappend="${main=='ad-bene'}? on">
+									<a th:href="@{/owner/ad/bene}">혜택 사항</a>
+								</li>
+								<li><a th:href="@{/owner/ad/pro}">신청 접수</a></li>
+								<li>배너 광고</li>
+								<li><a th:href="@{/owner/ad/area}">- 지역 광고</a></li>
+								<li><a th:href="@{/owner/ad/build}">- 건물 광고</a></li>
+								<li><a th:href="@{/owner/ad/coupon}">쿠폰 관리</a></li>
+							</ul>
+						</th:blcok>
+					</th:block>
+				</th:block>
+			</section>
+		        
+        <!--  END SIDEBAR  -->
+
+</th:block>
+  
+</html>

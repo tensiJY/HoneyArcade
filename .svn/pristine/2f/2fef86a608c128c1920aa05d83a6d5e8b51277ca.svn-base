@@ -1,0 +1,5 @@
+package honeyarcade.common.imp;
+
+public class ImpService {
+
+}

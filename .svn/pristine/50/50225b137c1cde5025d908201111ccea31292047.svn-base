@@ -1,0 +1,5 @@
+package honeyarcade.user;
+
+public class UserService {
+
+}

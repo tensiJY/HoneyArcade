@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head>
+	<th:block th:replace="fragments/meta-mobile :: metaFragment(title='허니아케이드', useMetaCsrf='true')"></th:block>
+</head>
+<body>
+	<th:block th:replace="fragments/script :: scriptFragment(useScriptCsrf='true')"></th:block>
+	<script th:Src="@{/resources/honeyArcade/common/js/mobile.js}"></script>
+	<script  th:inline="javascript">
+	/*<![CDATA[*/
+	$(function(){
+		var _buildSeq = "[[${build_seq}]]";
+		var _ownerId = "[[${owner_id}]]";
+		
+	})
+	/*]]>*/	
+	</script>
+</body>
+</html>

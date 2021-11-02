@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head>
+	<th:block th:replace="fragments/meta :: metaFragment(title='공지 사항 - 보기', useMetaCsrf='true')"></th:block>
+	<!--  css style  -->
+	<th:block th:replace="fragments/style :: styleFragment"></th:block>
+</head>
+
+
+<body class="sidebar-noneoverflow">
+    
+	<!--  header  -->
+	<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+		<!--  sidebar  -->
+		<th:block th:replace="fragments/sidebar :: sidebarFragment(main='st-ntc')"></th:block>
+		        
+        <!--  BEGIN CONTENT AREA  -->
+  
+		<section id="noticeInner" class="sub">
+			<h2>공지사항</h2>
+			<div class="inner">
+				<!-- New일 시 p 에  class new 붙일것 -->
+				<div class="notice-head">
+					<h4>[[${ntcView.ntc_title}]]</h4>
+					<p th:classappend="${ntcView.diff == 1}? new"> [[${ntcView.add_dt}]] </p>
+				</div>
+				<div class="notice-body">
+					<p style="white-space: pre-wrap;">
+[[${ntcView.ntc_text}]]
+					</p>
+				
+				</div>
+				<div class="notice-foot flex-between">
+					<div>
+						<button type="button" id="listBtn" class="btn btn-orange btn-sm">목록으로</button>
+					</div>
+					<div>
+						<th:block th:if="${ntcPrevSeq != null}">
+							<button type="button" id="ntcPrevBtn" class="btn btn-board btn-sm"
+								th:data-seq="${ntcPrevSeq}">이전글</button>
+						</th:block>
+		
+						<th:block th:if="${ntcNextSeq != null}">
+							<button type="button" id="ntcNextBtn" class="btn btn-board btn-sm"
+								th:data-seq="${ntcNextSeq}">다음글</button>
+						</th:block>
+					</div>
+				</div>
+			</div>
+		</section>
+            
+            <!--  footer   -->
+            <th:block th:replace="fragments/footer"></th:block>
+			
+            
+        <!--  END CONTENT AREA  -->
+
+    </div>
+    <!-- END MAIN CONTAINER -->
+	
+
+<form method="POST" th:action="@{/owner/st/ntc/view}" id="hiddenForm" style="display: none;">
+	<input type="hidden" name="ntc_seq">
+</form>
+
+
+	<th:block th:replace="fragments/script :: scriptFragment(useScriptCsrf='true')"></th:block>
+	<script th:src="@{/resources/honeyArcade/owner/st/ntc/js/ownerStNtcView.js}"></script>
+	
+	<script th:inline="javascript">
+	/* <![CDATA[ */
+		
+	/*]] */
+	</script>
+</body>
+
+</html>

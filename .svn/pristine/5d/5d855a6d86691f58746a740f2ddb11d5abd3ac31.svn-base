@@ -1,0 +1,24 @@
+package honeyarcade.reg;
+
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface RegMapper {
+
+	/**
+	 * 회원 가입 : 아이디 중복 체크
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer idCheck(String owner_id) throws Exception;
+
+	/**
+	 * 회원 가입 : 이메일 중복 체크
+	 * @param owner_email
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer emailCheck(String owner_email) throws Exception;
+
+}

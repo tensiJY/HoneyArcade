@@ -1,0 +1,26 @@
+package honeyarcade.common.imp;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface ImpMapper {
+
+	/**
+	 * 결제 키 중복 조회
+	 * @param uid
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer isKey(String uid) throws Exception;
+
+	/**
+	 * 
+	 * @param evtSeqList
+	 * @return
+	 * @throws Exception
+	 */
+	public List getEvtList(List evtSeqList) throws Exception;
+
+}

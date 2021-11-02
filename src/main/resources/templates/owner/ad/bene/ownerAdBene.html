@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head>
+	<th:block th:replace="fragments/meta :: metaFragment(title='혜택 사항', useMetaCsrf='true')"></th:block>
+	<!--  css style  -->
+	<th:block th:replace="fragments/style :: styleFragment"></th:block>
+</head>
+
+
+<body class="sidebar-noneoverflow">
+    
+	<!--  header  -->
+	<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
+
+	<!--  sidebar  -->
+	<th:block th:replace="fragments/sidebar :: sidebarFragment(main='ad-bene', sub='ad-bene')"></th:block>	
+
+
+    <div class="main-container" id="container">
+    
+		<section id="introduce" class="sub">
+			<h2>프로모션 혜택</h2>
+			<div class="inner">
+				<div class="company-img">
+					<th:block th:if="${beneVO != null}">
+						<img th:src="${beneVO.file_dtl_url_path}" alt="">
+					</th:block>
+
+				</div>
+			</div>
+		</section>
+
+    
+		<!--  footer   -->
+		<th:block th:replace="fragments/footer"></th:block>
+		
+    </div>
+    <!-- END MAIN CONTAINER -->
+	
+
+
+
+	<th:block th:replace="fragments/script :: scriptFragment(useScriptCsrf='true')"></th:block>
+	
+	<script th:inline="javascript">
+	/* <![CDATA[ */
+		
+	/*]] */
+	</script>
+</body>
+
+</html>

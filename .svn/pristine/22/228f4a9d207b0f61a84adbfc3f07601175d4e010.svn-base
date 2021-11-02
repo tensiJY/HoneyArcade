@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+
+<th:block th:fragment="footerFragment"> 
+	<!--  BEGIN FOOTER  -->
+              <footer class="kakao">
+			      <p>고객센터</p>
+			      <div class="flex-between">
+			        <p>전화 문의: 070-0000-0000</p>
+			        <p><a href="#">카카오톡 플러스 친구 문의<span></span></a></p>
+			      </div>
+			    </footer>
+    <!--  END FOOTER  -->
+
+</th:block>
+  
+</html> 

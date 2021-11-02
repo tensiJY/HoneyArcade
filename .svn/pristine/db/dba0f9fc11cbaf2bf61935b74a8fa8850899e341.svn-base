@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="honeyarcade.user.UserMapper">
+
+	<select id="getBuildInfo" parameterType="honeyarcade.user.UserVO" resultType="honeyarcade.user.UserVO">
+	<![CDATA[
+		select
+			build_name
+		from 
+			tb_build
+		where 
+			build_seq = #{build_seq}
+	]]>
+	</select>
+	
+	<select id="getStoreList" parameterType="honeyarcade.user.UserVO" resultType="honeyarcade.user.UserVO">
+	<![CDATA[
+		select
+			  tb_owner.store_name 
+			, tb_floor.floor_name
+			, tb_owner.build_seq 
+			, tb_owner.owner_id
+			, tb_owner.build_seq 
+			, tb_floor.floor_seq
+			, tb_owner.store_floor
+		from 
+			tb_owner
+		inner join tb_member
+			on tb_member.owner_id = tb_owner.owner_id 
+			and tb_member.del_flag = 'N'
+		inner join tb_floor
+			on tb_owner.build_seq = tb_floor.build_seq 	
+		 	and tb_floor.floor_seq = tb_owner.store_floor
+		where 
+		 		tb_owner.build_seq = #{build_seq}
+		 	and tb_owner.store_status = 2
+		 	and tb_owner.del_flag ='N'
+	]]>
+	<if test="type == 'search'">
+		<if test="search_text != ''">
+		<![CDATA[			 	
+			 	and 
+			 		(
+			 			
+			 			tb_owner.store_name like '%'+ #{search_text} + '%'
+			 			or
+			 			tb_owner.store_keyword like '%'+ #{search_text} + '%'
+			 		)
+		]]>	
+		</if>
+	</if>
+	<![CDATA[
+		order by store_sort desc
+	]]>
+	</select>
+	
+	<select id="getFloorInfo" parameterType="honeyarcade.user.UserVO" resultType="honeyarcade.user.UserVO">
+	<![CDATA[
+		select 
+			  file_dtl_url_path
+			, tb_floor.floor_name 
+			, tb_build.build_name
+		from tb_owner
+		inner join tb_build
+			on tb_build.build_seq = tb_owner.build_seq
+		inner join tb_floor 
+			on tb_owner.build_seq = tb_floor.build_seq 
+			and tb_owner.store_floor = tb_floor.floor_seq
+		inner join tb_file 
+			on tb_file.file_seq = tb_floor.file_seq 
+		inner join tb_file_dtl
+			on tb_file.file_seq = tb_file_dtl.file_seq 
+		where
+				tb_owner.owner_id = #{owner_id}
+			and tb_owner.store_floor = #{store_floor}
+			and tb_owner.build_seq = #{build_seq}
+	]]>
+	</select>
+	
+	<select id="getMemberCount" parameterType="honeyarcade.user.UserVO" resultType="Integer">
+	<![CDATA[
+		select 
+			count(*) as cnt
+		from 
+			tb_build 
+		inner join tb_owner
+			on tb_build.build_seq = tb_owner.build_seq
+			and tb_owner.store_status = 2
+			and tb_owner.del_flag = 'N'
+		inner join tb_member
+			on tb_owner.owner_id = tb_member.owner_id 
+			and tb_member.del_flag = 'N'
+		where
+			tb_build.build_seq = #{build_seq}		
+	]]>
+	</select>
+	
+	<select id="getCouponList" parameterType="honeyarcade.user.UserVO" resultType="honeyarcade.user.UserVO">
+	<![CDATA[
+		select 
+			  tb_coupon_dtl.coupon_dtl_text 
+			, tb_file_dtl.file_dtl_url_path 
+		from 
+			tb_build_coupon
+		inner join tb_coupon
+			on tb_build_coupon.coupon_seq = tb_coupon.coupon_seq
+			and tb_coupon.del_flag ='N'
+		inner join tb_coupon_dtl
+			on tb_coupon.coupon_seq = tb_coupon_dtl.coupon_seq 
+		inner join tb_file
+			on tb_file.file_seq = tb_coupon.coupon_img 
+		inner join tb_file_dtl 
+			on tb_file.file_seq = tb_file_dtl.file_seq 
+		where 
+				 tb_build_coupon.build_seq = #{build_seq}
+			 and convert(char(19), getdate(), 23) between convert(char(19), tb_coupon.coupon_start_day, 23) and  convert( char(19), tb_coupon.coupon_end_day, 23)	 
+		order by
+			coupon_sort desc	
+	]]>
+	</select>
+	
+	<select id="getBannerList" parameterType="honeyarcade.user.UserVO" resultType="honeyarcade.user.UserVO">
+	<![CDATA[
+		select * from 
+			(
+			SELECT bb.banner_seq -- 배너 key
+			 , b.owner_id -- 점주 ID
+			 , (SELECT fd.file_dtl_url_path
+			 FROM tb_file f, tb_file_dtl fd
+			 WHERE 1=1
+			 AND b.banner_img = f.file_seq
+			 AND f.file_seq = fd.file_seq) AS banner_img -- 점포 배너 이미지 URL
+			 , (SELECT fd.file_dtl_url_path
+			 FROM tb_file f, tb_file_dtl fd
+			 WHERE 1=1
+			 AND b.banner_main_img = f.file_seq
+			 AND f.file_seq = fd.file_seq) AS banner_main_img -- 점포 메인 이미지 URL
+			 , b.banner_start_day -- 배너 시작일
+			 , b.banner_end_day -- 배너 종료일
+			 , b.banner_sort -- 배너 정렬 순번
+			 FROM tb_build_banner bb, tb_banner b
+			WHERE 1=1
+			 AND bb.build_seq = #{build_seq}
+			 AND b.banner_type = 1
+			 AND bb.banner_seq = b.banner_seq
+			 AND bb.banner_type = b.banner_type
+			 AND b.del_flag = 'N'
+			 AND CONVERT(VARCHAR, GETDATE(), 112) BETWEEN CONVERT(VARCHAR, b.banner_start_day, 112) 
+			 AND CONVERT(VARCHAR, b.banner_end_day, 112)
+			UNION ALL
+			SELECT beb.banner_seq -- 배너 key
+			 , '' AS owner_id -- 점주 ID
+			 , (SELECT fd.file_dtl_url_path
+			 FROM tb_file f, tb_file_dtl fd
+			 WHERE 1=1
+			 AND eb.banner_img = f.file_seq
+			 AND f.file_seq = fd.file_seq) AS banner_img -- 점포 배너 이미지 URL
+			 , (SELECT fd.file_dtl_url_path
+			 FROM tb_file f, tb_file_dtl fd
+			 WHERE 1=1
+			 AND eb.banner_main_img = f.file_seq
+			 AND f.file_seq = fd.file_seq) AS banner_main_img -- 점포 메인 이미지 URL
+			 , eb.banner_start_day -- 배너 시작일
+			 , eb.banner_end_day -- 배너 종료일
+			 , eb.banner_sort -- 배너 정렬 순번
+			 FROM tb_build_ext_banner beb, tb_ext_banner eb
+			WHERE 1=1
+			 AND beb.build_seq = #{build_seq}
+			 AND beb.banner_seq = eb.banner_seq
+			 AND eb.banner_type = 1
+			 AND eb.del_flag = 'N'
+			 AND CONVERT(VARCHAR, GETDATE(), 112) BETWEEN CONVERT(VARCHAR, eb.banner_start_day, 112) 
+			 AND CONVERT(VARCHAR, eb.banner_end_day, 112)
+		 ) s
+		 order by banner_sort desc
+	]]>
+	</select>
+</mapper>

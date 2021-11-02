@@ -1,0 +1,226 @@
+#sebu form ul > li {
+  margin-top: 12px;
+}
+
+#sebu form ul > li .file-upload {
+  display: inline-block;
+  border-radius: 5px;
+  border: 1px solid #884f14;
+  min-width: 0;
+  font-weight: normal;
+  padding: 0 9px;
+  width: auto;
+  margin-left: 2px;
+  cursor: pointer;
+}
+#sebu form ul > li .build-name{
+	width: 200px;
+}
+#sebu form ul > li .file-upload:hover {
+  background: #884f14;
+  color: #fff;
+}
+#sebu form ul > li:nth-child(2) input{
+	cursor: pointer;	
+}
+
+
+#sebu form ul > li .size {
+  color: #8c6239;
+}
+
+#sebu form ul > li:nth-child(4){
+	width: 70%;
+}
+#sebu form ul > li:nth-child(4) div{
+	width: 50%;
+}
+#sebu form ul > li:nth-child(4) div:nth-child(2) input{
+	width: 100%;
+}
+#sebu form ul > li .store-num input{
+	max-width: 120px;
+}
+#sebu form ul > li.food-select{
+  border-radius: 5px;
+  background: rgba(199, 178, 153, 0.3);
+  padding: 15px 10px;
+  margin-bottom: 12px;
+}
+#sebu form ul > li.food-select .radio-box label{
+	display: inline-block;
+	background: #fff;
+	padding : 0 22px 0 14px;
+	border-radius: 5px;
+	margin: 12px 5px;
+	vertical-align: middle;
+}
+#sebu form ul > li.food-select .radio-box input{
+	width: 30px;
+	min-width:0;
+}
+
+#sebu form ul > li:nth-child(6) > div {
+  width: 48%;
+}
+
+#sebu form ul > li:nth-child(7) > div {
+  width: 48%;
+}
+#sebu form ul > li:nth-child(8) > div {
+  width: 48%;
+}
+
+#sebu form ul > li:nth-child(6) > div:nth-child(2) {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+#sebu form ul > li label {
+  color: #5a311d;
+  font-weight: 600;
+  margin-left: 20px;
+  display: block;
+}
+
+#sebu form ul > li input {
+  margin: 12px 0;
+  border-radius: 5px;
+  line-height: 32px;
+  width: 30%;
+  color: #8c6239;
+  padding-left: 20px;
+  font-size: 15px;
+}
+
+#sebu form ul > li input::-webkit-input-placeholder {
+  font-size: 15px;
+  color: #c7b299;
+}
+
+#sebu form ul > li input:-ms-input-placeholder {
+  font-size: 15px;
+  color: #c7b299;
+}
+
+#sebu form ul > li input::-ms-input-placeholder {
+  font-size: 15px;
+  color: #c7b299;
+}
+
+#sebu form ul > li input::placeholder {
+  font-size: 15px;
+  color: #c7b299;
+}
+
+#sebu form ul > li input[type="file"] {
+  display: inline-block;
+}
+
+#sebu form ul > li select {
+  text-align: center;
+  margin: 12px 6px 12px;
+  border-radius: 5px;
+  height: 32px;
+  line-height: 32px;
+  color: #8c6239;
+  font-size: 15px;
+  padding: 0 42px 0 22px;
+  background: #fff url(../../../img/select-arrow.png) 95% 50% no-repeat;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+#sebu form ul > li select select::-ms-expand {
+  display: none;
+}
+
+#sebu form ul > li select option {
+  line-height: 2;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-align: left;
+}
+
+#sebu form ul > li select option:first-child {
+  font-weight: bold;
+  background: #c7b299;
+  color: #fff;
+}
+
+#sebu form ul > li select option:hover, #sebu form ul > li select option:focus, #sebu form ul > li select option:active, #sebu form ul > li select option:checked {
+  background: #884f14 !important;
+  color: #fff !important;
+}
+
+#sebu form ul > li textarea {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 5px;
+  padding: 8px 22px;
+  resize: none;
+}
+
+#sebu form ul > li textarea::-webkit-input-placeholder {
+  color: #c7b299;
+}
+
+#sebu form ul > li textarea:-ms-input-placeholder {
+  color: #c7b299;
+}
+
+#sebu form ul > li textarea::-ms-input-placeholder {
+  color: #c7b299;
+}
+
+#sebu form ul > li textarea::placeholder {
+  color: #c7b299;
+}
+
+#sebu form ul > li button {
+  float: right;
+  margin-top: 12px;
+}
+
+#sebu form ul > li .list {
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #8c6239;
+  padding: 16px 22px;
+  color: #5a311d;
+  font-weight: bold;
+}
+
+#sebu form ul > li .list li {
+  margin-bottom: 5px;
+}
+
+#sebu form ul > li .list.list-menu p:nth-child(1) {
+  width: 20%;
+}
+
+#sebu form ul > li .list.list-menu p:nth-child(3) span {
+  display: block;
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  background: #ccc;
+}
+
+#sebu form ul > li.submit {
+  margin: 200px auto 0;
+  width: 62%;
+}
+
+#sebu form ul > li.submit button {
+  min-width: 300px;
+  font-size: 22px;
+}
+
+#sebu form ul > li .menus .upload-name {
+  width: auto;
+  min-width: 0;
+}
+/*# sourceMappingURL=sebu.css.map */

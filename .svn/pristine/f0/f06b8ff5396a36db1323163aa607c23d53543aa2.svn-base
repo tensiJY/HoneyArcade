@@ -1,0 +1,58 @@
+package honeyarcade.owner.st.dtl;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface OwnerStDtlMapper {
+
+	/**
+	 * 사용자 정보 가져오기
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public OwnerStDtlVO getOwnerInfo(String owner_id) throws Exception;
+
+	/**
+	 * 상품 정보 목록 
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<OwnerStDtlVO> getProductList(String owner_id) throws Exception;
+
+	/**
+	 * 상점 오픈시간
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<OwnerStDtlVO> getOpenDay(String owner_id) throws Exception;
+
+	/**
+	 * 상점 휴게시간
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<OwnerStDtlVO> getBreakDay(String owner_id) throws Exception;
+
+	/**
+	 * 상점 휴무일
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<OwnerStDtlVO> getDayOffList(String owner_id) throws Exception;
+
+	/**
+	 * 휴가 설정 (긴급 휴무)
+	 * @param owner_id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<OwnerStDtlVO> getHolidayList(String owner_id) throws Exception;
+
+}

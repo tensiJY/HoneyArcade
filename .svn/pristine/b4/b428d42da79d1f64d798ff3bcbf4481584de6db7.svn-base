@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head>
+	<th:block th:replace="fragments/meta :: metaFragment(title='허니아케이드 사장님')"></th:block>
+	<!--  css style  -->
+	<th:block th:replace="fragments/style :: styleFragment"></th:block>
+</head>
+
+
+<body>
+    
+	<!--  header  -->
+	<th:block th:replace="fragments/header :: headerFragment"></th:block>
+	<!--  sidebar  -->
+	<th:block th:replace="fragments/sidebar :: sidebarFragment(main='main')"></th:block>
+	
+	<th:block th:replace="fragments/script :: scriptFragment"></th:block>
+	
+	<section id="introduce" class="sub">
+		<h2>회사 소개</h2>
+		<div class="inner">
+			<div class="company-img">
+				<th:block th:if="${honeyInfo != null}">
+					<img th:src="${honeyInfo.file_dtl_url_path}" alt="">
+				</th:block>
+			</div>
+		</div>
+	</section>
+
+	<!--  footer   -->
+	<!--<th:block th:replace="fragments/footer"></th:block>-->
+		
+	<script th:inline="javascript">
+	/* <![CDATA[ */
+		
+	/*]] */
+	</script>
+</body>
+
+</html>
